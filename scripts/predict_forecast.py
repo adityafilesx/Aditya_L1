@@ -68,11 +68,11 @@ def plot_forecast_timeline():
     
     # Bottom Plot: Ensemble Forecast Probability
     ax2.plot(window_df.index, window_df['forecast_prob'], color='purple', label='Ensemble Forecast Probability (15m Horizon)')
-    ax2.axhline(y=0.5, color='orange', linestyle='--', label='50% Warning Threshold')
+    ax2.axhline(y=0.70, color='orange', linestyle='--', label='70% Warning Threshold')
     
-    # Highlight areas where prediction > 50%
-    ax2.fill_between(window_df.index, window_df['forecast_prob'], 0.5, 
-                     where=(window_df['forecast_prob'] >= 0.5), color='red', alpha=0.3)
+    # Highlight areas where prediction > 70%
+    ax2.fill_between(window_df.index, window_df['forecast_prob'], 0.70, 
+                     where=(window_df['forecast_prob'] >= 0.70), color='red', alpha=0.3)
                      
     ax2.set_ylabel('Probability')
     ax2.set_title('LightGBM + kNN Ensemble Forecast')

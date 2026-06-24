@@ -62,7 +62,7 @@ def evaluate_lead_time():
         slice_df = df.loc[(df.index >= start_search) & (df.index <= end_search)]
         
         # Find first trigger
-        triggers = slice_df[slice_df['forecast_prob'] > 0.5]
+        triggers = slice_df[slice_df['forecast_prob'] > 0.70]
         
         if not triggers.empty:
             trigger_time = triggers.index[0]
@@ -77,9 +77,9 @@ def evaluate_lead_time():
             false_negatives += 1
             
     # Calculate False Alarm Rate (FAR)
-    # A false alarm is a block of contiguous predictions > 0.5 that are NOT within 60 mins of any flare
-    # To simplify, we find all points where prob > 0.5
-    all_triggers = df[df['forecast_prob'] > 0.5]
+    # A false alarm is a block of contiguous predictions > 0.70 that are NOT within 60 mins of any flare
+    # To simplify, we find all points where prob > 0.70
+    all_triggers = df[df['forecast_prob'] > 0.70]
     
     false_alarms = 0
     # Create an array of safe regions

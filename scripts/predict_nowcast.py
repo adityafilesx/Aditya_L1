@@ -64,7 +64,7 @@ def plot_nowcast_timeline():
     
     # Bottom Plot: Predicted Probability of Flare in Next 15 mins
     ax2.plot(window_df.index, window_df['flare_prob'], color='darkorange', label='Predicted Flare Probability (Next 15 min)')
-    ax2.axhline(0.5, color='gray', linestyle='--', label='Decision Boundary (50%)')
+    ax2.axhline(0.70, color='gray', linestyle='--', label='Decision Boundary (70%)')
     ax2.fill_between(window_df.index, 0, window_df['flare_prob'], color='darkorange', alpha=0.3)
     ax2.set_ylabel('Probability')
     ax2.set_xlabel('Time (UTC)')

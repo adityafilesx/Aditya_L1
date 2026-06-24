@@ -75,6 +75,20 @@ def load_assets():
     p_knn = ensemble_data['knn'].predict_proba(X_sim)[:, 1]
     sim_df['forecast_prob'] = (0.7 * p_lgb) + (0.3 * p_knn)
     
+    # Compute Space-Segment Onboard Shutter Trigger
+    from aditya_flare.models.space_trigger import SpaceOnboardTrigger
+    space_trigger = SpaceOnboardTrigger()
+    onboard_states = []
+    onboard_derivs = []
+    for timestamp, row in sim_df.iterrows():
+        t_sec = int(timestamp.timestamp())
+        flux = float(row['solexs_sdd2_ctr'])
+        state, df_dt = space_trigger.update(t_sec, flux)
+        onboard_states.append(state)
+        onboard_derivs.append(df_dt)
+    sim_df['onboard_trigger_state'] = onboard_states
+    sim_df['onboard_df_dt'] = onboard_derivs
+    
     # Load master catalog from CSV
     if catalog_path.exists():
         catalog_df = pd.read_csv(catalog_path)
@@ -144,30 +158,52 @@ def init_session_state():
         st.session_state.zoom_window = None
 
 # --- 2. Header Alerts ---
-def render_header_alerts(current_row):
+def render_header_alerts(current_row, trigger_mode):
     flux = current_row['solexs_sdd2_ctr']
     prob = current_row['forecast_prob']
     
-    is_critical = flux > 500
-    is_warning = prob > 0.5 and not is_critical
-    
-    if is_critical:
-        alert_class = "alert-critical"
-        alert_text = f"🚨 CRITICAL: ACTIVE FLARE DETECTED (Flux: {flux:.0f})"
-    elif is_warning:
-        alert_class = "alert-critical"
-        alert_text = f"⚠️ WARNING: HIGH PROBABILITY SHIFT - INCOMING PEAK ANTICIPATED"
-    else:
-        alert_class = "alert-normal"
-        alert_text = f"✅ NORMAL: BACKGROUND SOLAR ACTIVITY STABLE"
+    if trigger_mode == "Space Segment Onboard Shutter Trigger (Rule-Based)":
+        state = int(current_row['onboard_trigger_state'])
+        df_dt = current_row['onboard_df_dt']
         
-    st.markdown(f'<div class="alert-banner {alert_class}">{alert_text}</div>', unsafe_allow_html=True)
-    
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("UTC Timestamp", current_row.name.strftime("%H:%M:%S"))
-    col2.metric("SoLEXS SDD2 Flux", f"{flux:.1f} cps")
-    col3.metric("Hardness Ratio", f"{current_row['hardness_ratio']:.3f}")
-    col4.metric("15-Min Forecast Prob", f"{prob*100:.1f}%")
+        if state == 2:
+            alert_class = "alert-critical"
+            alert_text = f"🚨 ALERT: ONBOARD SHUTTER TRIGGERED (PAYLOAD SHIELDED)"
+        elif state == 1:
+            alert_class = "alert-critical"  # styled warning
+            alert_text = f"⚠️ WATCH: HIGH dF/dt ({df_dt:.1f}) - PRE-HEAT ONSET ACTIVE"
+        else:
+            alert_class = "alert-normal"
+            alert_text = f"✅ NORMAL: ONBOARD SHUTTER CALIBRATION QUIET"
+            
+        st.markdown(f'<div class="alert-banner {alert_class}">{alert_text}</div>', unsafe_allow_html=True)
+        
+        col1, col2, col3, col4 = st.columns(4)
+        col1.metric("UTC Timestamp", current_row.name.strftime("%H:%M:%S"))
+        col2.metric("SoLEXS SDD2 Flux", f"{flux:.1f} cps")
+        col3.metric("Derivative (dF/dt)", f"{df_dt:.1f} cps²")
+        col4.metric("Onboard Shutter State", ["QUIET", "WATCH", "ALERT"][state])
+    else:
+        is_critical = flux > 500
+        is_warning = prob > 0.70 and not is_critical  # align warning line to optimized 0.70 FAR threshold
+        
+        if is_critical:
+            alert_class = "alert-critical"
+            alert_text = f"🚨 CRITICAL: ACTIVE FLARE DETECTED (Flux: {flux:.0f})"
+        elif is_warning:
+            alert_class = "alert-critical"
+            alert_text = f"⚠️ WARNING: HIGH PROBABILITY SHIFT - INCOMING PEAK ANTICIPATED"
+        else:
+            alert_class = "alert-normal"
+            alert_text = f"✅ NORMAL: BACKGROUND SOLAR ACTIVITY STABLE"
+            
+        st.markdown(f'<div class="alert-banner {alert_class}">{alert_text}</div>', unsafe_allow_html=True)
+        
+        col1, col2, col3, col4 = st.columns(4)
+        col1.metric("UTC Timestamp", current_row.name.strftime("%H:%M:%S"))
+        col2.metric("SoLEXS SDD2 Flux", f"{flux:.1f} cps")
+        col3.metric("Hardness Ratio", f"{current_row['hardness_ratio']:.3f}")
+        col4.metric("15-Min Forecast Prob", f"{prob*100:.1f}%")
 
 # --- 3. Interactive Charts ---
 def build_interactive_charts(df_buffer, current_time):
@@ -360,13 +396,29 @@ def main():
         
     st.sidebar.title("Simulation Controls")
     
-    if metrics_data:
+    trigger_mode = st.sidebar.radio(
+        "Active Prediction Segment",
+        ["Ground Segment Ensemble (ML)", "Space Segment Onboard Shutter Trigger (Rule-Based)"]
+    )
+    
+    if trigger_mode == "Ground Segment Ensemble (ML)":
+        if metrics_data:
+            st.sidebar.markdown("---")
+            st.sidebar.subheader("Ensemble Performance")
+            st.sidebar.metric("Average Lead Time", f"{metrics_data['avg_lead_time_min']:.1f} min")
+            st.sidebar.metric("True Positive Rate", f"{metrics_data['tpr_percent']:.1f}%")
+            st.sidebar.metric("False Alarm Rate", f"{metrics_data['far_percent']:.1f}%")
+            st.sidebar.caption(f"Evaluated on {metrics_data['true_positives'] + metrics_data['false_negatives']} historical flares.")
+    else:
         st.sidebar.markdown("---")
-        st.sidebar.subheader("Ensemble Performance")
-        st.sidebar.metric("Average Lead Time", f"{metrics_data['avg_lead_time_min']:.1f} min")
-        st.sidebar.metric("True Positive Rate", f"{metrics_data['tpr_percent']:.1f}%")
-        st.sidebar.metric("False Alarm Rate", f"{metrics_data['far_percent']:.1f}%")
-        st.sidebar.caption(f"Evaluated on {metrics_data['true_positives'] + metrics_data['false_negatives']} historical flares.")
+        st.sidebar.subheader("Space-Onboard Trigger Specs")
+        st.sidebar.markdown("""
+        * **Target Hardware**: LEON3 SPARC V8 (20–50 MHz)
+        * **Required Memory**: < 16 KB RAM
+        * **Execution Latency**: < 0.1 ms (Real-time)
+        * **Primary Mechanism**: Integer dF/dt + d²F/dt² State Machine
+        * **Action**: Autonomously trigger mechanical attenuators to shield payloads.
+        """)
     
     # Play controls
     play = st.sidebar.checkbox("Start Live Telemetry Stream")
@@ -391,7 +443,7 @@ def main():
     buffer_df = sim_df.iloc[:current_idx+1]
     
     # Render layout
-    render_header_alerts(current_row)
+    render_header_alerts(current_row, trigger_mode)
     build_interactive_charts(buffer_df, current_time)
     render_catalog_table(catalog_df)
     

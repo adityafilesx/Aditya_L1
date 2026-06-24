@@ -38,7 +38,7 @@ def extract_features(processed_dir: str, max_days: int = None, flare_threshold: 
         'hardness_ratio': 'mean'
     }
     agg_cols = {k: v for k, v in agg_funcs.items() if k in full_df.columns}
-    df = full_df.resample('1min').agg(agg_cols).ffill(limit=5) # ffill up to 5 mins as per spec
+    df = full_df.resample('1min').agg(agg_cols).interpolate(method='linear', limit=30).ffill()
     
     # Helper for fast rolling slope
     def rolling_slope(series, window):
