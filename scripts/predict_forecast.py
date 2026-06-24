@@ -84,7 +84,7 @@ def plot_forecast_timeline():
     
     plt.tight_layout()
     
-    artifact_dir = "/Users/aditya1981/.gemini/antigravity-ide/brain/db247a25-938f-4041-9c38-4920d6c3682f"
+    artifact_dir = "/Users/aditya1981/.gemini/antigravity-ide/brain/ead5211d-dfba-45f4-a3a2-adaf18c4ec59"
     plot_path = os.path.join(artifact_dir, "ensemble_forecast_timeline.png")
     plt.savefig(plot_path)
     print(f"Saved forecast timeline to: {plot_path}")

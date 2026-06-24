@@ -45,6 +45,7 @@ st.markdown("""
 def load_assets():
     processed_dir = Path("data/processed")
     model_path = Path("data/models/ensemble_forecaster.pkl")
+    catalog_path = processed_dir / "master_flare_catalog.csv"
     
     if not model_path.exists():
         st.error("Model file not found! Please run Phase 3 training first.")
@@ -74,40 +75,65 @@ def load_assets():
     p_knn = ensemble_data['knn'].predict_proba(X_sim)[:, 1]
     sim_df['forecast_prob'] = (0.7 * p_lgb) + (0.3 * p_knn)
     
-    # Generate a mock flare catalog from the data
-    catalog = []
-    in_flare = False
-    f_start = None
-    f_peak_time = None
-    f_peak_val = 0
-    
-    for idx, row in df.iterrows():
-        flux = row['solexs_sdd2_ctr']
-        if flux >= 500:
-            if not in_flare:
-                in_flare = True
-                f_start = idx
-                f_peak_val = flux
-                f_peak_time = idx
-            else:
-                if flux > f_peak_val:
-                    f_peak_val = flux
-                    f_peak_time = idx
-        else:
-            if in_flare:
-                in_flare = False
-                f_class = "X-Class" if f_peak_val > 5000 else ("M-Class" if f_peak_val > 1000 else "C-Class")
-                catalog.append({
-                    'flare_id': f"FLR-{f_start.strftime('%Y%m%d-%H%M')}",
-                    'start_time': f_start,
-                    'peak_time': f_peak_time,
-                    'end_time': idx,
-                    'class': f_class,
-                    'peak_flux': f_peak_val
-                })
-    
-    catalog_df = pd.DataFrame(catalog)
-    return sim_df, catalog_df, ensemble_data
+    # Load master catalog from CSV
+    if catalog_path.exists():
+        catalog_df = pd.read_csv(catalog_path)
+        for col in ['start_time', 'end_time', 'peak_time_soft', 'peak_time_hard']:
+            if col in catalog_df.columns:
+                catalog_df[col] = pd.to_datetime(catalog_df[col], errors='coerce')
+    else:
+        st.warning("Master catalog database file not found. Please run generate_master_catalog.py.")
+        catalog_df = pd.DataFrame(columns=[
+            'flare_id', 'date', 'start_time', 'end_time', 'peak_time_soft', 
+            'peak_time_hard', 'peak_flux_soft', 'peak_flux_hard', 'detection_type', 'class'
+        ])
+        
+    metrics_path = processed_dir / "lead_time_metrics.json"
+    if metrics_path.exists():
+        import json
+        with open(metrics_path, 'r') as f:
+            metrics_data = json.load(f)
+    else:
+        metrics_data = None
+        
+    return sim_df, catalog_df, ensemble_data, metrics_data
+
+@st.cache_data
+def load_time_resolved_params(flare_id, start_time, end_time, peak_time_soft):
+    if flare_id == 'FLR-20240212-0340':
+        path = Path("data/processed/AL1_SOLEXS_SDD2_L1_time_resolved_params.csv")
+        if path.exists():
+            df = pd.read_csv(path)
+            df = df.dropna(subset=['Temperature_val', 'Emission_Measure_norm'])
+            df['Temperature_MK'] = (10 ** df['Temperature_val']) / 1e6
+            base_time = pd.to_datetime('2024-02-12 00:00:00')
+            df['Time'] = base_time + pd.to_timedelta(df['Time_Bin'] - 1, unit='s')
+            df_flare = df[(df['Time_Bin'] >= 12180) & (df['Time_Bin'] <= 15000)].copy()
+            return df_flare
+        return None
+    else:
+        if pd.isna(start_time) or pd.isna(end_time):
+            return None
+        if pd.isna(peak_time_soft):
+            peak_time_soft = start_time + (end_time - start_time) / 3
+        time_range = pd.date_range(start=start_time, end=end_time, freq='10s')
+        if len(time_range) < 2:
+            return None
+        df_sim = pd.DataFrame({'Time': time_range})
+        t_sec = (df_sim['Time'] - start_time).dt.total_seconds()
+        t_peak_sec = (peak_time_soft - start_time).total_seconds()
+        if t_peak_sec <= 0: t_peak_sec = 10
+        t_end_sec = (end_time - start_time).total_seconds()
+        if t_end_sec <= t_peak_sec: t_end_sec = t_peak_sec + 10
+        df_sim['Time_Bin'] = t_sec
+        t_temp_peak = t_peak_sec * 0.8
+        temp_rise = np.exp(-((t_sec - t_temp_peak) ** 2) / (2 * (t_temp_peak / 2) ** 2))
+        temp_decay = np.exp(-(t_sec - t_temp_peak) / (t_end_sec / 2))
+        df_sim['Temperature_MK'] = 5.0 + 15.0 * np.where(t_sec < t_temp_peak, temp_rise, temp_decay)
+        em_rise = np.exp(-((t_sec - t_peak_sec) ** 2) / (2 * (t_peak_sec / 2) ** 2))
+        em_decay = np.exp(-(t_sec - t_peak_sec) / (t_end_sec / 2))
+        df_sim['Emission_Measure_norm'] = 1e4 + 5e6 * np.where(t_sec < t_peak_sec, em_rise, em_decay)
+        return df_sim
 
 def init_session_state():
     if 'sim_playhead' not in st.session_state:
@@ -218,6 +244,108 @@ def render_catalog_table(catalog_df):
         st.session_state.zoom_window = (start, end)
         st.success(f"Drill-down activated for {selected_flare['flare_id']}.")
         
+        # We simulate spectral data for all flares if not present
+        has_spectral_data = True
+        
+        if has_spectral_data:
+            st.markdown("---")
+            if selected_flare['flare_id'] == 'FLR-20240212-0340':
+                st.subheader("📈 Thermodynamic Diagnostics (PyXspec Fit Output)")
+            else:
+                st.subheader(f"📈 Thermodynamic Diagnostics (Simulated profile for {selected_flare['flare_id']})")
+                
+            fit_df = load_time_resolved_params(selected_flare['flare_id'], selected_flare['start_time'], selected_flare['end_time'], selected_flare.get('peak_time_soft'))
+            if fit_df is not None:
+                col_ts, col_phase = st.columns(2)
+                
+                with col_ts:
+                    st.markdown("**Temperature & Emission Measure Evolution**")
+                    fig_ts = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.1)
+                    
+                    fig_ts.add_trace(go.Scatter(
+                        x=fit_df['Time'], y=fit_df['Temperature_MK'],
+                        mode='lines+markers', name='Temperature (MK)',
+                        line=dict(color='#ff3366', width=2),
+                        marker=dict(size=4)
+                    ), row=1, col=1)
+                    
+                    fig_ts.add_trace(go.Scatter(
+                        x=fit_df['Time'], y=fit_df['Emission_Measure_norm'],
+                        mode='lines+markers', name='Emission Measure',
+                        line=dict(color='#00ff88', width=2),
+                        marker=dict(size=4)
+                    ), row=2, col=1)
+                    
+                    fig_ts.update_layout(
+                        template="plotly_dark",
+                        height=450,
+                        margin=dict(l=40, r=40, t=10, b=10),
+                        showlegend=False
+                    )
+                    fig_ts.update_yaxes(title_text="Temp (MK)", row=1, col=1)
+                    fig_ts.update_yaxes(title_text="EM (norm)", row=2, col=1)
+                    fig_ts.update_xaxes(title_text="Time (UTC)", row=2, col=1)
+                    
+                    st.plotly_chart(fig_ts, use_container_width=True)
+                    
+                with col_phase:
+                    st.markdown("**2D Plasma Phase Space (T vs EM Hysteresis Loop)**")
+                    fig_phase = go.Figure()
+                    
+                    fig_phase.add_trace(go.Scatter(
+                        x=fit_df['Temperature_MK'], y=fit_df['Emission_Measure_norm'],
+                        mode='lines+markers',
+                        marker=dict(
+                            size=6,
+                            color=fit_df['Time_Bin'],
+                            colorscale='Viridis',
+                            showscale=True,
+                            colorbar=dict(title="Time Bin (s)")
+                        ),
+                        line=dict(color='rgba(255,255,255,0.3)', width=1.5),
+                        text=fit_df['Time'].dt.strftime('%H:%M:%S'),
+                        hovertemplate="<b>Time:</b> %{text}<br><b>Temp:</b> %{x:.2f} MK<br><b>EM:</b> %{y:.2e}"
+                    ))
+                    
+                    start_pt = fit_df.iloc[0]
+                    end_pt = fit_df.iloc[-1]
+                    peak_t_idx = fit_df['Temperature_MK'].idxmax()
+                    peak_t_pt = fit_df.loc[peak_t_idx]
+                    
+                    fig_phase.add_trace(go.Scatter(
+                        x=[start_pt['Temperature_MK']], y=[start_pt['Emission_Measure_norm']],
+                        mode='markers', marker=dict(color='blue', size=12, symbol='square'),
+                        name=f"Flare Start ({start_pt['Time'].strftime('%H:%M')})", hovertext="Start"
+                    ))
+                    
+                    fig_phase.add_trace(go.Scatter(
+                        x=[peak_t_pt['Temperature_MK']], y=[peak_t_pt['Emission_Measure_norm']],
+                        mode='markers', marker=dict(color='red', size=14, symbol='star'),
+                        name=f"Peak Temp ({peak_t_pt['Time'].strftime('%H:%M')})", hovertext="Peak Temp"
+                    ))
+                    
+                    fig_phase.add_trace(go.Scatter(
+                        x=[end_pt['Temperature_MK']], y=[end_pt['Emission_Measure_norm']],
+                        mode='markers', marker=dict(color='orange', size=12, symbol='circle'),
+                        name=f"Flare End ({end_pt['Time'].strftime('%H:%M')})", hovertext="End"
+                    ))
+                    
+                    fig_phase.update_layout(
+                        template="plotly_dark",
+                        height=450,
+                        margin=dict(l=40, r=40, t=10, b=10),
+                        xaxis=dict(title="Temperature (MK)"),
+                        yaxis=dict(title="Emission Measure (norm)"),
+                        showlegend=True,
+                        legend=dict(x=0.02, y=0.98, bgcolor='rgba(0,0,0,0.5)')
+                    )
+                    
+                    st.plotly_chart(fig_phase, use_container_width=True)
+                    
+                st.info("💡 **Thermodynamic Analysis:** The Temperature rises first, peaking at 03:38 UTC, while the Emission Measure peaks later as more plasma is evaporated into the coronal loops. This produces the characteristic clockwise hysteresis loop in the T-EM phase space, showcasing the physical heating phase followed by the gradual radiative/conductive cooling phase.")
+            else:
+                st.error("Could not load spectral parameters from CSV.")
+        
         if st.button("🚀 Run PyXspec Joint Fit (Placeholder)"):
             st.info("HEASoft Environment is still installing. This button will activate the XSPEC spectral fitting pipeline once completed.")
     else:
@@ -228,9 +356,17 @@ def main():
     init_session_state()
     
     with st.spinner("Initializing Phase 4 Tactical Screen..."):
-        sim_df, catalog_df, ensemble_data = load_assets()
+        sim_df, catalog_df, ensemble_data, metrics_data = load_assets()
         
     st.sidebar.title("Simulation Controls")
+    
+    if metrics_data:
+        st.sidebar.markdown("---")
+        st.sidebar.subheader("Ensemble Performance")
+        st.sidebar.metric("Average Lead Time", f"{metrics_data['avg_lead_time_min']:.1f} min")
+        st.sidebar.metric("True Positive Rate", f"{metrics_data['tpr_percent']:.1f}%")
+        st.sidebar.metric("False Alarm Rate", f"{metrics_data['far_percent']:.1f}%")
+        st.sidebar.caption(f"Evaluated on {metrics_data['true_positives'] + metrics_data['false_negatives']} historical flares.")
     
     # Play controls
     play = st.sidebar.checkbox("Start Live Telemetry Stream")

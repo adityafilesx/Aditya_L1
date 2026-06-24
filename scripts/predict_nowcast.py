@@ -76,7 +76,7 @@ def plot_nowcast_timeline():
     ax2.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M\\n%m-%d'))
     plt.tight_layout()
     
-    artifact_dir = "/Users/aditya1981/.gemini/antigravity-ide/brain/db247a25-938f-4041-9c38-4920d6c3682f"
+    artifact_dir = "/Users/aditya1981/.gemini/antigravity-ide/brain/ead5211d-dfba-45f4-a3a2-adaf18c4ec59"
     plot_path = os.path.join(artifact_dir, "nowcast_timeline.png")
     plt.savefig(plot_path)
     print(f"Timeline plot saved to {plot_path}")
