@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aditya-L1 Mission Control | ISRO</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#eceef1",
+                    "tertiary-container": "#6e6f75",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#e2e2e9",
+                    "secondary-fixed": "#ffdbd1",
+                    "primary-container": "#5b5ceb",
+                    "on-primary-container": "#f5f2ff",
+                    "on-background": "#191c1e",
+                    "inverse-surface": "#2d3133",
+                    "primary-fixed": "#e1dfff",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#e6e8eb",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#c1c1ff",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#eff1f4",
+                    "surface": "#f7f9fc",
+                    "surface-tint": "#4949d9",
+                    "primary": "#4140d1",
+                    "surface-bright": "#f7f9fc",
+                    "tertiary": "#55575d",
+                    "secondary": "#ae3104",
+                    "tertiary-fixed-dim": "#c6c6cd",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#e0e3e6",
+                    "on-surface-variant": "#464555",
+                    "on-secondary-container": "#601600",
+                    "surface-dim": "#d8dadd",
+                    "on-tertiary-container": "#f3f3fa",
+                    "outline-variant": "#c7c4d7",
+                    "on-surface": "#191c1e",
+                    "on-secondary": "#ffffff",
+                    "surface-container-low": "#f2f4f7",
+                    "on-primary-fixed-variant": "#2f2bc1",
+                    "primary-fixed-dim": "#c1c1ff",
+                    "secondary-fixed-dim": "#ffb59f",
+                    "on-secondary-fixed": "#3b0a00",
+                    "on-error-container": "#93000a",
+                    "outline": "#767586",
+                    "secondary-container": "#fe693c",
+                    "background": "#f7f9fc",
+                    "surface-container-highest": "#e0e3e6",
+                    "on-secondary-fixed-variant": "#862200",
+                    "on-tertiary-fixed": "#1a1b21",
+                    "on-primary-fixed": "#08006c",
+                    "on-tertiary-fixed-variant": "#45474c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "component-padding-y": "12px",
+                    "container-margin": "32px",
+                    "section-gap": "48px",
+                    "gutter": "24px",
+                    "component-padding-x": "16px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "display-lg": ["Space Grotesk"],
+                    "headline-md": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "numeric-telemetry": ["Space Grotesk"],
+                    "body-lg": ["Inter"],
+                    "data-mono": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "numeric-telemetry": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "data-mono": ["13px", {"lineHeight": "18px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 1.25rem;
+        }
+        .active-sidebar-item {
+            background-color: #ffffff;
+            color: #111318 !important;
+            border-left: 4px solid #5b5ceb;
+            border-radius: 0 4px 4px 0;
+        }
+        .sidebar-item-hover:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .custom-shadow {
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+        }
+        .blink {
+            animation: blinker 1.5s linear infinite;
+        }
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+        body {
+            background-color: #f7f9fc;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="font-body-sm text-on-surface">
+<!-- Sidebar Shell -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-[#111318] text-white flex flex-col z-50">
+<!-- Logo Section -->
+<div class="p-6 mb-2">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary-container rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">wb_sunny</span>
+</div>
+<div>
+<h1 class="font-display-lg text-[18px] leading-tight tracking-tight uppercase">Aditya-L1</h1>
+<p class="text-[10px] text-surface-variant/40 tracking-[0.2em] font-label-caps uppercase">Mission Control</p>
+</div>
+</div>
+</div>
+<!-- Navigation Groups -->
+<div class="flex-1 overflow-y-auto px-4 space-y-6 pb-20">
+<!-- OVERVIEW -->
+<section>
+<h2 class="px-2 text-[10px] font-label-caps text-surface-variant/30 mb-2">Overview</h2>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-body-sm">Mission Overview</span>
+</a>
+</nav>
+</section>
+<!-- OPERATIONS (ACTIVE) -->
+<section>
+<h2 class="px-2 text-[10px] font-label-caps text-surface-variant/30 mb-2">Operations</h2>
+<nav class="space-y-1">
+<a class="active-sidebar-item flex items-center gap-3 px-3 py-2 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings_remote</span>
+<span class="text-body-sm font-semibold">Nowcasting</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-body-sm">Forecasting</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="text-body-sm">Alerts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">view_timeline</span>
+<span class="text-body-sm">Timeline</span>
+</a>
+</nav>
+</section>
+<!-- INVESTIGATION -->
+<section>
+<h2 class="px-2 text-[10px] font-label-caps text-surface-variant/30 mb-2">Investigation</h2>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="text-body-sm">AI Intelligence</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">lyrics</span>
+<span class="text-body-sm">Physics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">open_run</span>
+<span class="text-body-sm">Spectral Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">troubleshoot</span>
+<span class="text-body-sm">Sensor Inspector</span>
+</a>
+</nav>
+</section>
+<!-- DIGITAL TWIN -->
+<section>
+<h2 class="px-2 text-[10px] font-label-caps text-surface-variant/30 mb-2">Digital Twin</h2>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">view_in_ar</span>
+<span class="text-body-sm">Solar Twin</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">emergency_recording</span>
+<span class="text-body-sm">Active Regions</span>
+</a>
+</nav>
+</section>
+<!-- KNOWLEDGE -->
+<section>
+<h2 class="px-2 text-[10px] font-label-caps text-surface-variant/30 mb-2">Knowledge</h2>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="text-body-sm">Knowledge Graph</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="text-body-sm">Event Library</span>
+</a>
+</nav>
+</section>
+<!-- SYSTEM -->
+<section>
+<h2 class="px-2 text-[10px] font-label-caps text-surface-variant/30 mb-2">System</h2>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">health_metrics</span>
+<span class="text-body-sm">System Health</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span class="text-body-sm">Logs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-surface-variant/60 sidebar-item-hover rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-body-sm">Configuration</span>
+</a>
+</nav>
+</section>
+</div>
+<!-- Footer Sidebar -->
+<div class="p-4 border-t border-white/5 bg-[#0e1014]">
+<div class="flex items-center justify-between text-[11px] text-surface-variant/40 font-data-mono">
+<span>VER: v3.0-STABLE</span>
+<span class="text-primary-container">OS: LX-9</span>
+</div>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<nav class="fixed top-4 left-[284px] right-8 h-[72px] bg-white/80 backdrop-blur-md rounded-xl border border-outline-variant custom-shadow flex items-center justify-between px-6 z-40">
+<!-- Navigation Pills -->
+<div class="flex items-center gap-2 bg-surface-container-low p-1 rounded-lg">
+<button class="px-4 py-2 bg-white text-primary font-semibold rounded-md shadow-sm text-label-caps">Operations</button>
+<button class="px-4 py-2 text-on-surface-variant hover:text-primary transition-all text-label-caps">Analysis</button>
+<button class="px-4 py-2 text-on-surface-variant hover:text-primary transition-all text-label-caps">Digital Twin</button>
+<button class="px-4 py-2 text-on-surface-variant hover:text-primary transition-all text-label-caps">Reports</button>
+<button class="px-4 py-2 text-on-surface-variant hover:text-primary transition-all text-label-caps">System</button>
+</div>
+<!-- Middle Info (UTC & MET) -->
+<div class="flex items-center gap-8">
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-label-caps text-on-surface-variant/50 uppercase tracking-widest">UTC Time</span>
+<span class="font-data-mono text-primary text-[14px]" id="utc-clock">00:00:00.000</span>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/30"></div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-label-caps text-on-surface-variant/50 uppercase tracking-widest">Mission Elapsed Time</span>
+<span class="font-numeric-telemetry text-on-surface text-[16px] font-bold">T+ 145:12:04:22</span>
+</div>
+</div>
+<!-- Right Side Actions -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1 bg-secondary-container/10 rounded-full">
+<span class="w-2 h-2 bg-secondary-container rounded-full blink"></span>
+<span class="text-[10px] font-bold text-on-secondary-container uppercase">Live</span>
+</div>
+<button class="relative p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant/30"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-body-sm font-bold leading-none">Commander</p>
+<p class="text-[11px] text-on-surface-variant/60 leading-tight">Aditya-L1 Ops</p>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary-container p-[2px]">
+<img class="w-full h-full rounded-full object-cover" data-alt="A professional headshot of a space mission commander in a minimalist futuristic navy jumpsuit, looking confidently at the camera against a sleek, high-tech command center background with subtle cyan ambient lighting and digital interfaces. The aesthetic is clean, sharp, and authoritative, matching a corporate aerospace environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBduLyoBONYiAscZ1Gf9nvvVxiBQfPDeOJnClDJlEa8_sDjCZ4VvPzHhykkjh6JbJnBmNfHltH7oBbCRDKS9msyuJDmW0_EICtFh115yCar99MfwnIz1AGaWdBhySWZikJyiiwyECNs2pf67xAcdNK6bUNQEs_o4IwQbo0SofKNaMdPw9VBwbb0sXlg7n0LuWA1mjST1LcYAhHVk7p3DrX59jG4SqX1wvFIHYOSB8Gr-MXNQYoG9WKUm2ZB5rUUflgfg2zCP7oO6OS1"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas Shell -->
+<main class="fixed top-[104px] left-[284px] right-8 bottom-14 bg-white rounded-[18px] border border-outline-variant custom-shadow overflow-hidden">
+<div class="w-full h-full p-10 flex flex-col items-center justify-center text-center opacity-20">
+<!-- This area is reserved for high-density telemetry widgets and mission data -->
+<span class="material-symbols-outlined text-[64px] mb-4">space_dashboard</span>
+<h3 class="font-display-lg text-[24px]">Mission Workspace Ready</h3>
+<p class="font-body-lg">Select an operational module from the sidebar to begin analysis.</p>
+</div>
+</main>
+<!-- Bottom Status Strip -->
+<footer class="fixed bottom-0 left-[260px] right-0 h-10 bg-surface-container border-t border-outline-variant flex items-center justify-between px-8 z-40">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-label-caps text-on-surface-variant/40">Status:</span>
+<span class="text-[10px] font-label-caps text-primary uppercase font-bold tracking-wider">v3.0 Stable Build</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-label-caps text-on-surface-variant/40">Connectivity:</span>
+<div class="flex items-center gap-1 text-[10px] font-label-caps text-secondary uppercase font-bold">
+<span class="material-symbols-outlined text-[14px]">network_check</span>
+<span>Optimal (420ms)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-[10px] font-data-mono text-on-surface-variant/60">
+<span class="material-symbols-outlined text-[14px]">satellite_alt</span>
+<span>LAGRANGE_POINT_L1_STATION_04</span>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<span class="text-[10px] font-data-mono text-on-surface-variant/60">ISRO © 2024</span>
+</div>
+</footer>
+<script>
+        // Micro-interactions and Clock
+        function updateClock() {
+            const now = new Date();
+            const utcString = now.toISOString().split('T')[1].replace('Z', '');
+            document.getElementById('utc-clock').textContent = utcString;
+        }
+        
+        setInterval(updateClock, 1);
+        updateClock();
+
+        // Simulated interactions
+        document.querySelectorAll('nav button, aside a').forEach(el => {
+            el.addEventListener('mousedown', () => {
+                el.style.transform = 'scale(0.98)';
+            });
+            el.addEventListener('mouseup', () => {
+                el.style.transform = 'scale(1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

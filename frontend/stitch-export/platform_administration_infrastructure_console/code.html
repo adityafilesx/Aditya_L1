@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Platform Administration | Mission Control</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed-variant": "#2f2bc1",
+                      "error": "#ba1a1a",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#45474c",
+                      "surface-dim": "#d8dadd",
+                      "secondary-fixed-dim": "#ffb59f",
+                      "background": "#f7f9fc",
+                      "surface-container-low": "#f2f4f7",
+                      "on-primary-container": "#f5f2ff",
+                      "on-surface": "#191c1e",
+                      "primary-fixed": "#e1dfff",
+                      "secondary": "#ae3104",
+                      "surface-container-high": "#e6e8eb",
+                      "on-tertiary-container": "#f3f3fa",
+                      "outline-variant": "#c7c4d7",
+                      "tertiary-fixed": "#e2e2e9",
+                      "surface-container": "#eceef1",
+                      "on-error-container": "#93000a",
+                      "surface-container-highest": "#e0e3e6",
+                      "on-secondary-fixed": "#3b0a00",
+                      "secondary-fixed": "#ffdbd1",
+                      "inverse-surface": "#2d3133",
+                      "primary-container": "#5b5ceb",
+                      "surface-tint": "#4949d9",
+                      "on-secondary-fixed-variant": "#862200",
+                      "error-container": "#ffdad6",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "surface": "#f7f9fc",
+                      "surface-variant": "#e0e3e6",
+                      "surface-bright": "#f7f9fc",
+                      "tertiary-container": "#6e6f75",
+                      "primary": "#4140d1",
+                      "on-primary-fixed": "#08006c",
+                      "tertiary-fixed-dim": "#c6c6cd",
+                      "on-surface-variant": "#464555",
+                      "on-secondary-container": "#601600",
+                      "on-background": "#191c1e",
+                      "tertiary": "#55575d",
+                      "on-tertiary-fixed": "#1a1b21",
+                      "primary-fixed-dim": "#c1c1ff",
+                      "on-error": "#ffffff",
+                      "outline": "#767586",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#fe693c",
+                      "inverse-primary": "#c1c1ff",
+                      "inverse-on-surface": "#eff1f4"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "section-gap": "48px",
+                      "component-padding-y": "12px",
+                      "container-margin": "32px",
+                      "component-padding-x": "16px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "display-lg-mobile": [
+                              "Space Grotesk"
+                      ],
+                      "data-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "numeric-telemetry": [
+                              "Space Grotesk"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Space Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "data-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "numeric-telemetry": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body { background-color: #f7f9fc; color: #191c1e; }
+        /* Single, highly refined shadow for primary cards */
+        .card-shadow { box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); }
+        .card-hover:hover { border-color: #5b5ceb; }
+        /* Blinking dot */
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+    </style>
+</head>
+<body class="font-body-sm text-body-sm antialiased overflow-x-hidden min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-dim font-headline-md text-headline-md font-label-caps text-label-caps top-0 border-b border-outline-variant dark:border-outline shadow-sm flex justify-between items-center w-full px-container-margin py-component-padding-y z-50 sticky">
+<div class="flex items-center gap-8">
+<span class="font-display-lg text-display-lg-mobile tracking-tighter text-primary dark:text-primary-fixed uppercase">MISSION CONTROL PRECISION SYSTEM</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 hover:text-primary-container transition-colors duration-150 active:opacity-80 active:scale-95" href="#">LIVE FEED</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors duration-150 active:opacity-80 active:scale-95" href="#">TELEMETRY</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors duration-150 active:opacity-80 active:scale-95" href="#">ANALYSIS</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-2 px-3 py-1.5 border border-outline-variant rounded-DEFAULT bg-surface text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-32 focus:w-48 transition-all p-0" placeholder="Search..." type="text"/>
+</div>
+<span class="text-primary dark:text-primary-fixed-dim font-label-caps text-label-caps">MISSION STATUS: NOMINAL</span>
+<div class="flex gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors duration-150" data-icon="schedule">schedule</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors duration-150" data-icon="language">language</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors duration-150" data-icon="settings">settings</span>
+</div>
+</div>
+</header>
+<div class="flex flex-1 relative max-w-[1800px] mx-auto w-full">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-full py-container-margin bg-surface-container-low dark:bg-surface-dim font-label-caps text-label-caps font-body-sm text-body-sm w-[260px] border-r border-outline-variant shrink-0 sticky top-[80px] z-40 overflow-y-auto" style="height: calc(100vh - 80px);">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold">O7</div>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface text-base uppercase">OPERATOR 07</div>
+<div class="text-on-surface-variant text-xs opacity-80">LEO MISSION SPECIALIST</div>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-2 rounded-DEFAULT font-bold text-xs uppercase tracking-wider hover:bg-surface-tint transition-colors">INITIATE PROTOCOL</button>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-highest transition-all duration-150 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="dashboard">dashboard</span> Overview
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-primary font-bold border-l-4 border-primary bg-primary-fixed/20 transition-all duration-150 rounded-r-DEFAULT" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings_remote">settings_remote</span> Operations
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-highest transition-all duration-150 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="psychology">psychology</span> AI Intelligence
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-highest transition-all duration-150 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="biotech">biotech</span> Physics Lab
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-highest transition-all duration-150 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="view_in_ar">view_in_ar</span> Digital Twin
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-highest transition-all duration-150 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="hub">hub</span> Knowledge Graph
+                </a>
+</nav>
+<div class="mt-auto px-4 border-t border-outline-variant pt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-highest transition-all duration-150 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="terminal">terminal</span> System Logs
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant font-medium hover:bg-surface-container-highest transition-all duration-150 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="help_center">help_center</span> Support
+                </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-container-margin pb-[100px] overflow-x-hidden">
+<!-- Header Section -->
+<section class="mb-section-gap">
+<div class="flex justify-between items-end mb-2">
+<div>
+<h1 class="font-headline-md text-headline-md text-3xl text-on-surface uppercase mb-1">Platform Administration</h1>
+<p class="text-on-surface-variant font-body-sm text-sm uppercase tracking-wide">Infrastructure • Deployment • Security • Monitoring</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container-lowest border border-outline-variant px-3 py-1.5 rounded-DEFAULT text-xs font-data-mono text-on-surface">ENV: PRODUCTION</div>
+<div class="bg-surface-container-lowest border border-outline-variant px-3 py-1.5 rounded-DEFAULT text-xs font-data-mono text-on-surface">VER: v2.4.0</div>
+</div>
+</div>
+<div class="h-px bg-outline-variant w-full mt-4"></div>
+</section>
+<!-- Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- KPI Cards Row -->
+<div class="col-span-12 grid grid-cols-2 md:grid-cols-5 gap-gutter mb-6">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-[18px] p-5 card-shadow card-hover transition-colors">
+<div class="text-on-surface-variant font-label-caps text-label-caps mb-2">API GATEWAY</div>
+<div class="font-numeric-telemetry text-3xl text-on-surface">42<span class="text-base text-on-surface-variant ml-1">ms</span></div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-[18px] p-5 card-shadow card-hover transition-colors">
+<div class="text-on-surface-variant font-label-caps text-label-caps mb-2 flex items-center justify-between">DB STATUS <span class="w-2 h-2 rounded-full bg-[#10b981] blink"></span></div>
+<div class="font-numeric-telemetry text-3xl text-[#10b981]">HEALTHY</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-[18px] p-5 card-shadow card-hover transition-colors">
+<div class="text-on-surface-variant font-label-caps text-label-caps mb-2">GPU UTILIZATION</div>
+<div class="font-numeric-telemetry text-3xl text-on-surface">32<span class="text-base text-on-surface-variant ml-1">%</span></div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-[18px] p-5 card-shadow card-hover transition-colors">
+<div class="text-on-surface-variant font-label-caps text-label-caps mb-2">STORAGE</div>
+<div class="font-numeric-telemetry text-3xl text-on-surface">218<span class="text-base text-on-surface-variant ml-1">GB</span></div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-[18px] p-5 card-shadow card-hover transition-colors">
+<div class="text-on-surface-variant font-label-caps text-label-caps mb-2">ACTIVE USERS</div>
+<div class="font-numeric-telemetry text-3xl text-on-surface">14</div>
+</div>
+</div>
+<!-- Service Health Matrix -->
+<section class="col-span-12 xl:col-span-8">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-[18px] card-shadow overflow-hidden h-full">
+<div class="px-5 py-4 border-b border-outline-variant bg-surface flex justify-between items-center">
+<h2 class="font-label-caps text-label-caps text-on-surface">SERVICE HEALTH MATRIX</h2>
+<span class="font-data-mono text-xs text-on-surface-variant">UPTIME: 99.99%</span>
+</div>
+<div class="p-0 overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface border-b border-outline-variant">
+<tr>
+<th class="px-5 py-3 font-label-caps text-label-caps text-on-surface-variant">SERVICE</th>
+<th class="px-5 py-3 font-label-caps text-label-caps text-on-surface-variant">LATENCY</th>
+<th class="px-5 py-3 font-label-caps text-label-caps text-on-surface-variant">CPU</th>
+<th class="px-5 py-3 font-label-caps text-label-caps text-on-surface-variant">RAM</th>
+<th class="px-5 py-3 font-label-caps text-label-caps text-on-surface-variant">STATUS</th>
+</tr>
+</thead>
+<tbody class="font-data-mono text-data-mono">
+<tr class="border-b border-outline-variant hover:bg-surface-container transition-colors">
+<td class="px-5 py-3">Frontend</td>
+<td class="px-5 py-3">12ms</td>
+<td class="px-5 py-3">4%</td>
+<td class="px-5 py-3">1.2GB</td>
+<td class="px-5 py-3"><span class="px-2 py-0.5 rounded-sm bg-[#10b981]/10 text-[#10b981] text-xs">ONLINE</span></td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container transition-colors">
+<td class="px-5 py-3">API Gateway</td>
+<td class="px-5 py-3">42ms</td>
+<td class="px-5 py-3">18%</td>
+<td class="px-5 py-3">4.5GB</td>
+<td class="px-5 py-3"><span class="px-2 py-0.5 rounded-sm bg-[#10b981]/10 text-[#10b981] text-xs">ONLINE</span></td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container transition-colors">
+<td class="px-5 py-3">Physics Engine</td>
+<td class="px-5 py-3">125ms</td>
+<td class="px-5 py-3 text-[#f59e0b]">78%</td>
+<td class="px-5 py-3">16.0GB</td>
+<td class="px-5 py-3"><span class="px-2 py-0.5 rounded-sm bg-[#f59e0b]/10 text-[#f59e0b] text-xs">HEAVY LOAD</span></td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-5 py-3">AI Engine</td>
+<td class="px-5 py-3">85ms</td>
+<td class="px-5 py-3">45%</td>
+<td class="px-5 py-3">32.0GB</td>
+<td class="px-5 py-3"><span class="px-2 py-0.5 rounded-sm bg-[#10b981]/10 text-[#10b981] text-xs">ONLINE</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Log Center (Terminal) -->
+<section class="col-span-12 xl:col-span-4">
+<div class="bg-inverse-surface rounded-[18px] card-shadow overflow-hidden h-[300px] flex flex-col border border-inverse-surface">
+<div class="px-4 py-2 border-b border-tertiary flex justify-between items-center bg-[#1e2326]">
+<h2 class="font-label-caps text-label-caps text-on-secondary">SYSTEM LOGS</h2>
+<div class="flex gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#f59e0b]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#10b981]"></span>
+</div>
+</div>
+<div class="p-4 overflow-y-auto font-data-mono text-xs text-on-tertiary-fixed-variant leading-relaxed flex-1 space-y-1">
+<div><span class="text-[#10b981]">[INFO]</span> 14:02:11 - DB Sync complete.</div>
+<div><span class="text-[#10b981]">[INFO]</span> 14:02:15 - AI Model TCN-v2 ready.</div>
+<div><span class="text-[#f59e0b]">[WARN]</span> 14:03:00 - High latency on Physics Engine.</div>
+<div><span class="text-[#10b981]">[INFO]</span> 14:03:05 - Auto-scaling triggered.</div>
+<div><span class="text-[#10b981]">[INFO]</span> 14:04:12 - Gateway check passed.</div>
+<div><span class="text-[#10b981]">[INFO]</span> 14:05:00 - Telemetry packet received.</div>
+<div><span class="text-on-primary-fixed-variant blink">_</span></div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full z-40 flex justify-between items-center px-container-margin py-2 bg-surface-container-highest dark:bg-surface-container-high font-data-mono text-data-mono border-t border-outline-variant flat no shadows">
+<span class="text-primary dark:text-tertiary-fixed-dim font-bold">AEROSPACE MISSION CONTROL ALPHA • SYSTEM HEALTH: 100% • CONNECTIVITY: ENCRYPTED</span>
+<div class="flex gap-4">
+<a class="text-on-tertiary-fixed-variant hover:text-primary underline transition-colors duration-150 cursor-pointer" href="#">Uplink Status</a>
+<a class="text-on-tertiary-fixed-variant hover:text-primary underline transition-colors duration-150 cursor-pointer" href="#">Ground Station Alpha</a>
+<a class="text-on-tertiary-fixed-variant hover:text-primary underline transition-colors duration-150 cursor-pointer" href="#">Latencies</a>
+</div>
+</footer>
+</body></html>

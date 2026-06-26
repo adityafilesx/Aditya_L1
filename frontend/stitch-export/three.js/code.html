@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+<!-- STITCH_THREEJS_START:ANIMATION_11 class="fixed inset-0 w-full h-full bg-transparent" -->
+<div class="fixed inset-0 w-full h-full bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_11" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_11');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  
+const width = container.clientWidth || window.innerWidth;
+const height = container.clientHeight || window.innerHeight;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+camera.position.z = 5;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(width, height);
+renderer.setPixelRatio(window.devicePixelRatio);
+container.appendChild(renderer.domElement);
+
+// Solar Sphere
+const geometry = new THREE.SphereGeometry(2, 64, 64);
+// Use a high-quality emissive material to simulate the Sun's glow without complex EnvMaps
+const material = new THREE.MeshPhongMaterial({
+  color: 0xffcc33,
+  emissive: 0xff6600,
+  emissiveIntensity: 0.8,
+  shininess: 10,
+});
+
+const sun = new THREE.Mesh(geometry, material);
+scene.add(sun);
+
+// Atmosphere/Corona Glow (Simplified as a slightly larger transparent sphere)
+const coronaGeo = new THREE.SphereGeometry(2.1, 64, 64);
+const coronaMat = new THREE.MeshBasicMaterial({
+  color: 0xffaa00,
+  transparent: true,
+  opacity: 0.15,
+  side: THREE.BackSide
+});
+const corona = new THREE.Mesh(coronaGeo, coronaMat);
+scene.add(corona);
+
+// Grid (Latitude/Longitude)
+const gridGeometry = new THREE.SphereGeometry(2.01, 32, 32);
+const gridMaterial = new THREE.MeshBasicMaterial({
+  color: 0xffffff,
+  wireframe: true,
+  transparent: true,
+  opacity: 0.1
+});
+const grid = new THREE.Mesh(gridGeometry, gridMaterial);
+scene.add(grid);
+
+// Lights
+const ambientLight = new THREE.AmbientLight(0x404040, 2);
+scene.add(ambientLight);
+const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+pointLight.position.set(10, 10, 10);
+scene.add(pointLight);
+
+// Animation
+function animate() {
+  requestAnimationFrame(animate);
+  sun.rotation.y += 0.001; // Constant solar rotation
+  grid.rotation.y += 0.001;
+  renderer.render(scene, camera);
+}
+
+window.addEventListener('resize', () => {
+  const w = container.clientWidth || window.innerWidth;
+  const h = container.clientHeight || window.innerHeight;
+  renderer.setSize(w, h);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+});
+
+animate();
+
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_11 -->
+</body>
+</html>

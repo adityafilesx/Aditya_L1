@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aditya-L1 Research &amp; Publication Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c6c6cd",
+                        "on-tertiary-container": "#f3f3fa",
+                        "secondary-fixed": "#ffdbd1",
+                        "on-surface": "#191c1e",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#c1c1ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f7f9fc",
+                        "secondary": "#ae3104",
+                        "on-secondary-fixed": "#3b0a00",
+                        "on-tertiary-fixed-variant": "#45474c",
+                        "on-primary-fixed": "#08006c",
+                        "secondary-container": "#fe693c",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#e2e2e9",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#e1dfff",
+                        "on-tertiary-fixed": "#1a1b21",
+                        "on-primary-fixed-variant": "#2f2bc1",
+                        "secondary-fixed-dim": "#ffb59f",
+                        "primary-container": "#5b5ceb",
+                        "primary": "#4140d1",
+                        "outline-variant": "#c7c4d7",
+                        "background": "#f7f9fc",
+                        "on-surface-variant": "#464555",
+                        "surface-variant": "#e0e3e6",
+                        "on-background": "#191c1e",
+                        "on-primary-container": "#f5f2ff",
+                        "tertiary-container": "#6e6f75",
+                        "surface-tint": "#4949d9",
+                        "surface-container-low": "#f2f4f7",
+                        "outline": "#767586",
+                        "surface-container": "#eceef1",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#601600",
+                        "tertiary": "#55575d",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f7f9fc",
+                        "surface-dim": "#d8dadd",
+                        "inverse-on-surface": "#eff1f4",
+                        "on-secondary-fixed-variant": "#862200",
+                        "inverse-primary": "#c1c1ff",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-highest": "#e0e3e6",
+                        "surface-container-high": "#e6e8eb",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "32px",
+                        "component-padding-x": "16px",
+                        "section-gap": "48px",
+                        "gutter": "24px",
+                        "component-padding-y": "12px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Space Grotesk"],
+                        "numeric-telemetry": ["Space Grotesk"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Space Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "numeric-telemetry": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "data-mono": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #F5F7FA; color: #191c1e; margin: 0; padding: 0; min-height: 100vh; overflow-x: hidden; }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid #E8ECF2; border-radius: 18px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); transition: border-color 0.15s linear; }
+        .glass-card:hover { border-color: #5B5CEB; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e0e3e6; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #c7c4d7; }
+    </style>
+</head>
+<body class="font-body-sm text-body-sm flex bg-background">
+<!-- TopNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-dim font-body-lg text-body-lg fixed top-0 w-full z-50 flex justify-between items-center px-container-margin h-16 border-b border-outline-variant dark:border-outline flat no shadows docked full-width top-0">
+<div class="flex items-center gap-8">
+<span class="font-display-lg text-display-lg-mobile tracking-tighter text-primary dark:text-primary-fixed-dim">SOLARIS ENGINE</span>
+<div class="hidden md:flex gap-6">
+<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant pb-1 hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-150 cursor-pointer active:opacity-80" href="#">Live Feed</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant pb-1 hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-150 cursor-pointer active:opacity-80" href="#">Telemetry</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant pb-1 hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-150 cursor-pointer active:opacity-80" href="#">Analysis</a>
+<a class="text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary dark:border-primary-fixed-dim pb-1 cursor-pointer active:opacity-80" href="#">Research</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 mr-4 hidden lg:flex">
+<span class="font-data-mono text-data-mono text-on-surface-variant">DS: [SOL-FL-V4]</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant ml-2">EXP: [EXP-COR-99]</span>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-caps text-label-caps hover:bg-primary-container transition-colors ml-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">download</span> Export
+                </button>
+</div>
+<button class="text-primary dark:text-primary-fixed-dim cursor-pointer active:opacity-80 hover:text-primary-container transition-colors p-2 rounded-full hover:bg-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-primary dark:text-primary-fixed-dim cursor-pointer active:opacity-80 hover:text-primary-container transition-colors p-2 rounded-full hover:bg-surface-variant">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<img alt="Researcher Profile" class="w-8 h-8 rounded-full border border-outline-variant object-cover ml-2" data-alt="A small circular profile picture of a scientist wearing glasses in a brightly lit modern laboratory, professional white corporate aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA61cv8T2xPXazQj1ExZpRp72Xx-P_HxwNCeZ8qXG9rJ_Cz5uxu9MBp9tGyIgCaKH3Ir06l1MJk2Yd6e7ZXMyURlWmeQQ6VmUlHuucoJbFjKCSbuggJQoyFMs-EMsKubcAeJZ62s3msqvu-wM4Axq98mzGVYuIyypp5vrHu_kZUsLAgTktr5a1dv-7VwPecSPxLIxFx0NdQ5XpovFf7zyylorTguNqJkGhdGXYdnVDMyY3AbB9R7J1z_mvaFEwSz0fm5z7nzrl81zyX"/>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="bg-surface-container-low dark:bg-surface-container font-body-sm text-body-sm fixed left-0 top-16 h-full w-[260px] border-r border-outline-variant dark:border-outline flat no shadows flex flex-col gap-2 p-4 z-40 hidden md:flex overflow-y-auto custom-scrollbar">
+<div class="mb-6 px-4">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary-container flex items-center justify-center font-bold">W</div>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface dark:text-on-surface-variant leading-none">Project Helios</div>
+<div class="font-data-mono text-[10px] text-on-surface-variant mt-1">Active Mission: ML-Coronal-1</div>
+</div>
+</div>
+<button class="w-full mt-4 bg-surface-container-lowest border border-outline-variant text-primary py-2 rounded-lg font-label-caps text-label-caps hover:border-primary transition-colors flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">add</span> New Analysis
+            </button>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="cursor-pointer px-4 py-2 flex items-center gap-3 text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">database</span> Dataset Explorer
+            </a>
+<a class="cursor-pointer px-4 py-2 flex items-center gap-3 text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">analytics</span> Benchmarks
+            </a>
+<a class="cursor-pointer px-4 py-2 flex items-center gap-3 text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">insert_chart</span> Figures
+            </a>
+<a class="cursor-pointer px-4 py-2 flex items-center gap-3 bg-primary-container text-on-primary-container dark:bg-primary dark:text-on-primary rounded-lg transition-colors duration-150 font-medium" href="#">
+<span class="material-symbols-outlined">description</span> Reports
+            </a>
+<a class="cursor-pointer px-4 py-2 flex items-center gap-3 text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">library_books</span> Library
+            </a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-4 flex flex-col gap-1">
+<a class="cursor-pointer px-4 py-2 flex items-center gap-3 text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span> Documentation
+            </a>
+<a class="cursor-pointer px-4 py-2 flex items-center gap-3 text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-variant dark:hover:bg-surface-container-highest transition-colors duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[18px]">contact_support</span> Support
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 mt-16 md:ml-[260px] p-container-margin max-w-[1800px] mx-auto w-full pb-24">
+<!-- Header Section -->
+<header class="mb-section-gap flex justify-between items-end border-b border-outline-variant pb-6">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Research Workspace</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Scientific Analysis • Benchmarking • Publication Generation</p>
+</div>
+</header>
+<!-- Section 2: Project Summary -->
+<section class="mb-section-gap">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-gutter">
+<div class="glass-card p-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">DATASET</div>
+<div class="font-numeric-telemetry text-numeric-telemetry text-on-surface truncate" title="SOL-FLARE-V4-FINAL">SOL-FLARE-V4...</div>
+<div class="font-data-mono text-[10px] text-tertiary mt-2">Updated 2h ago</div>
+</div>
+<div class="glass-card p-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">MODELS</div>
+<div class="font-numeric-telemetry text-numeric-telemetry text-on-surface">7 Active</div>
+<div class="font-data-mono text-[10px] text-tertiary mt-2">Architectures</div>
+</div>
+<div class="glass-card p-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">EXPERIMENTS</div>
+<div class="font-numeric-telemetry text-numeric-telemetry text-on-surface">128 Runs</div>
+<div class="font-data-mono text-[10px] text-tertiary mt-2">Completed</div>
+</div>
+<div class="glass-card p-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">PHYSICS ENGINE</div>
+<div class="font-numeric-telemetry text-numeric-telemetry text-on-surface">v3.2.1 Stable</div>
+<div class="font-data-mono text-[10px] text-success mt-2 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Online</div>
+</div>
+<div class="glass-card p-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">DIGITAL TWIN</div>
+<div class="font-numeric-telemetry text-numeric-telemetry text-on-surface">99.8% Sync</div>
+<div class="w-full bg-surface-variant h-1 mt-2 rounded-full overflow-hidden"><div class="bg-primary h-full" style="width: 99.8%"></div></div>
+</div>
+<div class="glass-card p-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">PUBLICATIONS</div>
+<div class="font-numeric-telemetry text-numeric-telemetry text-on-surface">2 Drafts</div>
+<div class="font-data-mono text-[10px] text-secondary mt-2">1 Under Review</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface font-data-mono text-data-mono fixed bottom-0 w-full z-40 flex justify-between items-center px-container-margin py-2 border-t border-outline-variant dark:border-outline flat no shadows docked full-width bottom-0">
+<div class="text-on-surface-variant dark:text-on-tertiary-fixed-variant">© 2024 Solar Physics Research Org</div>
+<div class="flex gap-6">
+<span class="text-on-surface-variant dark:text-inverse-on-surface hover:text-primary dark:hover:text-primary-fixed-dim transition-opacity duration-150 cursor-pointer">Kernel: 4.19.0-ML</span>
+<span class="text-on-surface-variant dark:text-inverse-on-surface hover:text-primary dark:hover:text-primary-fixed-dim transition-opacity duration-150 cursor-pointer flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span> Status: Operational</span>
+<span class="text-on-surface-variant dark:text-inverse-on-surface hover:text-primary dark:hover:text-primary-fixed-dim transition-opacity duration-150 cursor-pointer">Region: US-East-1</span>
+</div>
+</footer>
+</body></html>

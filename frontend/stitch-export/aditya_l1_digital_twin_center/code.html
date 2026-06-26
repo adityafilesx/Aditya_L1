@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ADITYA-L1 MISSION OVERVIEW - Digital Twin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#45474c",
+                        "primary-container": "#5b5ceb",
+                        "on-error-container": "#93000a",
+                        "on-background": "#191c1e",
+                        "surface-container-high": "#e6e8eb",
+                        "surface-bright": "#f7f9fc",
+                        "secondary-fixed": "#ffdbd1",
+                        "on-primary-container": "#f5f2ff",
+                        "tertiary-fixed": "#e2e2e9",
+                        "on-surface-variant": "#464555",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#c6c6cd",
+                        "outline-variant": "#c7c4d7",
+                        "on-secondary-fixed-variant": "#862200",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb59f",
+                        "on-primary-fixed": "#08006c",
+                        "surface-dim": "#d8dadd",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#f3f3fa",
+                        "on-secondary-container": "#601600",
+                        "surface": "#f7f9fc",
+                        "on-surface": "#191c1e",
+                        "secondary-container": "#fe693c",
+                        "tertiary": "#55575d",
+                        "on-secondary-fixed": "#3b0a00",
+                        "outline": "#767586",
+                        "on-tertiary-fixed": "#1a1b21",
+                        "surface-container-low": "#f2f4f7",
+                        "secondary": "#ae3104",
+                        "primary": "#4140d1",
+                        "surface-variant": "#e0e3e6",
+                        "tertiary-container": "#6e6f75",
+                        "inverse-primary": "#c1c1ff",
+                        "primary-fixed": "#e1dfff",
+                        "inverse-surface": "#2d3133",
+                        "primary-fixed-dim": "#c1c1ff",
+                        "on-primary-fixed-variant": "#2f2bc1",
+                        "inverse-on-surface": "#eff1f4",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#4949d9",
+                        "surface-container": "#eceef1",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e0e3e6",
+                        "error-container": "#ffdad6",
+                        "background": "#f7f9fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "14px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "48px",
+                        "component-padding-x": "16px",
+                        "container-margin": "32px",
+                        "component-padding-y": "12px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "numeric-telemetry": ["Space Grotesk"],
+                        "display-lg": ["Space Grotesk"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "display-lg-mobile": ["Space Grotesk"],
+                        "data-mono": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "numeric-telemetry": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "data-mono": ["13px", { "lineHeight": "18px", "fontWeight": "500" }]
+                    },
+                    boxShadow: {
+                        'primary': '0 10px 30px rgba(15, 23, 42, 0.04)',
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid theme('colors.outline-variant');
+        }
+
+        .hover-border:hover {
+            border-color: theme('colors.primary');
+            box-shadow: 0 0 0 1px theme('colors.primary');
+        }
+
+        /* Custom Scrollbar for sleekness */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.surface-dim');
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline-variant');
+        }
+        
+        .blinking-dot {
+            animation: blink 1.5s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-lg min-h-screen flex flex-col relative overflow-x-hidden pt-16 pb-12">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-container-margin py-component-padding-y max-w-full">
+<div class="flex items-center gap-4">
+<h1 class="font-display-lg text-display-lg text-primary" style="font-size: 24px; line-height: 32px;">ADITYA-L1 MISSION OVERVIEW</h1>
+</div>
+<!-- Web Navigation -->
+<nav class="hidden md:flex gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150" href="#">Overview</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150" href="#">Telemetry</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-bold opacity-80 transition-opacity duration-150" href="#">Science</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150" href="#">Intelligence</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-150">
+<span class="material-symbols-outlined">schedule</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-150">
+<span class="material-symbols-outlined">timer</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A small, professional headshot or geometric avatar representing the Mission Commander in a minimalist aesthetic. High-key lighting, clean background, primarily cool tones (blues and grays) with sharp details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWAZf-Z8JFl0HD9lqXS9h_YuEbssEK0miZ_f-UJwZsi4Zbmt3J1WGXPpdpsM0yYWLP9oQhyPwS69iWmZU3VLzv3yldE5FZjApCnHz-8Xnkh0oVSjuMeZajyLTgsGtqMbAftB0uZRPQPs8AWqfiUtc3IegTzbO6jSZZOBQHMpMXWBKB5r-PsaQzm4Ym9ywVAh3QZ6qKPHI43PU1g4G4Dmp83InQj2sTXiHbhggO2_SZ_As8_Ezes5YbC24tjO6j0opcfmRw_r2W2K7k"/>
+</div>
+</div>
+</header>
+<!-- Main Container -->
+<div class="flex flex-1 max-w-[1800px] mx-auto w-full px-container-margin py-gutter gap-gutter h-[calc(100vh-112px)]">
+<!-- SideNavBar (Desktop Fixed Left) -->
+<aside class="hidden md:flex flex-col fixed left-0 top-16 h-[calc(100vh-112px)] w-[260px] bg-surface-container-low border-r border-outline-variant p-component-padding-x z-40">
+<div class="mb-8">
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center border border-outline-variant mb-4">
+<img class="w-10 h-10 object-contain" data-alt="A minimalist, geometric mission patch design for the ADITYA-L1 solar mission. Features clean lines representing a satellite trajectory around a stylized sun. Deep purple and vibrant orange accents on a pristine white background. Professional aerospace aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzKgxMkVwtmZMRZo5woBtjOu6P3-QqfAfELkua_Em4c8r4gOtULOE8e0Li6pBSQF_PpUmYZFv28JwBZO6eApL6yowXHz1V58NKas7cHDjvH_ptGM5bYGZ-59_kd2moWd2DtTbRlzx7nbX82MdGWiG6CNITgGVm7mUD1NjH7vVw0x46vdFb2_FauXJtAw_JUYhDhVf9cELEoo-_82RshTU8DymBwMRpGgVe9O5sEQJcm6bdR-Lcf81KKVDB2Ol6MfbinTMzb5QnRsDR"/>
+</div>
+<h2 class="font-display-lg text-primary text-[20px] leading-[28px]">SOLAR MISSION</h2>
+<p class="font-body-sm text-on-surface-variant mt-1">L1 LIBRATION POINT</p>
+<button class="mt-4 w-full bg-primary text-on-primary font-label-caps py-2 rounded-lg hover:bg-surface-tint transition-colors duration-150">
+                    MANUAL OVERRIDE
+                </button>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Command Center</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">wb_sunny</span>
+<span class="font-label-caps text-label-caps">Solar Flux</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary-container text-on-primary-container rounded-lg font-bold scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">model_training</span>
+<span class="font-label-caps text-label-caps">Digital Twin</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">warning</span>
+<span class="font-label-caps text-label-caps">Risk Matrix</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">timeline</span>
+<span class="font-label-caps text-label-caps">Timeline</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span class="font-label-caps text-label-caps">Instruments</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-2 border-t border-outline-variant pt-4">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-all duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area (12 Columns) -->
+<main class="md:ml-[260px] flex-1 grid grid-cols-1 md:grid-cols-12 gap-gutter h-full">
+<!-- Left Column (2.5 Cols roughly -> 3/12 for simplicity, but flex allows exact) -->
+<div class="col-span-1 md:col-span-3 flex flex-col gap-gutter h-full overflow-y-auto">
+<!-- Solar Overlays Panel -->
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-primary p-4 hover-border transition-colors duration-150">
+<div class="flex items-center justify-between mb-4 border-b border-surface-container-high pb-2">
+<h3 class="font-label-caps text-label-caps text-on-surface">SOLAR OVERLAYS</h3>
+<span class="material-symbols-outlined text-outline text-[18px]">layers</span>
+</div>
+<div class="flex flex-col gap-3">
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="font-body-sm text-on-surface-variant group-hover:text-primary transition-colors">Photosphere (Visible)</span>
+<div class="relative w-10 h-5 bg-surface-container-highest rounded-full border border-outline-variant">
+<div class="absolute left-0.5 top-0.5 w-4 h-4 bg-primary rounded-full transition-transform translate-x-5"></div>
+</div>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="font-body-sm text-on-surface-variant group-hover:text-primary transition-colors">Chromosphere (H-Alpha)</span>
+<div class="relative w-10 h-5 bg-surface-container-highest rounded-full border border-outline-variant">
+<div class="absolute left-0.5 top-0.5 w-4 h-4 bg-outline rounded-full transition-transform"></div>
+</div>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="font-body-sm text-on-surface-variant group-hover:text-primary transition-colors">Corona (EUV 193Å)</span>
+<div class="relative w-10 h-5 bg-surface-container-highest rounded-full border border-outline-variant">
+<div class="absolute left-0.5 top-0.5 w-4 h-4 bg-primary rounded-full transition-transform translate-x-5"></div>
+</div>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="font-body-sm text-on-surface-variant group-hover:text-primary transition-colors">Magnetic Field Lines</span>
+<div class="relative w-10 h-5 bg-surface-container-highest rounded-full border border-outline-variant">
+<div class="absolute left-0.5 top-0.5 w-4 h-4 bg-primary rounded-full transition-transform translate-x-5"></div>
+</div>
+</label>
+<div class="mt-2 pt-3 border-t border-surface-container-high">
+<div class="flex justify-between text-[10px] text-outline uppercase font-semibold mb-1">
+<span>Opacity</span>
+<span>85%</span>
+</div>
+<input class="w-full h-1 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-primary" max="100" min="0" type="range" value="85"/>
+</div>
+</div>
+</div>
+<!-- Active Region Inspector -->
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-primary p-4 hover-border transition-colors duration-150 flex-1 flex flex-col">
+<div class="flex items-center justify-between mb-4 border-b border-surface-container-high pb-2">
+<h3 class="font-label-caps text-label-caps text-on-surface">ACTIVE REGIONS</h3>
+<span class="flex items-center justify-center w-5 h-5 bg-primary-container text-primary rounded-full text-[10px] font-bold">4</span>
+</div>
+<div class="flex flex-col gap-2 overflow-y-auto pr-1">
+<!-- AR Item -->
+<div class="p-3 rounded-lg border border-primary bg-primary-fixed-dim/10 cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="font-numeric-telemetry text-numeric-telemetry text-primary font-bold">AR13872</span>
+<span class="bg-error/10 text-error text-[10px] font-bold px-2 py-0.5 rounded uppercase">High Risk</span>
+</div>
+<div class="flex justify-between font-body-sm text-on-surface-variant">
+<span>Complexity: β-γ-δ</span>
+<span>Flare Prob: 85%</span>
+</div>
+</div>
+<!-- AR Item -->
+<div class="p-3 rounded-lg border border-outline-variant hover:border-primary/50 bg-surface transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="font-numeric-telemetry text-numeric-telemetry text-on-surface font-bold">AR13873</span>
+<span class="bg-secondary-container/10 text-secondary text-[10px] font-bold px-2 py-0.5 rounded uppercase">Mod Risk</span>
+</div>
+<div class="flex justify-between font-body-sm text-on-surface-variant">
+<span>Complexity: β-γ</span>
+<span>Flare Prob: 42%</span>
+</div>
+</div>
+<!-- AR Item -->
+<div class="p-3 rounded-lg border border-outline-variant hover:border-primary/50 bg-surface transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="font-numeric-telemetry text-numeric-telemetry text-on-surface font-bold">AR13874</span>
+<span class="bg-outline-variant/30 text-on-surface-variant text-[10px] font-bold px-2 py-0.5 rounded uppercase">Low Risk</span>
+</div>
+<div class="flex justify-between font-body-sm text-on-surface-variant">
+<span>Complexity: α</span>
+<span>Flare Prob: 5%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Center Column (7 Cols) -->
+<div class="col-span-1 md:col-span-6 flex flex-col h-full bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-primary overflow-hidden relative">
+<!-- Header Overlay -->
+<div class="absolute top-0 left-0 w-full p-6 z-10 glass-panel border-x-0 border-t-0 rounded-t-2xl flex justify-between items-center">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1">Digital Twin Viewer</h2>
+<p class="font-body-sm text-on-surface-variant">Real-Time Virtual Solar Environment • Synthesis 99.8%</p>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded border border-outline-variant bg-surface flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="w-10 h-10 rounded border border-outline-variant bg-surface flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined">360</span>
+</button>
+<button class="w-10 h-10 rounded border border-outline-variant bg-surface flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined">fullscreen</span>
+</button>
+</div>
+</div>
+<!-- 3D Viewer Area -->
+<div class="flex-1 w-full relative bg-surface-container-highest">
+<!-- CRITICAL: Animation Tag -->
+
+<!-- Reticle/Center marker purely for aesthetic -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-30">
+<span class="material-symbols-outlined text-[64px] text-primary">add</span>
+</div>
+</div>
+<!-- Footer Controls Overlay -->
+<div class="absolute bottom-0 left-0 w-full p-4 z-10 glass-panel border-x-0 border-b-0 rounded-b-2xl">
+<div class="flex items-center gap-4">
+<button class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-surface-tint transition-colors shrink-0 shadow-sm">
+<span class="material-symbols-outlined fill">play_arrow</span>
+</button>
+<div class="flex-1 flex flex-col gap-2">
+<div class="flex justify-between items-center px-1">
+<span class="font-data-mono text-data-mono text-primary font-bold">T-00:00:00 (LIVE)</span>
+<div class="flex gap-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant cursor-pointer hover:text-primary">MINUTES</span>
+<span class="font-label-caps text-label-caps text-primary border-b border-primary">HOURS</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant cursor-pointer hover:text-primary">DAYS</span>
+</div>
+</div>
+<!-- Scrubber -->
+<div class="relative w-full h-2 bg-surface-container-high rounded-full cursor-pointer overflow-hidden">
+<div class="absolute left-0 top-0 h-full w-full bg-primary-container"></div>
+<div class="absolute right-0 top-0 h-full w-2 bg-primary"></div>
+</div>
+<!-- Markers -->
+<div class="flex justify-between px-1 mt-1 text-[10px] text-outline font-data-mono">
+<span>-24h</span>
+<span>-12h</span>
+<span>Live</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (2.5 Cols -> 3/12) -->
+<div class="col-span-1 md:col-span-3 flex flex-col gap-gutter h-full overflow-y-auto">
+<!-- Digital Twin State -->
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-primary p-4 hover-border transition-colors duration-150">
+<div class="flex items-center justify-between mb-4 border-b border-surface-container-high pb-2">
+<h3 class="font-label-caps text-label-caps text-on-surface">SYSTEM STATE</h3>
+<div class="w-2 h-2 rounded-full bg-primary blinking-dot"></div>
+</div>
+<div class="grid grid-cols-2 gap-2 mb-4">
+<div class="p-2 border border-outline-variant rounded bg-surface">
+<p class="text-[10px] text-outline uppercase mb-1">Status</p>
+<p class="font-data-mono text-data-mono text-primary font-bold">TRACKING</p>
+</div>
+<div class="p-2 border border-outline-variant rounded bg-surface">
+<p class="text-[10px] text-outline uppercase mb-1">Sync Ratio</p>
+<p class="font-data-mono text-data-mono text-on-surface font-bold">99.8%</p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-body-sm">
+<span class="text-on-surface-variant">Data Latency</span>
+<span class="font-data-mono text-primary">12ms</span>
+</div>
+<div class="flex justify-between font-body-sm">
+<span class="text-on-surface-variant">Mesh Density</span>
+<span class="font-data-mono text-on-surface">Ultra (8M Poly)</span>
+</div>
+</div>
+</div>
+<!-- Physics Overlay -->
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-primary p-4 hover-border transition-colors duration-150">
+<div class="flex items-center justify-between mb-4 border-b border-surface-container-high pb-2">
+<h3 class="font-label-caps text-label-caps text-on-surface">PHYSICS METRICS</h3>
+<span class="material-symbols-outlined text-outline text-[18px]">analytics</span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="relative p-3 border border-outline-variant rounded-lg bg-surface flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-on-surface-variant">Coronal Temp</span>
+<span class="font-numeric-telemetry text-secondary font-bold">1.2M K</span>
+</div>
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden mt-1">
+<div class="h-full bg-secondary w-[75%]"></div>
+</div>
+</div>
+<div class="relative p-3 border border-outline-variant rounded-lg bg-surface flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-on-surface-variant">X-Ray Flux</span>
+<span class="font-numeric-telemetry text-primary font-bold">M2.4</span>
+</div>
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden mt-1">
+<div class="h-full bg-primary w-[45%]"></div>
+</div>
+</div>
+<div class="relative p-3 border border-outline-variant rounded-lg bg-surface flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-on-surface-variant">Solar Wind</span>
+<span class="font-numeric-telemetry text-on-surface font-bold">420 km/s</span>
+</div>
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden mt-1">
+<div class="h-full bg-outline w-[30%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Similarity Engine -->
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-primary p-4 hover-border transition-colors duration-150 flex-1">
+<div class="flex items-center justify-between mb-4 border-b border-surface-container-high pb-2">
+<h3 class="font-label-caps text-label-caps text-on-surface">EVENT MATCHING</h3>
+<span class="material-symbols-outlined text-outline text-[18px]">compare_arrows</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mb-3 leading-relaxed">Comparing current AR topology against historical flare profiles.</p>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between p-2 rounded hover:bg-surface-container-low transition-colors cursor-pointer border border-transparent hover:border-outline-variant">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="font-data-mono text-[12px] text-on-surface">X2.2 (2017)</span>
+</div>
+<span class="font-numeric-telemetry text-[14px] text-primary">89%</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded hover:bg-surface-container-low transition-colors cursor-pointer border border-transparent hover:border-outline-variant">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-data-mono text-[12px] text-on-surface">M9.1 (2021)</span>
+</div>
+<span class="font-numeric-telemetry text-[14px] text-primary">76%</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded hover:bg-surface-container-low transition-colors cursor-pointer border border-transparent hover:border-outline-variant">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<span class="font-data-mono text-[12px] text-on-surface">X1.1 (2023)</span>
+</div>
+<span class="font-numeric-telemetry text-[14px] text-outline">62%</span>
+</div>
+</div>
+<button class="mt-4 w-full text-center py-2 text-[12px] text-primary font-bold border border-primary rounded hover:bg-primary-container hover:text-on-primary-container transition-colors">
+                        VIEW FULL MATRIX
+                    </button>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full z-50 bg-inverse-surface border-t border-outline flex justify-between items-center px-container-margin py-2 shadow-sm">
+<div class="font-label-caps text-label-caps text-secondary">
+            ISRO MISSION CONTROL • ADITYA-L1 OPERATIONS
+        </div>
+<div class="flex gap-6 font-data-mono text-data-mono text-inverse-on-surface">
+<span class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-primary-fixed blinking-dot"></div>
+                System Health: Nominal
+            </span>
+<span class="text-surface-variant">UTC: 12:45:00</span>
+<span class="text-surface-variant">MET: 142:10:22:04</span>
+</div>
+</footer>
+</body></html>

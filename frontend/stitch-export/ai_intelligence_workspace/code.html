@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aditya-L1 Mission Control | AI Intelligence</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Design System Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#ae3104",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#e1dfff",
+                    "on-tertiary-fixed": "#1a1b21",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#6e6f75",
+                    "surface-container-highest": "#e0e3e6",
+                    "tertiary-fixed": "#e2e2e9",
+                    "surface-dim": "#d8dadd",
+                    "surface-tint": "#4949d9",
+                    "surface-bright": "#f7f9fc",
+                    "surface-variant": "#e0e3e6",
+                    "surface-container-low": "#f2f4f7",
+                    "on-surface-variant": "#464555",
+                    "on-secondary-container": "#601600",
+                    "on-primary-fixed-variant": "#2f2bc1",
+                    "background": "#f7f9fc",
+                    "inverse-primary": "#c1c1ff",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#e6e8eb",
+                    "on-background": "#191c1e",
+                    "on-primary-container": "#f5f2ff",
+                    "secondary-fixed-dim": "#ffb59f",
+                    "secondary-container": "#fe693c",
+                    "on-primary-fixed": "#08006c",
+                    "inverse-on-surface": "#eff1f4",
+                    "primary-container": "#5b5ceb",
+                    "on-secondary-fixed": "#3b0a00",
+                    "tertiary-fixed-dim": "#c6c6cd",
+                    "on-tertiary-fixed-variant": "#45474c",
+                    "on-tertiary-container": "#f3f3fa",
+                    "on-surface": "#191c1e",
+                    "error-container": "#ffdad6",
+                    "surface": "#f7f9fc",
+                    "outline": "#767586",
+                    "outline-variant": "#c7c4d7",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#ffdbd1",
+                    "on-secondary-fixed-variant": "#862200",
+                    "surface-container": "#eceef1",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#2d3133",
+                    "primary": "#4140d1",
+                    "primary-fixed-dim": "#c1c1ff",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#55575d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "component-padding-y": "12px",
+                    "section-gap": "48px",
+                    "component-padding-x": "16px",
+                    "container-margin": "32px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Space Grotesk"],
+                    "numeric-telemetry": ["Space Grotesk"],
+                    "body-lg": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "data-mono": ["JetBrains Mono"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "numeric-telemetry": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "data-mono": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #f7f9fc; color: #191c1e; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .bento-card { background: white; border-radius: 18px; border: 1px solid #E8ECF2; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); transition: border-color 150ms linear; }
+        .bento-card:hover { border-color: #5B5CEB; }
+        .telemetry-table th { @apply font-label-caps text-label-caps text-on-surface-variant py-2 px-4 text-left border-b border-outline-variant; }
+        .telemetry-table td { @apply font-body-sm text-body-sm py-2 px-4 border-b border-outline-variant; }
+        .telemetry-table tr:hover { background-color: #f2f4f7; }
+        .status-dot-pulse { width: 8px; height: 8px; border-radius: 50%; background-color: #22c55e; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
+    </style>
+</head>
+<body class="font-body-lg text-body-lg antialiased">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-surface dark:bg-surface border-r border-outline-variant flex flex-col p-component-padding-x gap-gutter z-50">
+<div class="flex flex-col gap-1 py-4">
+<span class="font-headline-md text-headline-md font-black text-on-surface">SOLAR OPS</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Active Mission Phase</span>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low transition-all duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps font-body-sm text-body-sm">Mission Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low transition-all duration-150" href="#">
+<span class="material-symbols-outlined">biotech</span>
+<span class="font-label-caps text-label-caps font-body-sm text-body-sm">Sensor Inspector</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary-container text-on-primary-container font-bold rounded-lg transition-all duration-150" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps text-label-caps font-body-sm text-body-sm">AI Intelligence</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low transition-all duration-150" href="#">
+<span class="material-symbols-outlined">settings_remote</span>
+<span class="font-label-caps text-label-caps font-body-sm text-body-sm">Telemetry Control</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low transition-all duration-150" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-caps text-label-caps font-body-sm text-body-sm">Alert Logs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low transition-all duration-150" href="#">
+<span class="material-symbols-outlined">dns</span>
+<span class="font-label-caps text-label-caps font-body-sm text-body-sm">System Health</span>
+</a>
+</nav>
+<div class="mt-auto pb-4 space-y-4">
+<button class="w-full bg-primary text-on-primary font-label-caps text-label-caps py-3 rounded-lg hover:opacity-90 transition-opacity">COMMAND UPLINK</button>
+<div class="flex flex-col gap-1 border-t border-outline-variant pt-4">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-caps text-label-caps">Documentation</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-[260px] min-h-screen pb-12 overflow-x-hidden">
+<!-- Header Section -->
+<header class="bg-surface-container-low sticky top-0 z-40 border-b border-outline-variant px-container-margin py-component-padding-y flex justify-between items-center w-full">
+<div class="flex flex-col">
+<h1 class="font-display-lg text-headline-md font-bold text-primary">AI Intelligence</h1>
+<p class="font-label-caps text-[10px] text-on-surface-variant">Explainable Artificial Intelligence • Forecast Validation • Model Diagnostics</p>
+</div>
+<div class="flex items-center gap-gutter">
+<div class="hidden lg:flex items-center gap-4 bg-surface-container-high px-4 py-2 rounded-lg">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant">MODEL VERSION</span>
+<span class="font-data-mono text-data-mono text-primary">v4.2.1-alpha.rc2</span>
+</div>
+<div class="w-px h-8 bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant">INFERENCE</span>
+<span class="font-data-mono text-data-mono text-secondary">REAL-TIME</span>
+</div>
+<div class="w-px h-8 bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant">EXPERIMENT</span>
+<span class="font-data-mono text-data-mono text-on-surface">FLARE_DYNAMICS_99</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined p-2 hover:bg-surface-container-high rounded-full cursor-pointer">timer</span>
+<span class="material-symbols-outlined p-2 hover:bg-surface-container-high rounded-full cursor-pointer">public</span>
+<span class="material-symbols-outlined p-2 hover:bg-surface-container-high rounded-full cursor-pointer">settings</span>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-xs">FD</div>
+</div>
+</div>
+</header>
+<!-- Status Strip -->
+<section class="px-container-margin py-6 overflow-x-auto no-scrollbar">
+<div class="flex gap-4 min-w-[1400px]">
+<!-- Model Cards (7 instances) -->
+<script>
+                    const models = [
+                        { name: "Primary Forecast", ver: "v4.2", lat: "4ms", gpu: "42%" },
+                        { name: "Secondary", ver: "v3.9", lat: "6ms", gpu: "18%" },
+                        { name: "Hybrid Ensemble", ver: "v2.1", lat: "12ms", gpu: "88%" },
+                        { name: "Physics AI", ver: "v5.0", lat: "22ms", gpu: "92%" },
+                        { name: "Temporal AI", ver: "v1.4", lat: "8ms", gpu: "31%" },
+                        { name: "Digital Twin AI", ver: "v3.2", lat: "45ms", gpu: "95%" },
+                        { name: "Knowledge Graph", ver: "v1.0", lat: "110ms", gpu: "12%" }
+                    ];
+                    models.forEach(m => {
+                        document.write(`
+                            <div class="flex-1 bg-white border border-outline-variant rounded-lg p-3 min-w-[180px] flex flex-col gap-2 shadow-sm">
+                                <div class="flex justify-between items-start">
+                                    <span class="font-label-caps text-[10px] text-on-surface-variant uppercase">${m.name}</span>
+                                    <div class="status-dot-pulse"></div>
+                                </div>
+                                <div class="flex justify-between items-baseline">
+                                    <span class="font-data-mono text-[11px]">${m.ver}</span>
+                                    <span class="font-numeric-telemetry text-sm text-primary">${m.lat}</span>
+                                </div>
+                                <div class="w-full bg-surface-container-low h-1 rounded-full overflow-hidden">
+                                    <div class="bg-primary h-full" style="width: ${m.gpu}"></div>
+                                </div>
+                                <span class="font-label-caps text-[9px] text-on-surface-variant">GPU LOAD: ${m.gpu}</span>
+                            </div>
+                        `);
+                    });
+                </script>
+</div>
+</section>
+<div class="px-container-margin max-w-[1800px] grid grid-cols-12 gap-gutter">
+<!-- Live AI Prediction -->
+<section class="col-span-12 lg:col-span-8 bento-card p-6 flex flex-col gap-6">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-label-caps text-label-caps text-on-surface-variant">LIVE AI PREDICTION</h2>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-display-lg text-display-lg text-primary">20.8%</span>
+<span class="font-body-lg text-on-surface-variant">Flare Probability</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant">CONFIDENCE INTERVAL</span>
+<div class="font-numeric-telemetry text-headline-md text-secondary">96%</div>
+</div>
+</div>
+<!-- Prediction History Sparkline (Placeholder visualization) -->
+<div class="h-48 w-full bg-surface-container-low rounded-xl flex items-end p-4 gap-1 relative overflow-hidden">
+<div class="absolute top-4 left-4 flex flex-col gap-1 z-10">
+<span class="font-label-caps text-[10px] text-on-surface-variant">PREDICTION HISTORY (24H)</span>
+<span class="font-data-mono text-xs">SENSITIVITY: HIGH</span>
+</div>
+<!-- Simplified Visual for Sparkline -->
+<div class="flex-1 bg-primary/20 rounded-t-sm" style="height: 40%"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm" style="height: 35%"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm" style="height: 45%"></div>
+<div class="flex-1 bg-primary/30 rounded-t-sm" style="height: 60%"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm" style="height: 55%"></div>
+<div class="flex-1 bg-primary/40 rounded-t-sm" style="height: 70%"></div>
+<div class="flex-1 bg-primary/50 rounded-t-sm" style="height: 65%"></div>
+<div class="flex-1 bg-primary/80 rounded-t-sm" style="height: 90%"></div>
+<div class="flex-1 bg-primary rounded-t-sm" style="height: 85%"></div>
+<div class="flex-1 bg-secondary/80 rounded-t-sm" style="height: 75%"></div>
+<div class="flex-1 bg-secondary rounded-t-sm" style="height: 80%"></div>
+</div>
+<div class="flex justify-between items-center border-t border-outline-variant pt-4">
+<div class="flex gap-8">
+<div>
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Expected Class</span>
+<p class="font-headline-md text-xl">M-CLASS (MODERATE)</p>
+</div>
+<div>
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Time to Peak</span>
+<p class="font-headline-md text-xl">~14:22 UTC</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container-high rounded-lg font-label-caps text-label-caps hover:bg-surface-container-highest transition-colors">COMPARE MODELS</button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-label-caps text-label-caps hover:opacity-90 transition-opacity">VIEW EXPLANATION</button>
+</div>
+</div>
+</section>
+<!-- SHAP Explainability & Feature Importance -->
+<section class="col-span-12 lg:col-span-4 bento-card p-6 flex flex-col gap-4">
+<div class="flex justify-between items-center mb-2">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant">FEATURE IMPORTANCE</h2>
+<div class="flex gap-2">
+<span class="text-[10px] font-label-caps bg-primary-container text-on-primary-container px-2 py-0.5 rounded">SHAP</span>
+<span class="text-[10px] font-label-caps bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded">GAIN</span>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Feature Row -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-caps text-[11px]">
+<span>Magnetic Flux Density</span>
+<span class="text-primary">+0.24 SHAP</span>
+</div>
+<div class="h-2 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 85%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-caps text-[11px]">
+<span>Plasma Velocity</span>
+<span class="text-primary">+0.18 SHAP</span>
+</div>
+<div class="h-2 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 65%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-caps text-[11px]">
+<span>Proton Density</span>
+<span class="text-secondary">-0.05 SHAP</span>
+</div>
+<div class="h-2 bg-surface-container-low rounded-full overflow-hidden flex justify-end">
+<div class="h-full bg-secondary" style="width: 15%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between font-label-caps text-[11px]">
+<span>Sunspot Group Area</span>
+<span class="text-primary">+0.12 SHAP</span>
+</div>
+<div class="h-2 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 45%"></div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-outline-variant">
+<p class="font-body-sm text-on-surface-variant italic">"Current prediction heavily influenced by Magnetic Flux anomaly in AR-2934."</p>
+</div>
+</section>
+<!-- Model Consensus Matrix -->
+<section class="col-span-12 bento-card overflow-hidden">
+<div class="p-4 border-b border-outline-variant flex justify-between items-center">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant">MODEL CONSENSUS MATRIX</h2>
+<span class="font-data-mono text-[11px] text-on-surface-variant">POLLING RATE: 100HZ</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full telemetry-table">
+<thead>
+<tr>
+<th>MODEL ARCHITECTURE</th>
+<th>PREDICTION</th>
+<th>CONFIDENCE</th>
+<th>LATENCY</th>
+<th>ACCURACY</th>
+<th>CALIBRATION</th>
+<th>STATUS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="font-bold">XGBoost (Ensemble)</td>
+<td>M-Class</td>
+<td class="font-data-mono">96.2%</td>
+<td class="font-data-mono">4ms</td>
+<td class="text-primary">96%</td>
+<td>Perfect</td>
+<td><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] font-bold">NOMINAL</span></td>
+</tr>
+<tr>
+<td class="font-bold">LightGBM</td>
+<td>M-Class</td>
+<td class="font-data-mono">94.8%</td>
+<td class="font-data-mono">3ms</td>
+<td class="text-primary">95%</td>
+<td>High</td>
+<td><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] font-bold">NOMINAL</span></td>
+</tr>
+<tr>
+<td class="font-bold">Temporal CNN (TCN)</td>
+<td>C-Class</td>
+<td class="font-data-mono">82.1%</td>
+<td class="font-data-mono">18ms</td>
+<td class="text-secondary">89%</td>
+<td>Drifting</td>
+<td><span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded text-[10px] font-bold">WARNING</span></td>
+</tr>
+<tr>
+<td class="font-bold">Transformer-XL</td>
+<td>M-Class</td>
+<td class="font-data-mono">91.5%</td>
+<td class="font-data-mono">42ms</td>
+<td class="text-primary">92%</td>
+<td>Stable</td>
+<td><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] font-bold">NOMINAL</span></td>
+</tr>
+<tr>
+<td class="font-bold">Physics-Informed NN</td>
+<td>M-Class</td>
+<td class="font-data-mono">98.9%</td>
+<td class="font-data-mono">22ms</td>
+<td class="text-primary">97%</td>
+<td>Optimal</td>
+<td><span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] font-bold">NOMINAL</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- AI Pipeline Visualization -->
+<section class="col-span-12 lg:col-span-7 bento-card p-6">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant mb-6">AI INFERENCE PIPELINE</h2>
+<div class="flex items-center justify-between gap-2">
+<div class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-xl bg-surface-container-low border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">sensors</span>
+</div>
+<span class="font-label-caps text-[9px] text-center">TELEMETRY<br/>INGESTION</span>
+</div>
+<div class="flex-1 h-px bg-outline-variant relative">
+<div class="absolute -top-1 left-1/2 w-2 h-2 rounded-full bg-primary animate-ping"></div>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-xl bg-surface-container-low border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">cleaning_services</span>
+</div>
+<span class="font-label-caps text-[9px] text-center">DATA<br/>CLEANING</span>
+</div>
+<div class="flex-1 h-px bg-outline-variant"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-xl bg-surface-container-low border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">auto_fix_high</span>
+</div>
+<span class="font-label-caps text-[9px] text-center">PHYSICS<br/>ENGINE</span>
+</div>
+<div class="flex-1 h-px bg-outline-variant"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-xl bg-primary flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white">psychology</span>
+</div>
+<span class="font-label-caps text-[9px] text-center font-bold">MODEL<br/>INFERENCE</span>
+</div>
+<div class="flex-1 h-px bg-outline-variant"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-xl bg-surface-container-low border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">campaign</span>
+</div>
+<span class="font-label-caps text-[9px] text-center">ACTION<br/>TRIGGER</span>
+</div>
+</div>
+</section>
+<!-- Training Metrics & Uncertainty -->
+<section class="col-span-12 lg:col-span-5 bento-card p-6 flex flex-col gap-4">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant">TRAINING METRICS</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-surface-container-low rounded-lg">
+<span class="font-label-caps text-[10px] text-on-surface-variant">TOTAL SAMPLES</span>
+<div class="font-numeric-telemetry text-xl text-on-surface">102,252</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg">
+<span class="font-label-caps text-[10px] text-on-surface-variant">TSS (TRUE SKILL)</span>
+<div class="font-numeric-telemetry text-xl text-primary">0.91</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg">
+<span class="font-label-caps text-[10px] text-on-surface-variant">HSS (HEIDKE)</span>
+<div class="font-numeric-telemetry text-xl text-primary">0.84</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg">
+<span class="font-label-caps text-[10px] text-on-surface-variant">LOSS (LOG)</span>
+<div class="font-numeric-telemetry text-xl text-on-surface">0.042</div>
+</div>
+</div>
+<div class="mt-2">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Calibration Curve</span>
+<div class="h-24 w-full bg-surface-container-low rounded border border-outline-variant mt-1 relative overflow-hidden">
+<!-- Diagonal Reference -->
+<div class="absolute inset-0 border-b border-r border-outline-variant/20" style="background: linear-gradient(to top right, transparent calc(50% - 1px), #ccc, transparent calc(50% + 1px))"></div>
+<!-- Curve -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none">
+<path d="M 0 100 Q 50 40 100 0" fill="none" stroke="#4140d1" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</section>
+<!-- Experiment Tracker -->
+<section class="col-span-12 lg:col-span-8 bento-card overflow-hidden">
+<div class="p-4 border-b border-outline-variant flex justify-between items-center bg-surface-container-low/50">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant">EXPERIMENT TRACKER (W&B)</h2>
+<button class="text-primary font-label-caps text-[11px] font-bold">OPEN FULL DASHBOARD</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full telemetry-table">
+<thead>
+<tr>
+<th>RUN ID</th>
+<th>TIMESTAMP</th>
+<th>EPOCHS</th>
+<th>LOSS</th>
+<th>AUC</th>
+<th>TAGS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="font-data-mono">solar-flare-v4.2.1</td>
+<td>2023-10-27 12:45</td>
+<td>500</td>
+<td class="font-data-mono text-primary">0.038</td>
+<td class="font-data-mono">0.982</td>
+<td><span class="bg-primary/10 text-primary px-2 rounded text-[10px]">PRODUCTION</span></td>
+</tr>
+<tr>
+<td class="font-data-mono">experiment-tcn-02</td>
+<td>2023-10-27 10:12</td>
+<td>250</td>
+<td class="font-data-mono">0.051</td>
+<td class="font-data-mono">0.914</td>
+<td><span class="bg-secondary/10 text-secondary px-2 rounded text-[10px]">TESTING</span></td>
+</tr>
+<tr>
+<td class="font-data-mono">hyper-opt-r4</td>
+<td>2023-10-26 23:55</td>
+<td>1000</td>
+<td class="font-data-mono">0.044</td>
+<td class="font-data-mono">0.955</td>
+<td><span class="bg-outline-variant/30 text-on-surface-variant px-2 rounded text-[10px]">ARCHIVED</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Model Registry -->
+<section class="col-span-12 lg:col-span-4 bento-card p-6 flex flex-col gap-4">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant">MODEL REGISTRY</h2>
+<div class="space-y-3">
+<div class="p-3 border border-primary bg-primary/5 rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<div>
+<p class="font-bold text-sm">v4.2.1 (Active)</p>
+<p class="text-[10px] font-label-caps text-on-surface-variant">PRODUCTION ENCLAVE</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span>
+</div>
+<div class="p-3 border border-outline-variant rounded-lg flex items-center justify-between opacity-70">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">hourglass_empty</span>
+<div>
+<p class="font-bold text-sm">v4.3.0-rc1</p>
+<p class="text-[10px] font-label-caps text-on-surface-variant">STAGING GATE</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span>
+</div>
+<div class="p-3 border border-outline-variant rounded-lg flex items-center justify-between opacity-70">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">science</span>
+<div>
+<p class="font-bold text-sm">v5.0.0-alpha</p>
+<p class="text-[10px] font-label-caps text-on-surface-variant">RESEARCH LAB</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span>
+</div>
+</div>
+<button class="w-full mt-2 border border-outline border-dashed p-3 rounded-lg text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-container-low transition-colors">
+                    + REGISTER NEW MODEL
+                </button>
+</section>
+<!-- System Logs (Terminal-style) -->
+<section class="col-span-12 bg-[#0d1117] rounded-xl p-4 font-data-mono text-[11px] overflow-hidden shadow-2xl border border-[#30363d]">
+<div class="flex items-center justify-between border-b border-[#30363d] pb-2 mb-3">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-red-500"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+<div class="w-3 h-3 rounded-full bg-green-500"></div>
+<span class="ml-4 text-[#8b949e]">AI_SYSTEM_LOGS_STREAM</span>
+</div>
+<span class="text-[#8b949e]">Uptime: 1422:05:12</span>
+</div>
+<div class="space-y-1 text-[#c9d1d9] h-32 overflow-y-auto no-scrollbar">
+<p><span class="text-[#8b949e]">[14:22:01]</span> <span class="text-green-400">INFO:</span> Inference engine cold start successful. Model v4.2.1 loaded on GPU_0.</p>
+<p><span class="text-[#8b949e]">[14:22:02]</span> <span class="text-green-400">INFO:</span> Telemetry stream synchronized. Latency offset: -1.2ms.</p>
+<p><span class="text-[#8b949e]">[14:22:03]</span> <span class="text-yellow-400">WARN:</span> Drifting detected in Temporal AI feature vectors (Proton Density).</p>
+<p><span class="text-[#8b949e]">[14:22:04]</span> <span class="text-blue-400">DEBUG:</span> SHAP values recalculated for current frame. Dominant feature: AR_2934_MAG_FLUX.</p>
+<p><span class="text-[#8b949e]">[14:22:05]</span> <span class="text-green-400">INFO:</span> Prediction broadcasted to Command Uplink. Probability: 20.8%.</p>
+<p><span class="text-[#8b949e]">[14:22:06]</span> <span class="text-purple-400">CMD:</span> Executing automated uncertainty re-calibration on Ensemble node...</p>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer Information Bar -->
+<footer class="fixed bottom-0 left-0 w-full z-50 h-8 bg-surface-dim dark:bg-surface-dim border-t border-outline-variant flex justify-between items-center px-container-margin font-data-mono text-data-mono">
+<span class="text-on-surface-variant font-label-caps text-label-caps uppercase">ISRO Aerospace Operations - Infrastructure Health: NOMINAL</span>
+<div class="flex gap-6 text-on-tertiary-fixed-variant">
+<span class="hover:text-primary cursor-default">UTC 14:22:05</span>
+<span class="hover:text-primary cursor-default">MET 124:14:02</span>
+<span class="hover:text-primary cursor-default">Secure Node 04</span>
+</div>
+</footer>
+<!-- Micro-interaction Script -->
+<script>
+        // Simple animation for numbers to feel alive
+        document.addEventListener('DOMContentLoaded', () => {
+            const logs = document.querySelector('.overflow-y-auto');
+            setInterval(() => {
+                const p = document.createElement('p');
+                const now = new Date();
+                const time = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0') + ":" + now.getSeconds().toString().padStart(2, '0');
+                p.innerHTML = `<span class="text-[#8b949e]">[${time}]</span> <span class="text-green-400">INFO:</span> Heartbeat pulse received from model cluster node_${Math.floor(Math.random()*10)}.`;
+                logs.appendChild(p);
+                if (logs.childNodes.length > 20) logs.removeChild(logs.firstChild);
+                logs.scrollTop = logs.scrollHeight;
+            }, 5000);
+        });
+    </script>
+</body></html>

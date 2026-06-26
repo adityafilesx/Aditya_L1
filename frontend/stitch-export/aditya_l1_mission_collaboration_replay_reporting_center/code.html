@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aditya-L1 Mission Collaboration Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-container": "#5b5ceb",
+                        "on-secondary-container": "#601600",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#c1c1ff",
+                        "tertiary-fixed": "#e2e2e9",
+                        "primary": "#4140d1",
+                        "on-tertiary-fixed-variant": "#45474c",
+                        "surface-dim": "#d8dadd",
+                        "on-tertiary-container": "#f3f3fa",
+                        "surface-container-low": "#f2f4f7",
+                        "on-primary-container": "#f5f2ff",
+                        "surface": "#f7f9fc",
+                        "tertiary-fixed-dim": "#c6c6cd",
+                        "surface-tint": "#4949d9",
+                        "secondary-container": "#fe693c",
+                        "on-secondary-fixed": "#3b0a00",
+                        "tertiary": "#55575d",
+                        "outline-variant": "#c7c4d7",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#191c1e",
+                        "surface-bright": "#f7f9fc",
+                        "primary-fixed": "#e1dfff",
+                        "on-surface-variant": "#464555",
+                        "on-secondary-fixed-variant": "#862200",
+                        "on-primary-fixed": "#08006c",
+                        "on-primary": "#ffffff",
+                        "on-background": "#191c1e",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-high": "#e6e8eb",
+                        "surface-container": "#eceef1",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#2f2bc1",
+                        "outline": "#767586",
+                        "background": "#f7f9fc",
+                        "secondary": "#ae3104",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#1a1b21",
+                        "secondary-fixed-dim": "#ffb59f",
+                        "tertiary-container": "#6e6f75",
+                        "surface-variant": "#e0e3e6",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e0e3e6",
+                        "primary-fixed-dim": "#c1c1ff",
+                        "secondary-fixed": "#ffdbd1",
+                        "inverse-on-surface": "#eff1f4"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "component-padding-x": "16px",
+                        "section-gap": "48px",
+                        "component-padding-y": "12px",
+                        "gutter": "24px",
+                        "container-margin": "32px"
+                    },
+                    fontFamily: {
+                        "display-lg": ["Space Grotesk"],
+                        "label-caps": ["Inter"],
+                        "numeric-telemetry": ["Space Grotesk"],
+                        "headline-md": ["Inter"],
+                        "data-mono": ["JetBrains Mono"],
+                        "display-lg-mobile": ["Space Grotesk"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    fontSize: {
+                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "label-caps": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "numeric-telemetry": ["18px", { lineHeight: "24px", fontWeight: "500" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "data-mono": ["13px", { lineHeight: "18px", fontWeight: "500" }],
+                        "display-lg-mobile": ["32px", { lineHeight: "40px", fontWeight: "700" }],
+                        "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        .grid-bg {
+            background-image: linear-gradient(to right, #e2e2e9 1px, transparent 1px), linear-gradient(to bottom, #e2e2e9 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-sm antialiased overflow-x-hidden min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface-container-lowest border-b border-outline-variant shadow-sm w-full z-50">
+<div class="flex justify-between items-center w-full px-container-margin py-component-padding-y">
+<div class="flex items-center gap-6">
+<span class="font-display-lg text-display-lg-mobile md:text-display-lg tracking-tighter text-primary truncate max-w-xs md:max-w-none">
+                    MISSION CONTROL PRECISION SYSTEM
+                </span>
+<div class="hidden md:flex gap-6">
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors duration-150 font-label-caps text-label-caps" href="#">LIVE FEED</a>
+<a class="text-on-surface-variant font-medium hover:text-primary-container transition-colors duration-150 font-label-caps text-label-caps" href="#">TELEMETRY</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-caps text-label-caps" href="#">ANALYSIS</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center px-3 py-1 bg-surface-container-low border border-outline-variant rounded">
+<span class="material-symbols-outlined text-outline text-sm mr-2">search</span>
+<input class="bg-transparent border-none text-data-mono font-data-mono text-sm focus:ring-0 p-0 w-32 placeholder-outline-variant" placeholder="Search parameters..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded transition-colors"><span class="material-symbols-outlined">schedule</span></button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded transition-colors"><span class="material-symbols-outlined">language</span></button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded transition-colors"><span class="material-symbols-outlined">settings</span></button>
+</div>
+<div class="hidden lg:block font-data-mono text-data-mono text-primary bg-primary-fixed/20 px-3 py-1 rounded border border-primary/30">
+                    MISSION STATUS: NOMINAL
+                </div>
+</div>
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden h-[calc(100vh-120px)]">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-full py-container-margin w-[260px] bg-surface-container-low border-r border-outline-variant shrink-0 overflow-y-auto">
+<div class="px-6 mb-8 flex flex-col items-center border-b border-outline-variant pb-6">
+<img alt="User Mission Profile" class="w-20 h-20 rounded-full border-2 border-primary/20 mb-4 object-cover" data-alt="A highly detailed close-up of a professional corporate astronaut portrait in low-key lighting, emphasizing sharp facial features and scientific authority against a deep grey background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMUjt2kF_qCbW_3xRGM9p1qsEdEwqLVzlg7Xp3ChsNFmH-DCkNMYkO33atmlVo6g29lM_zb_rjYvs0DuYaqTpaZY3o8lO2ujqsWSM1OHNGkeYMD8cgxUsIFOeDah5wnSDKyFdR1HSblBQuV2E8e3aMHFA3ZBVlG0cVV5a5Bm3BNWRpLROU9YmVMQwOUeV8mL1C5yc7ATPb0oGFgA9Tq9Oh5rFw_AsJCcYN82MevT0XbI39FwVl0chbGV_lgPCbFPVWOHiGkZmzWqFC"/>
+<h2 class="font-headline-md text-headline-md text-on-surface text-center uppercase tracking-wider">OPERATOR 07</h2>
+<p class="font-data-mono text-[11px] text-on-surface-variant mt-1 tracking-widest text-center">LEO MISSION SPECIALIST</p>
+<button class="mt-4 w-full bg-primary text-on-primary font-label-caps text-label-caps py-2 rounded hover:bg-primary-container transition-colors border border-primary shadow-[0_2px_10px_rgba(65,64,209,0.2)]">INITIATE PROTOCOL</button>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant font-medium hover:bg-surface-container-highest transition-all duration-150 rounded" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant font-medium hover:bg-surface-container-highest transition-all duration-150 rounded" href="#">
+<span class="material-symbols-outlined">settings_remote</span>
+<span class="font-label-caps text-label-caps">Operations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant font-medium hover:bg-surface-container-highest transition-all duration-150 rounded" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-label-caps text-label-caps">AI Intelligence</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant font-medium hover:bg-surface-container-highest transition-all duration-150 rounded" href="#">
+<span class="material-symbols-outlined">biotech</span>
+<span class="font-label-caps text-label-caps">Physics Lab</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-primary font-bold border-l-4 border-primary bg-primary-fixed/20 rounded-r" href="#">
+<span class="material-symbols-outlined">view_in_ar</span>
+<span class="font-label-caps text-label-caps">Digital Twin</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant font-medium hover:bg-surface-container-highest transition-all duration-150 rounded" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-label-caps text-label-caps">Knowledge Graph</span>
+</a>
+</nav>
+<div class="px-4 mt-auto border-t border-outline-variant pt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant text-sm hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+<span class="font-body-sm">System Logs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant text-sm hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">help_center</span>
+<span class="font-body-sm">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto p-container-margin bg-surface">
+<!-- 1. Workspace Header -->
+<header class="flex flex-col md:flex-row md:items-end justify-between mb-section-gap gap-4">
+<div>
+<h1 class="font-headline-md text-display-lg text-on-surface tracking-tight mb-2">Mission Collaboration</h1>
+<p class="font-data-mono text-data-mono text-on-surface-variant">Mission Replay • Reporting • Scientific Review • Collaboration</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 bg-surface-container-lowest px-3 py-1.5 border border-outline-variant rounded shadow-sm">
+<div class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></div>
+<span class="font-data-mono text-[11px] text-on-surface">SESSION ACTIVE</span>
+</div>
+<button class="flex items-center gap-2 bg-surface-container-lowest px-3 py-1.5 border border-outline-variant rounded shadow-sm hover:border-primary transition-colors font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[16px]">ios_share</span> EXPORT
+                    </button>
+</div>
+</header>
+<!-- 2. Mission Summary Strip -->
+<section class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-gutter mb-section-gap">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-lg shadow-[0_10px_30px_rgba(15,23,42,0.04)] hover:border-primary transition-colors group">
+<div class="font-label-caps text-[10px] text-on-surface-variant mb-1 uppercase tracking-widest">Status</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#10b981] text-[16px] fill">check_circle</span>
+<span class="font-numeric-telemetry text-numeric-telemetry text-on-surface group-hover:text-primary transition-colors">Approved</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-lg shadow-[0_10px_30px_rgba(15,23,42,0.04)] hover:border-primary transition-colors">
+<div class="font-label-caps text-[10px] text-on-surface-variant mb-1 uppercase tracking-widest">Event</div>
+<div class="font-data-mono text-[16px] text-on-surface">AR13872</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-lg shadow-[0_10px_30px_rgba(15,23,42,0.04)] hover:border-primary transition-colors">
+<div class="font-label-caps text-[10px] text-on-surface-variant mb-1 uppercase tracking-widest">Confidence</div>
+<div class="font-numeric-telemetry text-numeric-telemetry text-on-surface">96%</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-lg shadow-[0_10px_30px_rgba(15,23,42,0.04)] hover:border-primary transition-colors relative overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-[#f59e0b]"></div>
+<div class="font-label-caps text-[10px] text-on-surface-variant mb-1 uppercase tracking-widest">Risk</div>
+<div class="font-numeric-telemetry text-numeric-telemetry text-[#d97706]">21%</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-lg shadow-[0_10px_30px_rgba(15,23,42,0.04)] hover:border-primary transition-colors">
+<div class="font-label-caps text-[10px] text-on-surface-variant mb-1 uppercase tracking-widest">Operator</div>
+<div class="font-body-sm text-on-surface truncate">V. Sharma</div>
+</div>
+<!-- Card 6 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-lg shadow-[0_10px_30px_rgba(15,23,42,0.04)] hover:border-primary transition-colors">
+<div class="font-label-caps text-[10px] text-on-surface-variant mb-1 uppercase tracking-widest">Reviewer</div>
+<div class="font-body-sm text-on-surface truncate">Dr. K. Rao</div>
+</div>
+<!-- Card 7 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-lg shadow-[0_10px_30px_rgba(15,23,42,0.04)] hover:border-primary transition-colors">
+<div class="font-label-caps text-[10px] text-on-surface-variant mb-1 uppercase tracking-widest">Modified</div>
+<div class="font-data-mono text-[12px] text-on-surface">14:22 UTC</div>
+</div>
+</section>
+<!-- Main Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Center Column (Panels & Replay) -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- 3. Mission Replay Workspace -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0_10px_30px_rgba(15,23,42,0.04)] flex flex-col overflow-hidden">
+<div class="px-4 py-3 border-b border-outline-variant flex justify-between items-center bg-surface-container-low/50">
+<h3 class="font-label-caps text-label-caps text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">movie</span> REPLAY ENGINE</h3>
+<div class="font-data-mono text-[12px] bg-surface-container-high px-2 py-0.5 rounded text-on-surface-variant">SYNC: ACTIVE</div>
+</div>
+<div class="h-64 bg-inverse-surface grid-bg relative p-4 flex flex-col justify-end">
+<!-- Placeholder for actual replay visual -->
+<div class="absolute inset-0 flex items-center justify-center opacity-20">
+<span class="material-symbols-outlined text-white text-[64px]">satellite_alt</span>
+</div>
+<!-- Telemetry Overlay -->
+<div class="absolute top-4 left-4 flex flex-col gap-1 z-10">
+<div class="font-data-mono text-[10px] text-[#10b981]">VEL: 4.2 km/s</div>
+<div class="font-data-mono text-[10px] text-[#f59e0b]">ALT: 1.5M km</div>
+<div class="font-data-mono text-[10px] text-white">ATT: NOMINAL</div>
+</div>
+<!-- Playback Controls -->
+<div class="bg-surface-container-lowest/10 backdrop-blur-md border border-white/10 rounded p-2 flex items-center justify-between z-10 gap-4 mt-auto">
+<div class="flex items-center gap-1">
+<button class="text-white hover:text-primary-fixed transition-colors"><span class="material-symbols-outlined">skip_previous</span></button>
+<button class="text-white hover:text-primary-fixed transition-colors"><span class="material-symbols-outlined">play_arrow</span></button>
+<button class="text-white hover:text-primary-fixed transition-colors"><span class="material-symbols-outlined">skip_next</span></button>
+</div>
+<div class="flex-1 h-1 bg-white/20 rounded-full relative cursor-pointer">
+<div class="absolute top-0 left-0 h-full w-[45%] bg-primary-fixed rounded-full"></div>
+<div class="absolute top-1/2 left-[45%] -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow border-2 border-primary-fixed"></div>
+</div>
+<div class="font-data-mono text-[12px] text-white flex items-center gap-2">
+<span>T+ 04:12:33</span>
+<span class="text-white/50">/</span>
+<span class="text-white/50">T+ 09:00:00</span>
+</div>
+<div class="font-data-mono text-[10px] text-white/70 bg-white/10 px-2 rounded">1.0x</div>
+</div>
+</div>
+</div>
+<!-- 4. Multi-Panel Synchronized Replay -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Panel A -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0_10px_30px_rgba(15,23,42,0.04)] overflow-hidden">
+<div class="px-3 py-2 border-b border-outline-variant font-label-caps text-[10px] text-on-surface-variant bg-surface-container-low flex justify-between">
+<span>SOLAR FLUX (X-RAY)</span>
+<span class="material-symbols-outlined text-[14px]">show_chart</span>
+</div>
+<div class="h-40 p-2 relative">
+<div class="bg-cover bg-center w-full h-full rounded border border-outline-variant/50" data-alt="A highly detailed data visualization chart showing scientific telemetry. The chart features a dark grey background with stark white gridlines. A vibrant, jagged cyan line graph plots solar flux data, annotated with precise numerical values in a technical monospace font. The aesthetic is purely functional and deeply analytical." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDWKPzzCH1_vmhaQHo5Emhwe6tgykzb4CybNH4-sVvmWk2ipuA0bpU3PSFzKiCInlLTkwfs7YGSmJgJ9RoYBJRLwCLGCUgBdGqG2yHGhDOx_ikfg8GkACj48w-XzRwpqNO5zoUXBU_Kfq5qOESYzjH7VsT9v9DE_xAHaNODShPX1bR3VahYjeerTZrsZsBMAYtLeRBrf7CZBfNTUJz5TPIybdYHRZezS3fW7hJkRhpPC0mf7DpppBsBi3t3WHc42KWHqjnCJGwLvkoS')"></div>
+</div>
+</div>
+<!-- Panel B -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0_10px_30px_rgba(15,23,42,0.04)] overflow-hidden">
+<div class="px-3 py-2 border-b border-outline-variant font-label-caps text-[10px] text-on-surface-variant bg-surface-container-low flex justify-between">
+<span>PHYSICS DIAGNOSTICS</span>
+<span class="material-symbols-outlined text-[14px]">biotech</span>
+</div>
+<div class="h-40 p-2 relative flex flex-col gap-1 justify-center">
+<div class="flex justify-between items-center text-[11px] font-data-mono border-b border-outline-variant/30 pb-1">
+<span class="text-on-surface-variant">TEMP_CORE</span>
+<span class="text-on-surface">5.4M K</span>
+</div>
+<div class="flex justify-between items-center text-[11px] font-data-mono border-b border-outline-variant/30 pb-1">
+<span class="text-on-surface-variant">MAG_FIELD</span>
+<span class="text-on-surface">120 G</span>
+</div>
+<div class="flex justify-between items-center text-[11px] font-data-mono border-b border-outline-variant/30 pb-1">
+<span class="text-on-surface-variant">DENSITY</span>
+<span class="text-on-surface">1e9 cm⁻³</span>
+</div>
+</div>
+</div>
+<!-- Panel C -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0_10px_30px_rgba(15,23,42,0.04)] overflow-hidden">
+<div class="px-3 py-2 border-b border-outline-variant font-label-caps text-[10px] text-on-surface-variant bg-surface-container-low flex justify-between">
+<span>DIGITAL TWIN (SUIT)</span>
+<span class="material-symbols-outlined text-[14px]">view_in_ar</span>
+</div>
+<div class="h-40 p-2 bg-[#191c1e] relative">
+<!-- Wireframe representation -->
+<div class="w-full h-full border border-[#4140d1]/30 rounded flex items-center justify-center relative overflow-hidden">
+<div class="absolute w-20 h-20 border border-[#4140d1] rounded-full animate-[spin_10s_linear_infinite]"></div>
+<div class="absolute w-16 h-16 border-t border-b border-white/50 rounded-full animate-[spin_5s_linear_infinite_reverse]"></div>
+</div>
+</div>
+</div>
+<!-- Panel D -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0_10px_30px_rgba(15,23,42,0.04)] overflow-hidden">
+<div class="px-3 py-2 border-b border-outline-variant font-label-caps text-[10px] text-on-surface-variant bg-surface-container-low flex justify-between">
+<span>KNOWLEDGE GRAPH</span>
+<span class="material-symbols-outlined text-[14px]">hub</span>
+</div>
+<div class="h-40 p-2 relative flex items-center justify-center">
+<div class="bg-cover bg-center w-full h-full rounded opacity-70" data-alt="A clean, modern network graph visualization on a white background. Small circular nodes in shades of deep blue and subtle orange are connected by thin, sharp grey lines. The nodes are labeled with tiny, illegible technical text. The structure implies complex relationships between data points in an enterprise system." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCn5kgSy1pzELxbNR8imfUJHJTr_upM4wFdK4A2exhT0ab6veLAzbi6_rGpkTjRpFgb7wN9qP3SaynDRcBkX-Q4_yF3kNbFRMWIOix680L8kHEkHslMwmqZOKjkXLjWFJiBMhNd2REeTwWM2wIaTEFMccKToxxoQLuJ_dvUA12D3CEp5ZObqwA2oOpRiUEuiUsVdz8_OZ9-vB9FjbU0navYUeAAQvgVMP1YzIlzhNb9f--r0hPbi_sSr0jq7ztaXZPnbgvBBCWAAmcW')"></div>
+</div>
+</div>
+</div>
+<!-- 6. Mission Logbook -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0_10px_30px_rgba(15,23,42,0.04)] overflow-hidden flex flex-col">
+<div class="px-4 py-3 border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-on-surface">MISSION LOGBOOK</h3>
+<button class="text-primary text-[11px] font-data-mono hover:underline">VIEW ALL</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface border-b border-outline-variant">
+<th class="p-2 font-label-caps text-[10px] text-on-surface-variant font-semibold pl-4">UTC TIME</th>
+<th class="p-2 font-label-caps text-[10px] text-on-surface-variant font-semibold">SUBSYSTEM</th>
+<th class="p-2 font-label-caps text-[10px] text-on-surface-variant font-semibold">CATEGORY</th>
+<th class="p-2 font-label-caps text-[10px] text-on-surface-variant font-semibold pr-4">SEVERITY</th>
+</tr>
+</thead>
+<tbody class="font-data-mono text-[12px] text-on-surface">
+<tr class="border-b border-outline-variant/30 hover:bg-surface-container-low transition-colors group">
+<td class="p-2 pl-4 text-on-surface-variant group-hover:text-primary">14:21:05.112</td>
+<td class="p-2">VELC</td>
+<td class="p-2">CALIBRATION</td>
+<td class="p-2 pr-4"><span class="px-2 py-0.5 bg-surface-container-high rounded text-on-surface text-[10px]">INFO</span></td>
+</tr>
+<tr class="border-b border-outline-variant/30 hover:bg-surface-container-low transition-colors group">
+<td class="p-2 pl-4 text-on-surface-variant group-hover:text-primary">14:19:44.801</td>
+<td class="p-2">SUIT</td>
+<td class="p-2">DATA_LINK</td>
+<td class="p-2 pr-4"><span class="px-2 py-0.5 bg-[#f59e0b]/10 text-[#d97706] rounded text-[10px]">WARN</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-2 pl-4 text-on-surface-variant group-hover:text-primary">14:15:00.000</td>
+<td class="p-2">PAPA</td>
+<td class="p-2">STATE_CHANGE</td>
+<td class="p-2 pr-4"><span class="px-2 py-0.5 bg-surface-container-high rounded text-on-surface text-[10px]">INFO</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column (Collaboration & Tasks) -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<!-- 5. Annotation & Discussion -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0_10px_30px_rgba(15,23,42,0.04)] flex flex-col h-[400px]">
+<div class="px-4 py-3 border-b border-outline-variant bg-surface-container-low flex justify-between items-center shrink-0">
+<h3 class="font-label-caps text-label-caps text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">forum</span> THREADS</h3>
+<span class="bg-primary-container text-on-primary-container px-1.5 rounded-full text-[10px] font-bold">3</span>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<!-- Message 1 -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0 font-label-caps text-[10px]">OP</div>
+<div>
+<div class="flex items-baseline gap-2">
+<span class="font-label-caps text-[11px] text-on-surface">operator07</span>
+<span class="font-data-mono text-[9px] text-on-surface-variant">14:05 UTC</span>
+</div>
+<p class="font-body-sm text-[13px] mt-1 text-on-surface">Noticing a slight deviation in the SUIT thermal profile at T+ 03:45. <span class="text-primary">@review_team</span> can we validate this against the twin?</p>
+</div>
+</div>
+<!-- Message 2 -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded bg-primary-fixed border border-primary/20 flex items-center justify-center shrink-0 font-label-caps text-[10px] text-on-primary-fixed">KR</div>
+<div>
+<div class="flex items-baseline gap-2">
+<span class="font-label-caps text-[11px] text-on-surface">dr_krao</span>
+<span class="font-data-mono text-[9px] text-on-surface-variant">14:10 UTC</span>
+</div>
+<p class="font-body-sm text-[13px] mt-1 text-on-surface">Reviewing now. Attaching spectral fit from the last polling cycle.</p>
+<div class="mt-2 border border-outline-variant rounded p-2 flex items-center gap-2 bg-surface-container-low hover:border-primary transition-colors cursor-pointer w-max">
+<span class="material-symbols-outlined text-[16px] text-outline">image</span>
+<span class="font-data-mono text-[10px]">fit_AR13872_v2.png</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-3 border-t border-outline-variant bg-surface shrink-0">
+<div class="flex items-center gap-2 bg-surface-container-lowest border border-outline-variant rounded p-1 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/10 transition-all">
+<input class="w-full bg-transparent border-none text-[13px] focus:ring-0 px-2 placeholder-outline-variant font-body-sm" placeholder="Add a note or @mention..." type="text"/>
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">attach_file</span></button>
+<button class="p-1 bg-primary text-on-primary rounded hover:bg-primary-container transition-colors"><span class="material-symbols-outlined text-[18px]">send</span></button>
+</div>
+</div>
+</div>
+<!-- 9. Task & Review Center -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0_10px_30px_rgba(15,23,42,0.04)] flex flex-col flex-1">
+<div class="px-4 py-3 border-b border-outline-variant bg-surface-container-low flex justify-between items-center shrink-0">
+<h3 class="font-label-caps text-label-caps text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">checklist</span> REVIEW TASKS</h3>
+</div>
+<div class="p-3 space-y-2 overflow-y-auto">
+<!-- Task 1 -->
+<div class="border border-outline-variant rounded p-2.5 flex items-start gap-3 hover:border-primary transition-colors cursor-pointer group">
+<div class="w-4 h-4 rounded border border-outline-variant mt-0.5 group-hover:border-primary"></div>
+<div>
+<div class="font-body-sm text-[13px] font-medium text-on-surface">Validate CME Velocity Model</div>
+<div class="font-label-caps text-[9px] text-on-surface-variant mt-1">PENDING VALIDATION</div>
+</div>
+</div>
+<!-- Task 2 -->
+<div class="border border-outline-variant rounded p-2.5 flex items-start gap-3 bg-surface-container-low cursor-pointer">
+<div class="w-4 h-4 rounded border-none bg-[#10b981] mt-0.5 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[12px] font-bold">check</span>
+</div>
+<div>
+<div class="font-body-sm text-[13px] font-medium text-on-surface line-through opacity-70">Cross-check magnetometer raw data</div>
+<div class="font-label-caps text-[9px] text-on-surface-variant mt-1">MODEL REVIEW</div>
+</div>
+</div>
+<!-- Task 3 -->
+<div class="border border-outline-variant rounded p-2.5 flex items-start gap-3 hover:border-primary transition-colors cursor-pointer group">
+<div class="w-4 h-4 rounded border border-outline-variant mt-0.5 group-hover:border-primary"></div>
+<div>
+<div class="font-body-sm text-[13px] font-medium text-on-surface">Draft Executive Summary paragraph 2</div>
+<div class="font-label-caps text-[9px] text-on-surface-variant mt-1 text-[#d97706]">PUBLICATION CHECKLIST</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Lower Section: Documents & Media -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mt-gutter mb-section-gap">
+<!-- 7. Document & Report Builder -->
+<div class="lg:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0_10px_30px_rgba(15,23,42,0.04)] overflow-hidden flex flex-col h-[300px]">
+<div class="px-4 py-2 border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<div class="flex items-center gap-4">
+<h3 class="font-label-caps text-label-caps text-on-surface">REPORT BUILDER</h3>
+<div class="hidden sm:flex gap-2">
+<button class="p-1 text-on-surface-variant hover:bg-surface-container-high rounded"><span class="material-symbols-outlined text-[16px]">format_bold</span></button>
+<button class="p-1 text-on-surface-variant hover:bg-surface-container-high rounded"><span class="material-symbols-outlined text-[16px]">format_italic</span></button>
+<button class="p-1 text-on-surface-variant hover:bg-surface-container-high rounded"><span class="material-symbols-outlined text-[16px]">code</span></button>
+</div>
+</div>
+<div class="font-data-mono text-[10px] text-on-surface-variant">Last saved: 2m ago</div>
+</div>
+<div class="p-6 overflow-y-auto flex-1 font-body-sm text-on-surface leading-relaxed">
+<h2 class="text-lg font-semibold mb-4">1.0 Preliminary Observations of AR13872</h2>
+<p class="mb-3">During the observation window 14:00 - 15:00 UTC, the VELC instrument recorded anomalous scattering corresponding to a minor coronal mass ejection (CME) precursor.</p>
+<p class="font-data-mono text-[12px] bg-surface-container p-3 rounded border border-outline-variant/50 text-tertiary mb-3">
+                            \begin{equation}<br/>
+                            F_{\lambda} = \int_{0}^{\infty} S_{\lambda}(\tau) e^{-\tau} d\tau<br/>
+                            \end{equation}
+                        </p>
+<p>The spectral lines indicate a localized temperature spike exceeding standard operational bounds by 4%, warranting further review against the digital twin baseline models.</p>
+</div>
+</div>
+<!-- 8 & 10. Media & Export -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<!-- Media Library Mini -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0_10px_30px_rgba(15,23,42,0.04)] p-4 flex-1">
+<div class="flex justify-between items-center mb-3">
+<h3 class="font-label-caps text-label-caps text-on-surface">MEDIA ASSETS</h3>
+<span class="text-[10px] font-data-mono text-primary cursor-pointer hover:underline">VIEW GRID</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<div class="aspect-square bg-cover bg-center rounded border border-outline-variant hover:border-primary transition-colors cursor-pointer" data-alt="A small square thumbnail image showing a highly stylized, false-color scientific heat map. Bright neon oranges and deep reds contrast against a stark black background, representing thermal intensities. The aesthetic is purely technical and analytical." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDl9AGDq6ZW7-a0oRcunhj2AzvxJROhCWe3S13RBMJR-P08WYco290G0I5K73Lo-eCEDmxUkLeBppAhvri76GFKO98wVq0JixN96ATFSCRPZ1MVXAAmqnVIwatfm4qg-K5WclrSCjBC79Hsd570Y5d4UQmU_ouMatQtYgj1QgbHnIaeqI-g532LAHbqvghNYfU-xk9I_zG9zr70tp3KDTsjLmaRZRbE9LD_uNhdXftLmKSd9FvBre__iRgnTLKHaalBOv2bA1Rw5otT')"></div>
+<div class="aspect-square bg-cover bg-center rounded border border-outline-variant hover:border-primary transition-colors cursor-pointer" data-alt="A small square thumbnail of a 3D wireframe mesh model of a satellite instrument. The lines are bright blue on a dark grey background, showing sharp, precise geometric shapes typical of CAD engineering software." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxatlkQk3A_lNTVmIiYFMjVYVnMZqt2y3_tTGhTFap61J2ZApkkg0jmcy3fqqNiVviBc7ZdiO_sDPJ4X3xYrUJGs8S3ds_l-sFpuflpxM2i1MAhhkku1pRAJIlK57e_rpo8a4yXHOAdrZsX5vLZSFr-aLpj1CGpPcv0kNmXqEOmUzBZAM950RxAPy4dxzVNZ_MyBhsLfOyPC0G3n4kIsYsqXKBJlZrSECXZGkJ7rgYrfgd02EeGxRpMGFdNExKpn9WJE9HTIxdjtcF')"></div>
+<div class="aspect-square rounded border border-dashed border-outline-variant flex items-center justify-center text-outline hover:text-primary hover:border-primary transition-colors cursor-pointer bg-surface-container-low">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</div>
+</div>
+</div>
+<!-- Export Action -->
+<div class="bg-primary border border-primary-fixed rounded-xl p-4 text-on-primary flex items-center justify-between shadow-[0_10px_30px_rgba(65,64,209,0.15)] cursor-pointer hover:bg-primary-container transition-colors">
+<div>
+<div class="font-label-caps text-[12px] font-bold tracking-wider">GENERATE PUBLICATION</div>
+<div class="font-data-mono text-[10px] text-on-primary/70 mt-1">PDF / IEEE FORMAT / ZIP</div>
+</div>
+<span class="material-symbols-outlined text-[24px]">cloud_download</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full z-40 flex justify-between items-center px-container-margin py-2 bg-surface-container-highest border-t border-outline-variant">
+<div class="font-data-mono text-data-mono text-tertiary truncate">
+            AEROSPACE MISSION CONTROL ALPHA • SYSTEM HEALTH: 100% • CONNECTIVITY: ENCRYPTED
+        </div>
+<div class="flex gap-6 hidden sm:flex">
+<a class="text-on-tertiary-fixed-variant font-data-mono text-data-mono hover:text-primary underline transition-colors duration-150" href="#">Replay Engine READY</a>
+<a class="text-on-tertiary-fixed-variant font-data-mono text-data-mono hover:text-primary underline transition-colors duration-150" href="#">Annotations SYNCED</a>
+<a class="text-primary font-bold font-data-mono text-data-mono hover:text-primary underline transition-colors duration-150" href="#">VC CONNECTED</a>
+</div>
+</footer>
+</body></html>

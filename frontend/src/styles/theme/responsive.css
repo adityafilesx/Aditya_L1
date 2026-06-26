@@ -1,0 +1,107 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ADITYA-L1 MISSION CONTROL — Responsive System
+   Container queries, breakpoint utilities, and print overrides.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Breakpoint References (documentation / JS access) ───────── */
+  --breakpoint-sm:   640px;
+  --breakpoint-md:   768px;
+  --breakpoint-lg:   1024px;
+  --breakpoint-xl:   1280px;
+  --breakpoint-2xl:  1536px;
+
+  /* ── Sidebar & Shell Metrics ─────────────────────────────────── */
+  --sidebar-width:   260px;
+  --toolbar-height:  72px;
+  --footer-height:   40px;
+  --content-inset:   8px;
+}
+
+
+/* ── Container Query Support ───────────────────────────────────── */
+.contain-inline {
+  container-type: inline-size;
+}
+
+.contain-size {
+  container-type: size;
+}
+
+/* Container-query-based card grid adjustments */
+@container (min-width: 600px) {
+  .cq-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container (min-width: 900px) {
+  .cq-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@container (min-width: 1200px) {
+  .cq-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+
+/* ── Print Layout ──────────────────────────────────────────────── */
+@media print {
+  /* Remove fixed positioning for print flow */
+  .shell-body {
+    overflow: visible !important;
+  }
+
+  /* Hide navigation chrome */
+  aside,
+  nav,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Reset main to flow layout */
+  main {
+    position: static !important;
+    inset: unset !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    width: 100% !important;
+  }
+
+  /* Page break hints */
+  .page-break-before {
+    page-break-before: always;
+  }
+
+  .page-break-after {
+    page-break-after: always;
+  }
+
+  .avoid-break {
+    page-break-inside: avoid;
+  }
+
+  /* Print-safe fonts */
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  /* Ensure charts/cards don't overflow page */
+  .bento-card,
+  .glass-card,
+  .glass-panel,
+  .lab-card {
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+}

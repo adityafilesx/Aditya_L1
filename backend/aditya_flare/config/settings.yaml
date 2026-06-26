@@ -1,0 +1,32 @@
+system:
+  environment: "production"
+  log_level: "INFO"
+  log_dir: "logs"
+
+data:
+  processed_dir: "data/processed"
+  models_dir: "data/models"
+
+model:
+  target_threshold_cps: 500.0
+  horizon_minutes: 15
+  xgboost:
+    n_estimators: 200
+    learning_rate: 0.05
+    max_depth: 6
+    early_stopping_rounds: 20
+
+dashboard:
+  server_port: 8505
+
+operational_state:
+  probability_thresholds:
+    watch: 0.2
+    pre_alert: 0.4
+    alert: 0.7
+    high_alert: 0.9
+  flux_class_thresholds:
+    watch: "B5"
+    pre_alert: "C1"
+    alert: "M1"
+    high_alert: "X1"

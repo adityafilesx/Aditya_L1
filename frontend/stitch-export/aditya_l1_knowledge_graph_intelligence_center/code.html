@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Knowledge Graph - Aditya-L1 Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#f5f2ff",
+                        "tertiary-container": "#6e6f75",
+                        "outline-variant": "#c7c4d7",
+                        "background": "#f7f9fc",
+                        "on-surface-variant": "#464555",
+                        "surface-variant": "#e0e3e6",
+                        "on-background": "#191c1e",
+                        "on-primary-fixed-variant": "#2f2bc1",
+                        "secondary-fixed-dim": "#ffb59f",
+                        "primary-container": "#5b5ceb",
+                        "primary": "#4140d1",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#e1dfff",
+                        "on-tertiary-fixed": "#1a1b21",
+                        "tertiary-fixed": "#e2e2e9",
+                        "secondary-container": "#fe693c",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#c1c1ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f7f9fc",
+                        "secondary": "#ae3104",
+                        "on-secondary-fixed": "#3b0a00",
+                        "on-tertiary-fixed-variant": "#45474c",
+                        "on-primary-fixed": "#08006c",
+                        "tertiary-fixed-dim": "#c6c6cd",
+                        "on-tertiary-container": "#f3f3fa",
+                        "secondary-fixed": "#ffdbd1",
+                        "on-surface": "#191c1e",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e0e3e6",
+                        "surface-container-high": "#e6e8eb",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "surface-dim": "#d8dadd",
+                        "inverse-on-surface": "#eff1f4",
+                        "on-secondary-fixed-variant": "#862200",
+                        "inverse-primary": "#c1c1ff",
+                        "surface": "#f7f9fc",
+                        "tertiary": "#55575d",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#601600",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#4949d9",
+                        "surface-container-low": "#f2f4f7",
+                        "outline": "#767586",
+                        "surface-container": "#eceef1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "component-padding-y": "12px",
+                        "container-margin": "32px",
+                        "component-padding-x": "16px",
+                        "section-gap": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Space Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "body-sm": ["Inter"],
+                        "display-lg-mobile": ["Space Grotesk"],
+                        "numeric-telemetry": ["Space Grotesk"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "data-mono": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "numeric-telemetry": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for high-density feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f7f9fc; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c7c4d7; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #767586; 
+        }
+        
+        /* Specific layout logic */
+        body {
+            background-color: #F5F7FA;
+            color: #191c1e;
+        }
+        
+        .shadow-soft {
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+        }
+        
+        .interactive-card {
+            transition: all 150ms linear;
+            border: 1px solid #E8ECF2;
+        }
+        
+        .interactive-card:hover {
+            border-color: #5B5CEB;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-sm min-h-screen pb-20 overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface dark:bg-surface border-b border-surface-variant dark:border-outline-variant flat no shadows">
+<div class="flex items-center gap-6">
+<div class="font-display-lg text-display-lg-mobile lg:text-display-lg font-bold text-primary dark:text-inverse-primary whitespace-nowrap">
+                Aditya-L1 Intelligence
+            </div>
+<!-- Navigation Links (Web only) -->
+<div class="hidden md:flex items-end gap-6 h-full mt-auto">
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-caps text-label-caps uppercase opacity-80 scale-95 transition-all duration-150" href="#">
+                    Knowledge Graph
+                </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-medium font-label-caps text-label-caps uppercase hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 pb-1 border-b-2 border-transparent" href="#">
+                    Causal Analysis
+                </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-medium font-label-caps text-label-caps uppercase hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 pb-1 border-b-2 border-transparent" href="#">
+                    Scientific Reports
+                </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-medium font-label-caps text-label-caps uppercase hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 pb-1 border-b-2 border-transparent" href="#">
+                    Telemetry
+                </a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<!-- Search Bar -->
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container border border-surface-variant rounded focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none font-body-sm w-64 transition-colors" placeholder="Search knowledge graph..." type="text"/>
+</div>
+<!-- Primary Action -->
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded font-label-caps text-label-caps uppercase hover:bg-surface-tint transition-colors duration-150">
+                Deploy Recommendation
+            </button>
+<!-- Trailing Icons -->
+<div class="flex items-center gap-2 text-on-surface-variant">
+<button class="p-1.5 hover:bg-surface-variant rounded transition-colors duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-1.5 hover:bg-surface-variant rounded transition-colors duration-150">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="p-1.5 hover:bg-surface-variant rounded transition-colors duration-150">
+<span class="material-symbols-outlined">help</span>
+</button>
+<!-- Profile -->
+<div class="ml-2 w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-outline-variant">
+<img alt="Mission Scientist Avatar" class="w-full h-full object-cover" data-alt="Professional corporate headshot of a mission scientist in a brightly lit, sterile control room environment. Minimalist background, high key lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl3BCfhVTMvvYEatclHfM4XGsgJPqDE_A5AeH7oEMxbrjR5kdk_xC2v2khVzNH2P1NEX4s_Wxg0cUHD-Fz5-WyQyyZleTOMMgIwtZ4eprnPyjpclkI8YQBAXkLMe_J9FBFn7IcaG53h3pf2D2bt1JV3iaaj7I1dM7kzRTRxEgaOu-MGA6zl1fgeJVma7pU0eoJJaTFc7DGaTgqS30D2et8LWEPcB-mIkfi4_-d2FKmMrw2DASICAhTcXT_rkkT49T552zETUbMELcL"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar & Main Content Wrapper -->
+<div class="flex pt-16">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col py-component-padding-y px-4 gap-2 fixed left-0 top-16 h-[calc(100vh-64px)] w-[260px] bg-surface-container-low dark:bg-surface-container-lowest border-r border-surface-variant dark:border-outline-variant flat no shadows z-40 overflow-y-auto">
+<div class="mb-6 px-2">
+<div class="font-headline-md text-headline-md font-bold text-primary mb-1">Operator Console</div>
+<div class="font-data-mono text-[11px] text-on-surface-variant">L1 Point Status: Nominal</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-surface-container-high rounded-lg hover:bg-surface-variant dark:hover:bg-surface-container-high transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">hub</span>
+<span class="font-label-caps text-label-caps uppercase">Mission Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary-fixed text-on-primary-fixed font-bold rounded-lg scale-98 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps text-label-caps uppercase">Graph Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-surface-container-high rounded-lg hover:bg-surface-variant dark:hover:bg-surface-container-high transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">history_edu</span>
+<span class="font-label-caps text-label-caps uppercase">Historical Similarity</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-surface-container-high rounded-lg hover:bg-surface-variant dark:hover:bg-surface-container-high transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">account_tree</span>
+<span class="font-label-caps text-label-caps uppercase">Causal Chains</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-surface-container-high rounded-lg hover:bg-surface-variant dark:hover:bg-surface-container-high transition-colors duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">info</span>
+<span class="font-label-caps text-label-caps uppercase">Node Inspector</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-surface-variant pt-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-surface-container-high rounded-lg transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+<span class="font-label-caps text-label-caps uppercase">System Logs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-surface-container-high rounded-lg transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]">contact_support</span>
+<span class="font-label-caps text-label-caps uppercase">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 md:ml-[260px] p-container-margin max-w-[1800px] mx-auto w-full">
+<!-- 1. Workspace Header & 2. Global Search -->
+<header class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-8">
+<div>
+<h1 class="font-display-lg text-display-lg-mobile lg:text-display-lg font-bold text-on-background mb-2">Knowledge Graph</h1>
+<p class="text-tertiary font-body-lg">Scientific Event Intelligence • Causal Analysis • Mission Knowledge Base</p>
+</div>
+<div class="flex items-center gap-6 bg-surface p-4 rounded-[18px] border border-surface-variant shadow-soft">
+<div class="text-right">
+<div class="font-label-caps text-label-caps text-tertiary uppercase mb-1">Events Indexed</div>
+<div class="font-numeric-telemetry text-numeric-telemetry font-bold text-on-surface">12,458</div>
+</div>
+<div class="w-px h-10 bg-surface-variant"></div>
+<div class="text-right">
+<div class="font-label-caps text-label-caps text-tertiary uppercase mb-1">Relationships</div>
+<div class="font-numeric-telemetry text-numeric-telemetry font-bold text-on-surface">98,341</div>
+</div>
+</div>
+</header>
+<!-- 12 Column Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Left/Center Column (Graph & Analysis) -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-gutter">
+<!-- Search Bar Large -->
+<div class="relative w-full shadow-soft">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface border border-surface-variant rounded-[8px] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none font-body-lg shadow-sm transition-all focus:shadow-[0_0_0_2px_rgba(91,92,235,0.1)]" placeholder="Query entities: Active Regions, Flares, CMEs, Insturments..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-surface-container hover:bg-surface-container-high rounded text-on-surface font-label-caps text-label-caps transition-colors">
+                            Advanced
+                        </button>
+</div>
+<!-- 3. Interactive Knowledge Graph -->
+<div class="bg-surface border border-surface-variant rounded-[18px] shadow-soft overflow-hidden h-[600px] flex flex-col relative interactive-card group">
+<div class="flex justify-between items-center p-4 border-b border-surface-variant bg-surface-bright">
+<h2 class="font-label-caps text-label-caps uppercase text-on-surface font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">schema</span>
+                                Entity Network Visualization
+                            </h2>
+<div class="flex gap-2">
+<button class="p-1 text-tertiary hover:text-primary transition-colors"><span class="material-symbols-outlined">zoom_in</span></button>
+<button class="p-1 text-tertiary hover:text-primary transition-colors"><span class="material-symbols-outlined">zoom_out</span></button>
+<button class="p-1 text-tertiary hover:text-primary transition-colors"><span class="material-symbols-outlined">filter_list</span></button>
+</div>
+</div>
+<!-- Visualization Area (Placeholder for actual graph) -->
+<div class="flex-1 relative bg-[#F9FAFB] flex items-center justify-center overflow-hidden">
+<!-- Shader placeholder instead of generic img -->
+
+<!-- Overlay Graph UI elements -->
+<div class="absolute inset-0 pointer-events-none">
+<!-- Simulated Nodes connecting -->
+<svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+<line stroke="#c7c4d7" stroke-width="1.5" x1="30%" x2="50%" y1="40%" y2="50%"></line>
+<line stroke="#c7c4d7" stroke-dasharray="4" stroke-width="1.5" x1="50%" x2="70%" y1="50%" y2="30%"></line>
+<line stroke="#c7c4d7" stroke-width="1.5" x1="50%" x2="60%" y1="50%" y2="70%"></line>
+<line stroke="#c7c4d7" stroke-width="1.5" x1="60%" x2="40%" y1="70%" y2="80%"></line>
+</svg>
+<!-- Simulated Nodes -->
+<div class="absolute top-[40%] left-[30%] -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-primary flex items-center justify-center shadow-lg border-2 border-surface pointer-events-auto cursor-pointer hover:scale-110 transition-transform">
+<span class="w-2 h-2 rounded-full bg-white"></span>
+</div>
+<!-- Active Selected Node -->
+<div class="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto">
+<div class="absolute inset-0 bg-secondary-container rounded-full animate-ping opacity-30 scale-150"></div>
+<div class="relative w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shadow-[0_0_15px_rgba(254,105,60,0.4)] border-2 border-surface cursor-pointer z-10">
+<span class="material-symbols-outlined text-white text-[18px]">wb_sunny</span>
+</div>
+<div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-inverse-surface text-inverse-on-surface px-2 py-1 rounded text-[11px] font-data-mono whitespace-nowrap z-20">
+                                        AR13872
+                                    </div>
+</div>
+<div class="absolute top-[30%] left-[70%] -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#9c27b0] flex items-center justify-center shadow-lg border-2 border-surface pointer-events-auto cursor-pointer opacity-70">
+<span class="material-symbols-outlined text-white text-[14px]">storm</span>
+</div>
+<div class="absolute top-[70%] left-[60%] -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-error flex items-center justify-center shadow-lg border-2 border-surface pointer-events-auto cursor-pointer"></div>
+</div>
+</div>
+<!-- Legend -->
+<div class="absolute bottom-4 left-4 right-4 bg-surface/90 backdrop-blur-sm border border-surface-variant p-3 rounded-lg flex flex-wrap gap-4 text-[11px] font-label-caps uppercase items-center">
+<span class="font-bold text-tertiary mr-2">Legend:</span>
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-primary"></span> Active Regions</div>
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-secondary-container"></span> Flares</div>
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#9c27b0]"></span> CMEs</div>
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-error"></span> SEPs</div>
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#10b981]"></span> Instruments</div>
+</div>
+</div>
+<!-- 5. Causal Analysis Flowchart -->
+<div class="bg-surface border border-surface-variant rounded-[18px] shadow-soft p-6 interactive-card">
+<h3 class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">timeline</span>
+                            Causal Chain: Current Trajectory
+                        </h3>
+<div class="flex items-center justify-between overflow-x-auto pb-4 hide-scrollbar gap-2">
+<!-- Node 1 -->
+<div class="flex flex-col items-center min-w-[100px]">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center border border-surface-variant mb-2 shadow-sm">
+<span class="material-symbols-outlined text-primary">my_location</span>
+</div>
+<span class="font-data-mono text-[11px] text-center">Active<br/>Region</span>
+</div>
+<!-- Arrow -->
+<div class="flex-1 min-w-[30px] flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant text-[20px]">arrow_forward</span>
+</div>
+<!-- Node 2 -->
+<div class="flex flex-col items-center min-w-[100px]">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center border border-surface-variant mb-2 shadow-sm">
+<span class="material-symbols-outlined text-primary">waves</span>
+</div>
+<span class="font-data-mono text-[11px] text-center">Magnetic<br/>Complexity</span>
+</div>
+<!-- Arrow -->
+<div class="flex-1 min-w-[30px] flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant text-[20px]">arrow_forward</span>
+</div>
+<!-- Node 3 -->
+<div class="flex flex-col items-center min-w-[100px]">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center border border-surface-variant mb-2 shadow-sm">
+<span class="material-symbols-outlined text-secondary-container">thermostat</span>
+</div>
+<span class="font-data-mono text-[11px] text-center">Coronal<br/>Heating</span>
+</div>
+<!-- Arrow -->
+<div class="flex-1 min-w-[30px] flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container text-[20px]">arrow_forward</span>
+</div>
+<!-- Node 4 (Active) -->
+<div class="flex flex-col items-center min-w-[100px]">
+<div class="w-12 h-12 rounded-lg bg-secondary-container text-white flex items-center justify-center border-2 border-secondary-fixed mb-2 shadow-[0_4px_10px_rgba(254,105,60,0.3)] relative">
+<span class="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full border-2 border-secondary-container animate-pulse"></span>
+<span class="material-symbols-outlined">wb_sunny</span>
+</div>
+<span class="font-data-mono text-[11px] text-center font-bold text-secondary-container">Solar<br/>Flare</span>
+</div>
+<!-- Arrow -->
+<div class="flex-1 min-w-[30px] flex items-center justify-center relative">
+<div class="absolute top-0 text-[10px] font-data-mono text-tertiary">18% Prob</div>
+<span class="material-symbols-outlined text-outline-variant text-[20px] border-b border-dashed border-outline-variant">arrow_forward</span>
+</div>
+<!-- Node 5 -->
+<div class="flex flex-col items-center min-w-[100px] opacity-60">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center border border-dashed border-surface-variant mb-2">
+<span class="material-symbols-outlined text-[#9c27b0]">storm</span>
+</div>
+<span class="font-data-mono text-[11px] text-center">CME<br/>Ejection</span>
+</div>
+<!-- Arrow -->
+<div class="flex-1 min-w-[30px] flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant text-[20px] opacity-50">arrow_forward</span>
+</div>
+<!-- Node 6 -->
+<div class="flex flex-col items-center min-w-[100px] opacity-60">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center border border-dashed border-surface-variant mb-2">
+<span class="material-symbols-outlined text-error">satellite_alt</span>
+</div>
+<span class="font-data-mono text-[11px] text-center">HF<br/>Blackout</span>
+</div>
+</div>
+</div>
+<!-- Bottom Row: Historical & Analytics -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- 6. Historical Similarity -->
+<div class="bg-surface border border-surface-variant rounded-[18px] shadow-soft p-6 interactive-card flex flex-col h-full">
+<h3 class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mb-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">history</span>
+                                    Historical Similarity
+                                </div>
+<span class="text-[10px] bg-surface-container px-2 py-0.5 rounded text-tertiary">Top Matches</span>
+</h3>
+<div class="flex-1 overflow-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-surface-variant font-label-caps text-[10px] text-tertiary uppercase">
+<th class="py-2 font-medium">Event</th>
+<th class="py-2 font-medium">Date</th>
+<th class="py-2 font-medium text-right">Similarity</th>
+</tr>
+</thead>
+<tbody class="font-data-mono text-[12px]">
+<tr class="border-b border-surface-variant hover:bg-surface-bright transition-colors cursor-pointer group">
+<td class="py-3 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary-container"></div>
+<span class="group-hover:text-primary transition-colors">X2.2 Class</span>
+</td>
+<td class="py-3 text-tertiary">2021-10-28</td>
+<td class="py-3 text-right text-[#10b981]">94%</td>
+</tr>
+<tr class="border-b border-surface-variant hover:bg-surface-bright transition-colors cursor-pointer group">
+<td class="py-3 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary-container"></div>
+<span class="group-hover:text-primary transition-colors">X1.5 Class</span>
+</td>
+<td class="py-3 text-tertiary">2017-09-06</td>
+<td class="py-3 text-right text-[#10b981]">88%</td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors cursor-pointer group">
+<td class="py-3 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary-container"></div>
+<span class="group-hover:text-primary transition-colors">M9.8 Class</span>
+</td>
+<td class="py-3 text-tertiary">2022-04-19</td>
+<td class="py-3 text-right text-tertiary">76%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- 8. Graph Analytics Summary -->
+<div class="bg-surface border border-surface-variant rounded-[18px] shadow-soft p-6 interactive-card flex flex-col h-full">
+<h3 class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">donut_small</span>
+                                Sub-Graph Analytics
+                            </h3>
+<div class="grid grid-cols-2 gap-4 flex-1">
+<div class="bg-surface-bright border border-surface-variant rounded-lg p-3 flex flex-col justify-center">
+<div class="text-tertiary text-[11px] font-label-caps uppercase mb-1">Centrality</div>
+<div class="font-numeric-telemetry text-[20px] text-on-surface font-bold">0.842</div>
+<div class="text-[10px] text-[#10b981] mt-1 flex items-center"><span class="material-symbols-outlined text-[12px]">arrow_upward</span> 0.05</div>
+</div>
+<div class="bg-surface-bright border border-surface-variant rounded-lg p-3 flex flex-col justify-center">
+<div class="text-tertiary text-[11px] font-label-caps uppercase mb-1">Clusters</div>
+<div class="font-numeric-telemetry text-[20px] text-on-surface font-bold">142</div>
+<div class="text-[10px] text-tertiary mt-1">Stable</div>
+</div>
+<div class="col-span-2 bg-surface-bright border border-surface-variant rounded-lg p-3 flex items-center justify-between">
+<div>
+<div class="text-tertiary text-[11px] font-label-caps uppercase mb-1">Density</div>
+<div class="font-numeric-telemetry text-[16px] text-on-surface font-bold">High (0.68)</div>
+</div>
+<!-- Mini sparkline placeholder -->
+<svg class="w-16 h-8" preserveaspectratio="none" viewbox="0 0 100 30">
+<path d="M0,25 Q20,5 40,20 T80,10 T100,15" fill="none" stroke="#4140d1" stroke-width="2"></path>
+<path d="M0,25 Q20,5 40,20 T80,10 T100,15 L100,30 L0,30 Z" fill="rgba(65, 64, 209, 0.1)"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Inspector & Recommendations) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<!-- 4. Node Inspector -->
+<div class="bg-surface border border-surface-variant rounded-[18px] shadow-soft overflow-hidden flex flex-col">
+<!-- Header -->
+<div class="bg-surface-container-low p-5 border-b border-surface-variant">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary-container shadow-[0_0_8px_rgba(254,105,60,0.5)]"></span>
+<span class="font-label-caps text-[10px] text-tertiary uppercase tracking-wider">Current Selection</span>
+</div>
+<button class="text-tertiary hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
+</div>
+<h2 class="font-display-lg-mobile text-[28px] font-bold text-on-surface leading-tight">AR13872</h2>
+<p class="font-body-sm text-tertiary mt-1">Complex Beta-Gamma-Delta Region</p>
+</div>
+<!-- Core Metrics -->
+<div class="p-5 grid grid-cols-2 gap-4 border-b border-surface-variant">
+<div>
+<div class="font-label-caps text-[10px] text-tertiary uppercase mb-1">Confidence</div>
+<div class="font-numeric-telemetry text-[24px] text-on-surface font-bold">96%</div>
+</div>
+<div>
+<div class="font-label-caps text-[10px] text-tertiary uppercase mb-1">Mission Risk</div>
+<div class="font-numeric-telemetry text-[24px] text-error font-bold flex items-center gap-1">
+                                    21% <span class="material-symbols-outlined text-[16px]">warning</span>
+</div>
+</div>
+</div>
+<!-- Physics Summary -->
+<div class="p-5 bg-surface-bright flex-1">
+<h4 class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mb-3">Physics Summary</h4>
+<div class="space-y-3 font-data-mono text-[13px]">
+<div class="flex justify-between items-end border-b border-surface-variant pb-1">
+<span class="text-tertiary">Temperature</span>
+<span class="font-semibold">14.2 MK</span>
+</div>
+<div class="flex justify-between items-end border-b border-surface-variant pb-1">
+<span class="text-tertiary">Area (MH)</span>
+<span class="font-semibold">980</span>
+</div>
+<div class="flex justify-between items-end border-b border-surface-variant pb-1">
+<span class="text-tertiary">Magnetic Flux</span>
+<span class="font-semibold">3.2e22 Mx</span>
+</div>
+<div class="flex justify-between items-end pb-1 mt-4">
+<span class="text-tertiary">CME Probability</span>
+<span class="font-semibold text-secondary-container">18%</span>
+</div>
+<div class="flex justify-between items-end pb-1">
+<span class="text-tertiary">HF Blackout</span>
+<span class="font-semibold text-[#10b981]">Low</span>
+</div>
+</div>
+<button class="w-full mt-6 border border-surface-variant py-2 rounded-lg text-primary font-label-caps text-label-caps uppercase hover:bg-surface-variant transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                                Full Spectral Data
+                            </button>
+</div>
+</div>
+<!-- 7. Mission Recommendations -->
+<div class="bg-surface border border-surface-variant rounded-[18px] shadow-soft p-5">
+<h3 class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">rule</span>
+                            Active Protocols
+                        </h3>
+<div class="space-y-3">
+<!-- Rec 1 -->
+<div class="p-3 border border-surface-variant rounded-lg bg-surface-bright hover:border-primary transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<div class="font-body-sm font-semibold text-on-surface">Payload SUIT</div>
+<span class="bg-[#10b981]/10 text-[#10b981] px-1.5 py-0.5 rounded text-[10px] font-label-caps uppercase font-bold">Nominal</span>
+</div>
+<div class="text-[12px] text-tertiary">Maintain current observation cadence.</div>
+</div>
+<!-- Rec 2 -->
+<div class="p-3 border border-error/30 rounded-lg bg-error/5 hover:border-error transition-colors cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<div class="font-body-sm font-semibold text-on-surface">Ground Station</div>
+<span class="bg-error/10 text-error px-1.5 py-0.5 rounded text-[10px] font-label-caps uppercase font-bold">High Priority</span>
+</div>
+<div class="text-[12px] text-tertiary pl-2">Prepare for potential downlink interference at 14:00 UTC.</div>
+</div>
+<!-- Rec 3 -->
+<div class="p-3 border border-secondary-container/30 rounded-lg bg-secondary-container/5 hover:border-secondary-container transition-colors cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<div class="font-body-sm font-semibold text-on-surface">Communications</div>
+<span class="bg-secondary-container/10 text-secondary-container px-1.5 py-0.5 rounded text-[10px] font-label-caps uppercase font-bold">Calibrate</span>
+</div>
+<div class="text-[12px] text-tertiary pl-2">Schedule S-band calibration before shadow entry.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 9. Event Timeline (Bottom) -->
+<div class="mt-gutter bg-surface border border-surface-variant rounded-[18px] shadow-soft p-5">
+<h3 class="font-label-caps text-label-caps uppercase text-on-surface font-semibold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">update</span>
+                    Graph Ingestion Timeline
+                </h3>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
+<!-- Event 1 -->
+<div class="flex-none w-64 border-l-2 border-primary pl-3">
+<div class="font-data-mono text-[10px] text-tertiary mb-1">10:42:15 UTC</div>
+<div class="font-body-sm text-on-surface">Node <span class="font-data-mono text-primary bg-primary/10 px-1 rounded">AR13872</span> updated properties</div>
+</div>
+<!-- Event 2 -->
+<div class="flex-none w-64 border-l-2 border-secondary-container pl-3">
+<div class="font-data-mono text-[10px] text-tertiary mb-1">10:38:02 UTC</div>
+<div class="font-body-sm text-on-surface">New edge formed: <span class="font-data-mono text-[12px]">Flare_M1.2 -&gt; CME_094</span></div>
+</div>
+<!-- Event 3 -->
+<div class="flex-none w-64 border-l-2 border-surface-variant pl-3 opacity-60">
+<div class="font-data-mono text-[10px] text-tertiary mb-1">10:15:00 UTC</div>
+<div class="font-body-sm text-on-surface">Telemetry sync complete (9,402 metrics)</div>
+</div>
+<!-- Event 4 -->
+<div class="flex-none w-64 border-l-2 border-surface-variant pl-3 opacity-60">
+<div class="font-data-mono text-[10px] text-tertiary mb-1">09:00:00 UTC</div>
+<div class="font-body-sm text-on-surface">Daily model re-training executed.</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="fixed bottom-0 left-0 w-full z-40 flex justify-between items-center px-container-margin py-2 bg-surface-container dark:bg-surface-container-high border-t border-surface-variant dark:border-outline-variant flat no shadows md:pl-[292px] transition-opacity duration-150">
+<div class="font-label-caps text-label-caps text-primary">
+            © 2024 Aditya-L1 Space Intelligence. Mission-Critical Data - Confidential.
+        </div>
+<div class="flex gap-4">
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary" href="#">Privacy Protocol</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary" href="#">Security Clearance</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary" href="#">API Documentation</a>
+</div>
+</footer>
+</body></html>

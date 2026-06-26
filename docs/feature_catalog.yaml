@@ -1,0 +1,135 @@
+features:
+  # Statistics
+  roll_mean:
+    description: "Rolling arithmetic mean of the signal"
+    equation: "μ = 1/N * Σ(x_i)"
+    units: "cps"
+    source: ["solexs_sdd2_ctr", "helios_czt_broad_ctr"]
+    expected_range: "[10, 5000]"
+    intended_use: "Baseline flux trend."
+
+  roll_mad:
+    description: "Median Absolute Deviation"
+    equation: "MAD = median(|x_i - median(X)|)"
+    units: "cps"
+    source: ["solexs_sdd2_ctr", "helios_czt_broad_ctr"]
+    expected_range: "[0, 500]"
+    intended_use: "Robust volatility measurement resistant to microflare outliers."
+
+  roll_skew:
+    description: "Rolling Skewness"
+    equation: "Skew = E[(X - μ)^3] / σ^3"
+    units: "dimensionless"
+    source: ["solexs_sdd2_ctr", "helios_czt_broad_ctr"]
+    expected_range: "[-5, 5]"
+    intended_use: "Detects impulsive asymmetry in light curves."
+
+  roll_kurtosis:
+    description: "Rolling Kurtosis"
+    equation: "Kurt = E[(X - μ)^4] / σ^4"
+    units: "dimensionless"
+    source: ["solexs_sdd2_ctr", "helios_czt_broad_ctr"]
+    expected_range: "[-3, 30]"
+    intended_use: "Identifies heavy-tailed burst distributions."
+
+  # Entropy
+  shannon_entropy:
+    description: "Shannon Entropy of the amplitude distribution"
+    equation: "H = -Σ(p * log(p))"
+    units: "bits"
+    source: ["solexs_sdd2_ctr", "helios_czt_broad_ctr"]
+    expected_range: "[0, 5]"
+    intended_use: "Measures signal complexity and randomness."
+
+  sample_entropy:
+    description: "Sample Entropy proxy"
+    equation: "H_s = log(B) - log(A)"
+    units: "dimensionless"
+    source: ["solexs_sdd2_ctr", "helios_czt_broad_ctr"]
+    expected_range: "[0, 2]"
+    intended_use: "Measures time-series regularity."
+
+  # Thermodynamics
+  estimated_temperature_mk:
+    description: "Estimated Plasma Temperature"
+    equation: "T(MK) ≈ 15 * sqrt(HR)"
+    units: "MK"
+    source: ["solexs_sdd2_ctr", "helios_czt_broad_ctr"]
+    expected_range: "[2.0, 50.0]"
+    intended_use: "Thermal state tracking."
+
+  estimated_em_norm:
+    description: "Estimated Emission Measure"
+    equation: "EM ≈ Soft Flux / sqrt(T)"
+    units: "normalized"
+    source: ["solexs_sdd2_ctr", "helios_czt_broad_ctr"]
+    expected_range: "[NaN]"
+    intended_use: "Only populated when valid spectral fits exist."
+
+  thermo_confidence:
+    description: "Confidence interval of thermodynamic estimation"
+    equation: "0.0 without PyXspec, 1.0 with fit"
+    units: "probability"
+    source: ["Internal State"]
+    expected_range: "[0, 1]"
+    intended_use: "Filters invalid EM inferences."
+
+  # Neupert
+  neupert_score:
+    description: "Pearson correlation of HXR and d(SXR)/dt"
+    equation: "r = corr(Hard Flux, d(Soft Flux)/dt)"
+    units: "dimensionless"
+    source: ["solexs_sdd2_ctr", "helios_czt_broad_ctr"]
+    expected_range: "[-1, 1]"
+    intended_use: "Identifies electron beam heating vs gradual heating."
+
+  # Wavelets
+  wavelet_energy:
+    description: "Wavelet Energy (DWT db2)"
+    equation: "E = Σ|coeffs|^2"
+    units: "cps^2"
+    source: ["solexs_sdd2_ctr", "helios_czt_broad_ctr"]
+    expected_range: "[0, 1e7]"
+    intended_use: "High-frequency power content."
+
+  dominant_scale:
+    description: "Dominant Frequency Band via Wavelet Packet Transform"
+    equation: "argmax(Node Energy)"
+    units: "Node Index"
+    source: ["solexs_sdd2_ctr", "helios_czt_broad_ctr"]
+    expected_range: "[0, 7]"
+    intended_use: "Identifies predominant oscillation regime without expensive CWT."
+
+  # Spectral
+  spec_centroid:
+    description: "Spectral Centroid via Welch's PSD"
+    equation: "C = Σ(f * P(f)) / Σ(P(f))"
+    units: "Hz"
+    source: ["solexs_sdd2_ctr", "helios_czt_broad_ctr"]
+    expected_range: "[0.001, 0.5]"
+    intended_use: "Tracks center of mass of the spectrum."
+
+  spec_flatness:
+    description: "Spectral Flatness (Wiener entropy)"
+    equation: "SF = exp(mean(log(P))) / mean(P)"
+    units: "dimensionless"
+    source: ["solexs_sdd2_ctr", "helios_czt_broad_ctr"]
+    expected_range: "[0, 1]"
+    intended_use: "Distinguishes between tonal oscillations and white noise."
+
+  # Morphology
+  physics_timeline:
+    description: "Phase of the flare timeline"
+    equation: "State machine based on derivative and peak distance"
+    units: "categorical"
+    source: ["solexs_sdd2_ctr"]
+    expected_range: "['Background', 'Preheating', 'Impulsive Rise', 'Peak', 'Decay', 'Recovery']"
+    intended_use: "Context-aware operational routing."
+
+  flare_morphology:
+    description: "Shape classification of the flare"
+    equation: "Rule-based classifier on rise/decay times and peak magnitude"
+    units: "categorical"
+    source: ["solexs_sdd2_ctr"]
+    expected_range: "['Impulsive', 'Gradual', 'Long-Duration', 'Complex', 'None']"
+    intended_use: "Long-term statistical classification of events."

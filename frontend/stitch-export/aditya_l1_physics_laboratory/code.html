@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physics Laboratory - Aditya-L1 Mission Control</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f2f4f7",
+                        "on-surface-variant": "#464555",
+                        "inverse-primary": "#c1c1ff",
+                        "on-secondary-fixed-variant": "#862200",
+                        "on-primary-container": "#f5f2ff",
+                        "secondary-fixed": "#ffdbd1",
+                        "surface-container": "#eceef1",
+                        "tertiary-fixed-dim": "#c6c6cd",
+                        "secondary": "#ae3104",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f7f9fc",
+                        "surface-variant": "#e0e3e6",
+                        "secondary-container": "#fe693c",
+                        "primary-fixed": "#e1dfff",
+                        "on-tertiary-container": "#f3f3fa",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#3b0a00",
+                        "primary": "#4140d1",
+                        "surface-container-highest": "#e0e3e6",
+                        "on-primary-fixed": "#08006c",
+                        "inverse-surface": "#2d3133",
+                        "error": "#ba1a1a",
+                        "outline": "#767586",
+                        "secondary-fixed-dim": "#ffb59f",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#4949d9",
+                        "on-secondary-container": "#601600",
+                        "on-surface": "#191c1e",
+                        "inverse-on-surface": "#eff1f4",
+                        "surface-bright": "#f7f9fc",
+                        "primary-container": "#5b5ceb",
+                        "on-primary-fixed-variant": "#2f2bc1",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d8dadd",
+                        "primary-fixed-dim": "#c1c1ff",
+                        "on-tertiary-fixed": "#1a1b21",
+                        "on-background": "#191c1e",
+                        "tertiary": "#55575d",
+                        "outline-variant": "#c7c4d7",
+                        "tertiary-fixed": "#e2e2e9",
+                        "tertiary-container": "#6e6f75",
+                        "background": "#f7f9fc",
+                        "on-tertiary-fixed-variant": "#45474c",
+                        "surface-container-high": "#e6e8eb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "48px",
+                        "gutter": "24px",
+                        "container-margin": "32px",
+                        "component-padding-y": "12px",
+                        "component-padding-x": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg-mobile": ["Space Grotesk"],
+                        "display-lg": ["Space Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "numeric-telemetry": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "data-mono": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+                        "numeric-telemetry": ["18px", { "lineHeight": "24px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #f7f9fc; color: #191c1e; }
+        .lab-card {
+            background-color: #ffffff;
+            border-radius: 14px;
+            border: 1px solid #e0e3e6;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+        }
+        .lab-card:hover { border-color: #5b5ceb; }
+        .data-value { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em; }
+        .unit-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #767586; text-transform: uppercase; }
+        .chart-placeholder { background: linear-gradient(180deg, rgba(242, 244, 247, 0.5) 0%, rgba(236, 238, 241, 0.8) 100%); }
+    </style>
+</head>
+<body class="font-body-sm text-body-sm antialiased h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-inverse-surface border-r border-outline-variant fixed left-0 top-0 h-full w-[260px] flex flex-col p-4 gap-2 z-50">
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-on-primary font-bold">A1</div>
+<div>
+<h1 class="font-label-caps text-label-caps text-on-primary-container">Aditya-L1</h1>
+<p class="font-data-mono text-[10px] text-tertiary-fixed-dim">Mission Control</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-colors duration-150" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span>Overview</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-colors duration-150" href="#"><span class="material-symbols-outlined text-[20px]">settings_remote</span>Operations</a>
+<a class="flex items-center gap-3 px-4 py-2 bg-primary-container text-on-primary-container rounded-lg" href="#"><span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">analytics</span>Investigation</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-colors duration-150" href="#"><span class="material-symbols-outlined text-[20px]">view_in_ar</span>Digital Twin</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-colors duration-150" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span>Knowledge</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-lg transition-colors duration-150" href="#"><span class="material-symbols-outlined text-[20px]">settings_input_component</span>System</a>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="bg-surface/80 backdrop-blur-md border border-outline-variant shadow-sm fixed top-4 left-[284px] right-8 h-[72px] rounded-xl flex justify-between items-center px-6 z-40">
+<div class="flex items-center gap-6">
+<span class="font-display-lg text-[20px] font-bold text-primary tracking-tight">Aditya-L1 Operations</span>
+<nav class="hidden md:flex gap-6 font-label-caps text-label-caps text-on-surface-variant">
+<a class="hover:text-primary transition-all duration-150" href="#">Operations</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Analysis</a>
+<a class="hover:text-primary transition-all duration-150" href="#">Digital Twin</a>
+<a class="hover:text-primary transition-all duration-150" href="#">Reports</a>
+<a class="hover:text-primary transition-all duration-150" href="#">System</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer text-[20px]">search</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant border-l border-outline-variant pl-4">
+<span class="material-symbols-outlined hover:text-primary cursor-pointer text-[20px]">notifications</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer text-[20px]">schedule</span>
+<span class="material-symbols-outlined hover:text-primary cursor-pointer text-[20px]">hourglass_empty</span>
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant ml-2 overflow-hidden">
+<img alt="Mission Commander Profile" class="w-full h-full object-cover" data-alt="A small circular avatar image showing a professional headshot of a mission commander in a high-tech control room setting. Bright, sterile lighting, corporate minimalist style, sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAPVJ_ypAZgciXIWrKUrG6Gi9VYzXcG4lqtR01kqh-N6rIi8cyony_PYM9pJxtUwuEOmaqRcXxL7GvHSFBPfz4Abn_5nsHF0R8PQfzTXBDTxmZn-WGUzZHIH84BciM9cwV-lkNvNIDhsNneZLNwlzSj6O2G2igUCVErQn4u41AMc1E0yVxTOqciJRiMoIQGMumC0I2ViyigLs4THieP4XG5if2vB0Zmb-LXAPwEvvsX6vTIdrCA6bK9esDRawXQ4qfu1fESfMJFTAn"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 ml-[260px] mt-[88px] mb-10 overflow-y-auto px-8 py-6 relative">
+<div class="max-w-[1800px] mx-auto grid grid-cols-12 gap-gutter">
+<!-- 1. Workspace Header -->
+<div class="col-span-12 mb-4 flex justify-between items-end border-b border-outline-variant pb-4">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1">Physics Laboratory</h2>
+<p class="font-data-mono text-[12px] text-tertiary">Thermodynamic Diagnostics • Spectral Analysis • Plasma Evolution • Physics Intelligence</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4 font-data-mono text-[12px]">
+<div><span class="text-tertiary">T:</span> <span class="text-on-surface font-semibold">2023-10-24T14:32:00Z</span></div>
+<div><span class="text-tertiary">Exp:</span> <span class="text-on-surface font-semibold">12.5s</span></div>
+<div><span class="text-tertiary">Inst:</span> <span class="text-primary font-semibold">SUIT / VELC</span></div>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 border border-outline-variant rounded-md text-primary font-label-caps text-[11px] hover:border-primary transition-colors">Export Data</button>
+<button class="px-3 py-1.5 bg-primary text-white rounded-md font-label-caps text-[11px] shadow-sm hover:bg-primary-container transition-colors">Run Model</button>
+</div>
+</div>
+</div>
+<!-- 2. Live Physics Summary (KPI Grid) -->
+<div class="col-span-12 grid grid-cols-5 gap-4 mb-2">
+<div class="lab-card p-4 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-caps text-[11px] text-tertiary">Peak Temperature</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">thermostat</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="data-value text-secondary">14.2</span>
+<span class="unit-label">MK</span>
+</div>
+</div>
+<div class="lab-card p-4 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-caps text-[11px] text-tertiary">Emission Measure</span>
+<span class="material-symbols-outlined text-primary text-[16px]">waves</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="data-value text-primary">1.2e48</span>
+<span class="unit-label">cm⁻³</span>
+</div>
+</div>
+<div class="lab-card p-4 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-caps text-[11px] text-tertiary">Heating Rate</span>
+<span class="material-symbols-outlined text-secondary-container text-[16px]">local_fire_department</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="data-value text-on-surface">4.5e28</span>
+<span class="unit-label">erg/s</span>
+</div>
+</div>
+<div class="lab-card p-4 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-caps text-[11px] text-tertiary">Neupert Score</span>
+<span class="material-symbols-outlined text-tertiary text-[16px]">score</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="data-value text-on-surface">0.71</span>
+<span class="text-[10px] text-tertiary ml-2">σ = 0.05</span>
+</div>
+</div>
+<div class="lab-card p-4 flex flex-col justify-between border-l-4 border-l-primary-container">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-caps text-[11px] text-primary">AI Confidence</span>
+<span class="material-symbols-outlined text-primary-container text-[16px]">psychology</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="data-value text-primary-container">94.2</span>
+<span class="unit-label">%</span>
+</div>
+</div>
+</div>
+<!-- Left Column: Core Analysis (8 cols) -->
+<div class="col-span-8 flex flex-col gap-6">
+<!-- 3. Thermodynamic Evolution -->
+<div class="lab-card p-0 overflow-hidden flex flex-col h-[400px]">
+<div class="flex border-b border-outline-variant bg-surface-container-lowest px-4 pt-3">
+<div class="px-4 py-2 border-b-2 border-primary text-primary font-label-caps text-[11px] cursor-pointer">T-Evolution</div>
+<div class="px-4 py-2 border-b-2 border-transparent text-tertiary font-label-caps text-[11px] cursor-pointer hover:text-on-surface">EM-Evolution</div>
+<div class="px-4 py-2 border-b-2 border-transparent text-tertiary font-label-caps text-[11px] cursor-pointer hover:text-on-surface">Pressure</div>
+<div class="px-4 py-2 border-b-2 border-transparent text-tertiary font-label-caps text-[11px] cursor-pointer hover:text-on-surface">Density</div>
+</div>
+<div class="flex-1 p-4 relative chart-placeholder">
+<!-- Placeholder for Plotly Chart -->
+<div class="absolute top-4 right-4 flex gap-2">
+<span class="bg-white/80 px-2 py-1 border border-outline-variant rounded text-[10px] font-data-mono text-tertiary">Log Scale</span>
+</div>
+<div class="w-full h-full border border-dashed border-outline-variant flex items-center justify-center text-tertiary font-data-mono text-sm">
+                             [Interactive Thermodynamic Time-Series Render]
+                         </div>
+</div>
+</div>
+<!-- 6. Spectral Analysis & Fitting (XSPEC) -->
+<div class="lab-card p-0 flex flex-col h-[450px]">
+<div class="p-3 border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-label-caps text-[12px] text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">graphic_eq</span> Spectral Analysis (XSPEC)</h3>
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-green-50 text-green-700 border border-green-200 rounded text-[10px] font-data-mono">χ² = 1.08</span>
+<span class="px-2 py-0.5 border border-outline-variant rounded text-[10px] font-data-mono text-tertiary">dof = 124</span>
+</div>
+</div>
+<div class="flex flex-1 overflow-hidden">
+<div class="flex-1 flex flex-col border-r border-outline-variant">
+<div class="flex bg-surface-container-lowest px-2 border-b border-outline-variant">
+<div class="px-3 py-1.5 border-b-2 border-primary text-primary font-label-caps text-[10px] cursor-pointer">Counts/Energy</div>
+<div class="px-3 py-1.5 border-b-2 border-transparent text-tertiary font-label-caps text-[10px] cursor-pointer">Residuals</div>
+<div class="px-3 py-1.5 border-b-2 border-transparent text-tertiary font-label-caps text-[10px] cursor-pointer">DEM</div>
+</div>
+<div class="flex-1 p-4 chart-placeholder">
+<div class="w-full h-full border border-dashed border-outline-variant flex items-center justify-center text-tertiary font-data-mono text-sm">
+                                    [XSPEC Spectral Plot Render]
+                                </div>
+</div>
+</div>
+<div class="w-[280px] bg-surface-bright p-4 flex flex-col gap-4 overflow-y-auto">
+<h4 class="font-label-caps text-[11px] text-tertiary mb-1">Model Parameters</h4>
+<div class="space-y-3">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-[11px] font-data-mono"><span class="text-on-surface">vth.kT</span><span class="text-primary">1.24 keV</span></div>
+<input class="w-full accent-primary" type="range" value="40"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-[11px] font-data-mono"><span class="text-on-surface">vth.norm</span><span class="text-primary">0.054</span></div>
+<input class="w-full accent-primary" type="range" value="20"/>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-[11px] font-data-mono"><span class="text-on-surface">powerlaw.PhoIndex</span><span class="text-secondary">3.4</span></div>
+<input class="w-full accent-secondary" type="range" value="70"/>
+</div>
+</div>
+<div class="mt-auto">
+<button class="w-full py-2 bg-surface border border-outline-variant rounded font-label-caps text-[11px] text-on-surface hover:bg-surface-variant transition-colors">Re-Fit Data</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Secondary Analysis & Context (4 cols) -->
+<div class="col-span-4 flex flex-col gap-6">
+<!-- 4. T-EM Loop Plot -->
+<div class="lab-card p-4 flex flex-col h-[280px]">
+<h3 class="font-label-caps text-[12px] text-on-surface mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">change_history</span> Thermodynamic Phase Diagram</h3>
+<div class="flex-1 chart-placeholder border border-outline-variant rounded bg-white relative">
+<div class="absolute inset-0 flex items-center justify-center text-tertiary font-data-mono text-xs text-center p-4">
+                             [T-EM Loop Phase Space]
+                         </div>
+</div>
+</div>
+<!-- 9. Flare Morphology & Timeline -->
+<div class="lab-card p-4 flex flex-col flex-1 min-h-[300px]">
+<h3 class="font-label-caps text-[12px] text-on-surface mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">timeline</span> Event Morphology</h3>
+<div class="flex justify-between mb-4 px-2">
+<div class="text-center">
+<div class="w-3 h-3 rounded-full bg-surface-variant border border-outline mx-auto mb-1"></div>
+<span class="font-data-mono text-[9px] text-tertiary">Pre-flare</span>
+</div>
+<div class="h-px bg-outline-variant flex-1 mt-1.5 mx-1"></div>
+<div class="text-center">
+<div class="w-3 h-3 rounded-full bg-secondary-container mx-auto mb-1 animate-pulse"></div>
+<span class="font-data-mono text-[9px] text-secondary">Rise</span>
+</div>
+<div class="h-px bg-outline-variant flex-1 mt-1.5 mx-1"></div>
+<div class="text-center">
+<div class="w-3 h-3 rounded-full bg-surface-variant border border-outline mx-auto mb-1"></div>
+<span class="font-data-mono text-[9px] text-tertiary">Peak</span>
+</div>
+<div class="h-px bg-outline-variant flex-1 mt-1.5 mx-1"></div>
+<div class="text-center">
+<div class="w-3 h-3 rounded-full bg-surface-variant border border-outline mx-auto mb-1"></div>
+<span class="font-data-mono text-[9px] text-tertiary">Decay</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 space-y-3">
+<div class="border-l-2 border-outline-variant pl-3 pb-2 relative">
+<div class="absolute w-2 h-2 rounded-full bg-outline-variant -left-[5px] top-1"></div>
+<div class="font-data-mono text-[10px] text-tertiary mb-0.5">14:30:12Z</div>
+<div class="font-body-sm text-[12px] text-on-surface">Initial flux increase detected in SUIT 1700Å.</div>
+</div>
+<div class="border-l-2 border-secondary-container pl-3 pb-2 relative">
+<div class="absolute w-2 h-2 rounded-full bg-secondary-container -left-[5px] top-1"></div>
+<div class="font-data-mono text-[10px] text-secondary mb-0.5">14:32:00Z</div>
+<div class="font-body-sm text-[12px] text-on-surface font-medium">Impulsive phase onset. Hard X-ray emission rise.</div>
+</div>
+<div class="border-l-2 border-outline-variant pl-3 relative">
+<div class="absolute w-2 h-2 rounded-full bg-surface -left-[5px] top-1 border border-outline-variant"></div>
+<div class="font-data-mono text-[10px] text-tertiary mb-0.5">Pending...</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container border-t border-outline-variant fixed bottom-0 left-[260px] right-0 h-10 flex justify-between items-center px-8 z-40">
+<div class="font-label-caps text-label-caps text-on-surface">ISRO Aditya-L1 Mission Control v2.4.0-Stable | Connectivity: <span class="text-green-600">OPTIMAL</span></div>
+<div class="flex gap-4 font-data-mono text-data-mono text-secondary">
+<span class="flex items-center gap-1"><div class="w-1.5 h-1.5 rounded-full bg-green-500"></div> PhysEng: IDLE</span>
+<span class="flex items-center gap-1"><div class="w-1.5 h-1.5 rounded-full bg-green-500"></div> SpecEng: READY</span>
+<span class="flex items-center gap-1"><div class="w-1.5 h-1.5 rounded-full bg-green-500"></div> XSPEC: CONNECTED</span>
+</div>
+<div class="flex gap-4 font-data-mono text-data-mono text-tertiary">
+<a class="hover:underline" href="#">Telemetry Protocol</a>
+<a class="hover:underline" href="#">System Health</a>
+<a class="hover:underline" href="#">Manuals</a>
+</div>
+</footer>
+</body></html>

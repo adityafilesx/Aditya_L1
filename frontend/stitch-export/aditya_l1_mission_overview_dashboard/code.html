@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ADITYA-L1 MISSION OVERVIEW</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#e1dfff",
+                        "error": "#ba1a1a",
+                        "success": "#22C55E",
+                        "warning": "#F59E0B",
+                        "critical": "#EF4444",
+                        "surface-container-high": "#e6e8eb",
+                        "inverse-on-surface": "#eff1f4",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#c1c1ff",
+                        "surface-tint": "#4949d9",
+                        "surface": "#f7f9fc",
+                        "surface-container": "#eceef1",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#6e6f75",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#ffdbd1",
+                        "tertiary-fixed": "#e2e2e9",
+                        "on-primary-container": "#f5f2ff",
+                        "primary-container": "#5b5ceb",
+                        "on-background": "#191c1e",
+                        "inverse-surface": "#2d3133",
+                        "on-error-container": "#93000a",
+                        "outline": "#767586",
+                        "secondary-container": "#fe693c",
+                        "surface-container-highest": "#e0e3e6",
+                        "on-tertiary-fixed": "#1a1b21",
+                        "on-secondary-fixed-variant": "#862200",
+                        "background": "#f7f9fc",
+                        "on-tertiary-fixed-variant": "#45474c",
+                        "on-primary-fixed": "#08006c",
+                        "surface-bright": "#f7f9fc",
+                        "primary": "#4140d1",
+                        "tertiary": "#55575d",
+                        "surface-variant": "#e0e3e6",
+                        "tertiary-fixed-dim": "#c6c6cd",
+                        "secondary": "#ae3104",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#601600",
+                        "on-surface-variant": "#464555",
+                        "outline-variant": "#c7c4d7",
+                        "surface-dim": "#d8dadd",
+                        "on-tertiary-container": "#f3f3fa",
+                        "on-surface": "#191c1e",
+                        "primary-fixed-dim": "#c1c1ff",
+                        "surface-container-low": "#f2f4f7",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#2f2bc1",
+                        "secondary-fixed-dim": "#ffb59f",
+                        "on-secondary-fixed": "#3b0a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "48px",
+                        "container-margin": "32px",
+                        "component-padding-y": "12px",
+                        "gutter": "24px",
+                        "component-padding-x": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Space Grotesk"],
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "numeric-telemetry": ["Space Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "numeric-telemetry": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "data-mono": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #f7f9fc; color: #191c1e; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .live-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        .bento-card { background: #ffffff; border-radius: 18px; border: 1px solid #E8ECF2; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); transition: border-color 0.15s linear; }
+        .bento-card:hover { border-color: #5B5CEB; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d8dadd; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="bg-surface border-b border-outline-variant flex justify-between items-center w-full px-container-margin py-component-padding-y fixed top-0 z-50">
+<div class="flex items-center gap-8">
+<h1 class="font-display-lg text-headline-md font-bold text-primary">ADITYA-L1 MISSION OVERVIEW</h1>
+<nav class="hidden md:flex gap-6">
+<a class="font-label-caps text-label-caps text-primary border-b-2 border-primary pb-1 font-bold" href="#">Overview</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Telemetry</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Science</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Intelligence</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">schedule</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">timer</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">notifications</span>
+<img class="w-10 h-10 rounded-full border border-outline-variant object-cover" data-alt="A professional headshot of a mission commander in a clean, modern aerospace uniform. The background is a blurred high-tech control room with blue and white interface lights. The lighting is soft and cinematic, emphasizing authority and focus in a bright light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMkl4xzqNsyhqupLZrqtpkO7bCep9fprzIUe6DomPWpWKjC72ab5USonVqOb5Wg0GKrENfpeRHUER1RqCQsitAkdtuWneq4N4o_9Ff1m8UPjhIcDp54ntnwdlWodXY5KHWI204J4h6MYSDUBz3vQF7CRNsMiPDsq1exY4qrK1WoQLS5MWLakKh_AwdxnSHUq3-P7nC4T8_iE9CmRzJv2kVXnNaDDRx2lf8h01PaffjIPyvFr-AJ3Y1X7ZsTz7-oF38GqdFIK0VaXH1"/>
+</div>
+</header>
+<div class="flex flex-1 pt-16 pb-12">
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-[260px] bg-surface-container-low border-r border-outline-variant flex flex-col p-component-padding-x hidden md:flex">
+<div class="mb-8 mt-4">
+<div class="flex items-center gap-3 mb-2">
+<img class="w-10 h-10 object-contain" data-alt="A graphic mission patch for the Aditya-L1 solar mission. It features a stylized sun with radial flares, an orbit path around the L1 point, and the text L1 LIBRA POINT. The color scheme is deep blue, white, and solar orange, presented in a minimalist high-precision vector style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbWNbBvfUsnNNlgajqm9PObpndsQH6-YTibcCC6FQx_CXsoGV50aPobS6Mtbph1AI_w4LhXEBct6Q685vkF9mLR6Byuv0QwCkvl3JDypZ_feh18pVohcaiWLmRp7TVvjzkklXqwp94oFk3yNLX_Di9wLo3Sl1lZ-TE17r4fIPNe49c_CIBTwyEolGcdAbro256IPgQA5ErseAr3ioFo-nPInLnDodq7eOhGDXaZm6XkxZrR1mwtI9UWnq5FMT6Eavzi8rjQ50IxWVu"/>
+<div>
+<div class="font-label-caps text-label-caps text-primary uppercase">Solar Mission</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">L1 LIBRATION POINT</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold transition-transform duration-150 scale-[0.98]">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Command Center</span>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">wb_sunny</span>
+<span class="font-label-caps text-label-caps">Solar Flux</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">model_training</span>
+<span class="font-label-caps text-label-caps">Digital Twin</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">warning</span>
+<span class="font-label-caps text-label-caps">Risk Matrix</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">timeline</span>
+<span class="font-label-caps text-label-caps">Timeline</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span class="font-label-caps text-label-caps">Instruments</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant mb-4">
+<button class="w-full bg-primary text-on-primary font-label-caps text-label-caps py-3 rounded-lg flex items-center justify-center gap-2 mb-4 hover:opacity-90">
+                    MANUAL OVERRIDE
+                </button>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-[260px] p-container-margin overflow-y-auto">
+<!-- Header Status -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-gutter gap-4">
+<div>
+<h2 class="font-display-lg text-headline-md text-on-surface">Mission Overview</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Real-Time Executive Solar Situation Awareness</p>
+</div>
+<div class="flex flex-wrap gap-x-6 gap-y-2 bg-white p-4 rounded-xl border border-outline-variant font-data-mono text-data-mono">
+<div class="flex flex-col">
+<span class="text-[10px] text-on-surface-variant uppercase">UTC Clock</span>
+<span class="text-primary font-bold">12:45:00</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-on-surface-variant uppercase">Mission Elapsed</span>
+<span class="text-on-surface">T+ 145:12:04:22</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-on-surface-variant uppercase">Mode</span>
+<span class="text-success font-bold flex items-center gap-1"><span class="live-dot bg-success"></span> Science Mode</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-on-surface-variant uppercase">Shift / Op</span>
+<span class="text-on-surface">Alpha / Cmdr. Aditi</span>
+</div>
+</div>
+</div>
+<!-- Global Mission Status Strip -->
+<div class="bg-white border border-outline-variant rounded-lg p-3 mb-gutter flex flex-wrap items-center gap-6 justify-between overflow-x-auto whitespace-nowrap">
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-success"></span><span class="font-label-caps text-label-caps">Mission</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-success"></span><span class="font-label-caps text-label-caps">Telemetry</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-success"></span><span class="font-label-caps text-label-caps">AI</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-success"></span><span class="font-label-caps text-label-caps">Physics</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-warning"></span><span class="font-label-caps text-label-caps">Fusion</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-success"></span><span class="font-label-caps text-label-caps">Digital Twin</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-success"></span><span class="font-label-caps text-label-caps">Knowledge</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-success"></span><span class="font-label-caps text-label-caps">Forecast</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-success"></span><span class="font-label-caps text-label-caps">API</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-success"></span><span class="font-label-caps text-label-caps">DB</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-critical"></span><span class="font-label-caps text-label-caps">Redis</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-success"></span><span class="font-label-caps text-label-caps">GPU</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-success"></span><span class="font-label-caps text-label-caps">Inference</span></div>
+</div>
+<!-- Executive KPI Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-gutter mb-gutter">
+<div class="bento-card p-5">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">Mission Risk</span>
+<span class="font-numeric-telemetry text-numeric-telemetry text-success font-bold">21/100</span>
+</div>
+<div class="bento-card p-5">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">Flare Prob.</span>
+<span class="font-numeric-telemetry text-numeric-telemetry text-warning font-bold">20.8%</span>
+</div>
+<div class="bento-card p-5">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">Forecast Conf.</span>
+<span class="font-numeric-telemetry text-numeric-telemetry text-primary font-bold">96%</span>
+</div>
+<div class="bento-card p-5">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">HF Blackout</span>
+<span class="font-numeric-telemetry text-numeric-telemetry text-success font-bold">Low</span>
+</div>
+<div class="bento-card p-5">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">Radiation</span>
+<span class="font-numeric-telemetry text-numeric-telemetry text-success font-bold">Nominal</span>
+</div>
+<div class="bento-card p-5">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">Telemetry</span>
+<span class="font-numeric-telemetry text-numeric-telemetry text-primary font-bold">98%</span>
+</div>
+<div class="bento-card p-5">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">Fusion Conf.</span>
+<span class="font-numeric-telemetry text-numeric-telemetry text-primary font-bold">94%</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-gutter">
+<!-- Main Solar Telemetry Panel -->
+<div class="lg:col-span-2 bento-card flex flex-col">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Solar X-Ray Flux</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time spectral density monitoring</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-surface-container-high rounded transition-colors"><span class="material-symbols-outlined text-on-surface-variant">export_notes</span></button>
+<button class="p-2 hover:bg-surface-container-high rounded transition-colors"><span class="material-symbols-outlined text-on-surface-variant">refresh</span></button>
+<button class="p-2 hover:bg-surface-container-high rounded transition-colors"><span class="material-symbols-outlined text-on-surface-variant">fullscreen</span></button>
+<div class="h-8 w-px bg-outline-variant mx-1"></div>
+<select class="bg-surface-container-low border-outline-variant rounded font-label-caps text-label-caps px-3 py-1">
+<option>L-24H</option>
+<option>L-6H</option>
+<option>L-1H</option>
+</select>
+</div>
+</div>
+<div class="flex-1 min-h-[400px] bg-slate-50 relative overflow-hidden flex items-center justify-center">
+<!-- Simulated Plotly Chart Area -->
+
+<div class="relative z-10 text-center">
+<span class="material-symbols-outlined text-primary text-6xl mb-4">analytics</span>
+<p class="font-data-mono text-on-surface-variant">TELEMETRY_ENGINE_V4.2 READY</p>
+<p class="font-label-caps text-label-caps text-outline">Waiting for live data handshake...</p>
+</div>
+</div>
+</div>
+<!-- Mission Intelligence Panel -->
+<div class="space-y-gutter">
+<div class="bento-card p-6 border-l-4 border-l-primary">
+<div class="flex items-center gap-2 mb-4 text-primary">
+<span class="material-symbols-outlined">psychology</span>
+<h3 class="font-label-caps text-label-caps font-bold">Intelligence Feed</h3>
+</div>
+<div class="space-y-4">
+<div class="p-3 bg-surface-container-low rounded-lg">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-caps text-[10px] text-primary-container bg-primary px-2 rounded">Operational</span>
+<span class="font-data-mono text-[10px] text-outline">T-12:04</span>
+</div>
+<p class="font-body-sm text-body-sm font-semibold">Initiate HEL1OS Cal-Sweep</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Thermal stability achieved. Optimal window for calibration starts in 4m.</p>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-caps text-[10px] text-on-tertiary bg-tertiary-container px-2 rounded">Peak Window</span>
+<span class="font-data-mono text-[10px] text-outline">T-08:45</span>
+</div>
+<p class="font-body-sm text-body-sm font-semibold">CME Flux Detection Probability High</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">AR-3482 showing complex magnetic topology. Increase sampling rate.</p>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg border border-warning/30">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-caps text-[10px] text-on-secondary-fixed bg-warning px-2 rounded">CME Context</span>
+<span class="font-data-mono text-[10px] text-outline">T-02:11</span>
+</div>
+<p class="font-body-sm text-body-sm font-semibold">SEP Event Anticipated</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Sub-surface flow indicates impending release within 6 hours.</p>
+</div>
+</div>
+</div>
+<div class="bento-card p-6">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-4">Physics Summary</h3>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<span class="block text-[10px] text-outline uppercase">Temperature</span>
+<span class="font-numeric-telemetry text-numeric-telemetry font-bold">14.2 MK</span>
+</div>
+<div>
+<span class="block text-[10px] text-outline uppercase">Neupert Score</span>
+<span class="font-numeric-telemetry text-numeric-telemetry font-bold">0.68</span>
+</div>
+<div class="col-span-2">
+<span class="block text-[10px] text-outline uppercase">Emission Measure</span>
+<span class="font-data-mono text-data-mono font-bold">1.2e48 cm⁻³</span>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant grid grid-cols-2 gap-x-4 gap-y-2 text-[11px] font-data-mono">
+<div class="flex justify-between"><span>Wavelet</span> <span class="text-success">Nominal</span></div>
+<div class="flex justify-between"><span>Entropy</span> <span class="text-success">0.94</span></div>
+<div class="flex justify-between"><span>Heating</span> <span class="text-primary">High</span></div>
+<div class="flex justify-between"><span>Cooling</span> <span class="text-on-surface-variant">Stable</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Consensus & Sensor Matrix -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter mb-gutter">
+<div class="bento-card overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">AI Model Consensus</h3>
+<div class="px-3 py-1 bg-primary-container/10 border border-primary text-primary rounded-full font-label-caps text-label-caps">94% Agreement</div>
+</div>
+<table class="w-full text-left">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant uppercase">Model</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant uppercase text-right">Confidence</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant uppercase text-right">Latency</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant uppercase">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-data-mono text-data-mono">XGBoost-Solar-V3</td>
+<td class="px-6 py-4 text-right font-data-mono">0.92</td>
+<td class="px-6 py-4 text-right font-data-mono">14ms</td>
+<td class="px-6 py-4"><span class="w-2 h-2 rounded-full bg-success inline-block mr-2"></span><span class="text-[12px]">Nominal</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-data-mono text-data-mono">TCN-ResNet-Hybrid</td>
+<td class="px-6 py-4 text-right font-data-mono">0.89</td>
+<td class="px-6 py-4 text-right font-data-mono">42ms</td>
+<td class="px-6 py-4"><span class="w-2 h-2 rounded-full bg-success inline-block mr-2"></span><span class="text-[12px]">Nominal</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-data-mono text-data-mono">Transformer-XL</td>
+<td class="px-6 py-4 text-right font-data-mono">0.96</td>
+<td class="px-6 py-4 text-right font-data-mono">124ms</td>
+<td class="px-6 py-4"><span class="w-2 h-2 rounded-full bg-warning inline-block mr-2"></span><span class="text-[12px]">Saturated</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bento-card overflow-hidden">
+<div class="p-6 border-b border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-on-surface">Sensor Health Matrix</h3>
+</div>
+<table class="w-full text-left">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant uppercase">Instrument</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant uppercase text-right">Packet Qlt.</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant uppercase text-right">Latency</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant uppercase">Health</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-body-sm font-bold">SoLEXS</td>
+<td class="px-6 py-4 text-right font-data-mono">100.0%</td>
+<td class="px-6 py-4 text-right font-data-mono">0.4s</td>
+<td class="px-6 py-4"><span class="px-2 py-1 rounded bg-success/10 text-success text-[10px] font-bold">OPTIMAL</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-body-sm font-bold">HEL1OS</td>
+<td class="px-6 py-4 text-right font-data-mono">99.8%</td>
+<td class="px-6 py-4 text-right font-data-mono">1.2s</td>
+<td class="px-6 py-4"><span class="px-2 py-1 rounded bg-success/10 text-success text-[10px] font-bold">OPTIMAL</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-body-sm font-bold">GOES-16 (Ref)</td>
+<td class="px-6 py-4 text-right font-data-mono">100.0%</td>
+<td class="px-6 py-4 text-right font-data-mono">0.8s</td>
+<td class="px-6 py-4"><span class="px-2 py-1 rounded bg-success/10 text-success text-[10px] font-bold">OPTIMAL</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-body-sm font-bold">SUIT</td>
+<td class="px-6 py-4 text-right font-data-mono">82.1%</td>
+<td class="px-6 py-4 text-right font-data-mono">4.5s</td>
+<td class="px-6 py-4"><span class="px-2 py-1 rounded bg-warning/10 text-warning text-[10px] font-bold">DEGRADED</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Digital Twin & Operational Timeline -->
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-gutter mb-gutter">
+<div class="lg:col-span-3 bento-card p-6 flex flex-col md:flex-row gap-6">
+<div class="md:w-1/3 aspect-square bg-inverse-surface rounded-lg relative overflow-hidden flex items-center justify-center">
+<img class="absolute inset-0 w-full h-full object-cover opacity-80" data-alt="A detailed solar surface photograph showing an active region with sunspots and magnetic loops. The image uses extreme ultraviolet filtering, resulting in a dramatic high-contrast golden and orange glow against a deep black background. Digital crosshairs and telemetry overlays are superimposed on the image in a cyan technical interface style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7bio_x30nXMd-EMAfLkPJK9CDrJ_kb72719jzU6VeGU3-TpU4GLcwFW8IHVAInENRY79suLvvMJyENirVk4d235eNxZPTUX4JjL2mgV6OA6nfU2OeWRPvmwijWdYbZ3yFgN2BDJicHqiRK8kZDmv09ICEfsQ-CyVwONVzT6gVKTjdFeLPoBOffRRFmLs4i5ZYLTWOnXglZ--eHMOr9vM7oh0398IfNJTotvUjKdAdaE70e_fADvQgVFfXtoyzzPQeDX2ihHoMUGfD"/>
+<div class="absolute inset-0 border-[20px] border-transparent border-t-primary/20 border-l-primary/20"></div>
+<div class="z-10 text-white font-data-mono text-[10px] bg-black/50 p-2 rounded backdrop-blur">AR-3482 TARGET LOCK</div>
+</div>
+<div class="flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Digital Twin Snapshot</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Simulated physics-to-sensor validation</p>
+</div>
+<div class="text-right">
+<span class="text-[10px] text-outline uppercase block">Similarity Score</span>
+<span class="font-numeric-telemetry text-numeric-telemetry text-primary font-bold">0.982</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 flex-1">
+<div class="p-4 bg-surface-container-low rounded-lg border border-outline-variant">
+<span class="block text-[10px] text-outline uppercase mb-2">Active Region Info</span>
+<div class="space-y-1 font-data-mono text-[12px]">
+<div class="flex justify-between"><span>Lat/Long:</span> <span class="text-on-surface">12N / 45E</span></div>
+<div class="flex justify-between"><span>Area:</span> <span class="text-on-surface">1420 MH</span></div>
+<div class="flex justify-between"><span>Class:</span> <span class="text-secondary font-bold">Beta-Gamma-Delta</span></div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg border border-outline-variant">
+<span class="block text-[10px] text-outline uppercase mb-2">Twin Discrepancy</span>
+<div class="space-y-1 font-data-mono text-[12px]">
+<div class="flex justify-between"><span>Flux Δ:</span> <span class="text-success">0.002</span></div>
+<div class="flex justify-between"><span>V-Field Δ:</span> <span class="text-warning">0.014</span></div>
+<div class="flex justify-between"><span>Temp Δ:</span> <span class="text-success">0.001</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bento-card p-6 flex flex-col">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-4">Operational Timeline</h3>
+<div class="flex-1 space-y-4 overflow-y-auto pr-2">
+<div class="relative pl-6 border-l-2 border-primary-container">
+<div class="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-primary ring-4 ring-white"></div>
+<div class="font-data-mono text-[10px] text-outline">12:44:12</div>
+<p class="font-body-sm text-[12px] font-bold">Shift Handover Complete</p>
+</div>
+<div class="relative pl-6 border-l-2 border-outline-variant">
+<div class="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-outline-variant ring-4 ring-white"></div>
+<div class="font-data-mono text-[10px] text-outline">12:40:00</div>
+<p class="font-body-sm text-[12px]">SUIT Shutter Cycle Complete</p>
+</div>
+<div class="relative pl-6 border-l-2 border-outline-variant">
+<div class="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-outline-variant ring-4 ring-white"></div>
+<div class="font-data-mono text-[10px] text-outline">12:32:45</div>
+<p class="font-body-sm text-[12px]">Inference Load Balance Adjusted</p>
+</div>
+<div class="relative pl-6 border-l-2 border-outline-variant">
+<div class="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-outline-variant ring-4 ring-white"></div>
+<div class="font-data-mono text-[10px] text-outline">12:15:22</div>
+<p class="font-body-sm text-[12px]">X-Ray Pulse Event Detected</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Alerts Table -->
+<div class="bento-card overflow-hidden mb-gutter">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Recent Alerts</h3>
+<button class="font-label-caps text-label-caps text-primary hover:underline">View All Logs</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">Time</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">Severity</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">Subsystem</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">Description</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr>
+<td class="px-6 py-4 font-data-mono text-data-mono">12:42:01</td>
+<td class="px-6 py-4"><span class="px-2 py-0.5 rounded bg-warning/10 text-warning text-[10px] font-bold">WARNING</span></td>
+<td class="px-6 py-4 font-body-sm">REDIS-CLUSTER</td>
+<td class="px-6 py-4 font-body-sm">Node 04 Latency Spike &gt; 200ms</td>
+<td class="px-6 py-4"><button class="text-primary font-bold text-[11px] hover:underline">REBALANCE</button></td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-data-mono text-data-mono">12:35:14</td>
+<td class="px-6 py-4"><span class="px-2 py-0.5 rounded bg-critical/10 text-critical text-[10px] font-bold">CRITICAL</span></td>
+<td class="px-6 py-4 font-body-sm">THERMAL-V1</td>
+<td class="px-6 py-4 font-body-sm">Radiator Panel #2 misalignment</td>
+<td class="px-6 py-4"><button class="text-primary font-bold text-[11px] hover:underline">CALIBRATE</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- System Health Infrastructure -->
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-gutter">
+<div class="bg-white p-4 rounded-xl border border-outline-variant">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] text-outline uppercase font-bold">CPU Core</span>
+<span class="w-2 h-2 rounded-full bg-success"></span>
+</div>
+<div class="font-numeric-telemetry text-[14px] font-bold">12%</div>
+<div class="h-8 mt-2 w-full bg-surface-container flex items-end gap-0.5">
+<div class="w-1 bg-primary/40 h-2"></div><div class="w-1 bg-primary/40 h-3"></div><div class="w-1 bg-primary/40 h-1"></div><div class="w-1 bg-primary/40 h-4"></div><div class="w-1 bg-primary/40 h-2"></div>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl border border-outline-variant">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] text-outline uppercase font-bold">RAM Cap</span>
+<span class="w-2 h-2 rounded-full bg-success"></span>
+</div>
+<div class="font-numeric-telemetry text-[14px] font-bold">42%</div>
+<div class="h-8 mt-2 w-full bg-surface-container flex items-end gap-0.5">
+<div class="w-1 bg-primary/40 h-6"></div><div class="w-1 bg-primary/40 h-6"></div><div class="w-1 bg-primary/40 h-6"></div><div class="w-1 bg-primary/40 h-6"></div><div class="w-1 bg-primary/40 h-6"></div>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl border border-outline-variant">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] text-outline uppercase font-bold">GPU Load</span>
+<span class="w-2 h-2 rounded-full bg-warning"></span>
+</div>
+<div class="font-numeric-telemetry text-[14px] font-bold">88%</div>
+<div class="h-8 mt-2 w-full bg-surface-container flex items-end gap-0.5">
+<div class="w-1 bg-warning/40 h-6"></div><div class="w-1 bg-warning/40 h-7"></div><div class="w-1 bg-warning/40 h-8"></div><div class="w-1 bg-warning/40 h-7"></div><div class="w-1 bg-warning/40 h-8"></div>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl border border-outline-variant">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] text-outline uppercase font-bold">DISK I/O</span>
+<span class="w-2 h-2 rounded-full bg-success"></span>
+</div>
+<div class="font-numeric-telemetry text-[14px] font-bold">144 MB/s</div>
+<div class="h-8 mt-2 w-full bg-surface-container flex items-end gap-0.5">
+<div class="w-1 bg-primary/40 h-3"></div><div class="w-1 bg-primary/40 h-2"></div><div class="w-1 bg-primary/40 h-5"></div><div class="w-1 bg-primary/40 h-4"></div><div class="w-1 bg-primary/40 h-3"></div>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl border border-outline-variant">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] text-outline uppercase font-bold">Bandwidth</span>
+<span class="w-2 h-2 rounded-full bg-success"></span>
+</div>
+<div class="font-numeric-telemetry text-[14px] font-bold">1.2 GB/s</div>
+<div class="h-8 mt-2 w-full bg-surface-container flex items-end gap-0.5">
+<div class="w-1 bg-primary/40 h-4"></div><div class="w-1 bg-primary/40 h-4"></div><div class="w-1 bg-primary/40 h-4"></div><div class="w-1 bg-primary/40 h-4"></div><div class="w-1 bg-primary/40 h-4"></div>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl border border-outline-variant">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] text-outline uppercase font-bold">Power Bus</span>
+<span class="w-2 h-2 rounded-full bg-success"></span>
+</div>
+<div class="font-numeric-telemetry text-[14px] font-bold">4.2 kW</div>
+<div class="h-8 mt-2 w-full bg-surface-container flex items-end gap-0.5">
+<div class="w-1 bg-primary/40 h-6"></div><div class="w-1 bg-primary/40 h-6"></div><div class="w-1 bg-primary/40 h-6"></div><div class="w-1 bg-primary/40 h-6"></div><div class="w-1 bg-primary/40 h-6"></div>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl border border-outline-variant">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] text-outline uppercase font-bold">Latency</span>
+<span class="w-2 h-2 rounded-full bg-success"></span>
+</div>
+<div class="font-numeric-telemetry text-[14px] font-bold">8ms</div>
+<div class="h-8 mt-2 w-full bg-surface-container flex items-end gap-0.5">
+<div class="w-1 bg-primary/40 h-1"></div><div class="w-1 bg-primary/40 h-1"></div><div class="w-1 bg-primary/40 h-2"></div><div class="w-1 bg-primary/40 h-1"></div><div class="w-1 bg-primary/40 h-1"></div>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl border border-outline-variant">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] text-outline uppercase font-bold">Error Rate</span>
+<span class="w-2 h-2 rounded-full bg-success"></span>
+</div>
+<div class="font-numeric-telemetry text-[14px] font-bold">0.00%</div>
+<div class="h-8 mt-2 w-full bg-surface-container flex items-end gap-0.5">
+<div class="w-1 bg-primary/40 h-0"></div><div class="w-1 bg-primary/40 h-0"></div><div class="w-1 bg-primary/40 h-0"></div><div class="w-1 bg-primary/40 h-0"></div><div class="w-1 bg-primary/40 h-0"></div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer Status Bar -->
+<footer class="bg-inverse-surface fixed bottom-0 w-full z-50 flex justify-between items-center px-container-margin py-2 border-t border-outline">
+<div class="font-label-caps text-label-caps text-secondary uppercase">
+            ISRO MISSION CONTROL • ADITYA-L1 OPERATIONS
+        </div>
+<div class="flex gap-8 font-data-mono text-data-mono text-inverse-on-surface">
+<div class="flex items-center gap-2">
+<span class="live-dot bg-success"></span> System Health: Nominal
+            </div>
+<div>UTC: 12:45:00</div>
+<div class="text-primary-fixed">MET: 142:10:22:04</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for live feeling
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update live MET ticker logic could go here
+            console.log('Aditya-L1 Telemetry Feed Active');
+        });
+    </script>
+</body></html>
