@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 import pandas as pd
-from aditya_flare.data.readers.time_utils import (
+from backend.aditya_flare.data.readers.time_utils import (
     unix_to_utc,
     mjd_to_utc,
     utc_to_unix,

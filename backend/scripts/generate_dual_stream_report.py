@@ -3,7 +3,7 @@ from pathlib import Path
 
 # Add project root to path
 sys.path.append(str(Path(__file__).parent.parent))
-from aditya_flare.ai_engine.models.dual_stream import DualStreamNetwork
+from backend.aditya_flare.ai_engine.models.dual_stream import DualStreamNetwork
 
 def main():
     print("Initializing Dual Stream Architecture...")

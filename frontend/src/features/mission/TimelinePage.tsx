@@ -19,9 +19,9 @@ export const TimelinePage: React.FC = () => {
       accessorKey: 'actions', 
       cell: () => (
         <div className="flex gap-2">
-          <ActionButton icon="view_in_ar" label="Twin" variant="ghost" onClick={() => {}} />
-          <ActionButton icon="hub" label="Graph" variant="ghost" onClick={() => {}} />
-          <ActionButton icon="science" label="AI" variant="ghost" onClick={() => {}} />
+          <ActionButton icon="view_in_ar" title="Twin" variant="ghost" onClick={() => {}} />
+          <ActionButton icon="hub" title="Graph" variant="ghost" onClick={() => {}} />
+          <ActionButton icon="science" title="AI" variant="ghost" onClick={() => {}} />
         </div>
       )
     },
@@ -38,8 +38,8 @@ export const TimelinePage: React.FC = () => {
           <p className="text-on-surface-variant font-body-md mt-1">Chronological event log with cross-engine synchronization.</p>
         </div>
         <div className="flex gap-3">
-          <ActionButton icon="replay" label="Replay Events" variant="outline" onClick={() => {}} />
-          <ActionButton icon="download" label="Export Timeline" onClick={() => {}} />
+          <ActionButton icon="replay" title="Replay Events" variant="secondary" onClick={() => {}} />
+          <ActionButton icon="download" title="Export Timeline" onClick={() => {}} />
         </div>
       </div>
 

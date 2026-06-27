@@ -1,14 +1,14 @@
 import pytest
 import numpy as np
 import pandas as pd
-from physics_engine.statistics import extract_statistical_features
-from physics_engine.entropy import extract_entropy_features, shannon_entropy
-from physics_engine.wavelets import extract_wavelet_features
-from physics_engine.spectral import extract_spectral_features
-from physics_engine.thermodynamics import extract_thermodynamic_features
-from physics_engine.neupert import compute_neupert_score
-from physics_engine.event_segmentation import segment_events_and_timeline
-from physics_engine.feature_pipeline import extract_physics_features
+from backend.physics_engine.statistics import extract_statistical_features
+from backend.physics_engine.entropy import extract_entropy_features, shannon_entropy
+from backend.physics_engine.wavelets import extract_wavelet_features
+from backend.physics_engine.spectral import extract_spectral_features
+from backend.physics_engine.thermodynamics import extract_thermodynamic_features
+from backend.physics_engine.neupert import compute_neupert_score
+from backend.physics_engine.event_segmentation import segment_events_and_timeline
+from backend.physics_engine.feature_pipeline import extract_physics_features
 
 @pytest.fixture
 def dummy_dataframe():

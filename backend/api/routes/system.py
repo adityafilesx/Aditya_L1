@@ -1,8 +1,8 @@
 import psutil
 import time
 from fastapi import APIRouter
-from aditya_flare.config.config_loader import config
-from api.state import app_state
+from backend.aditya_flare.config.config_loader import config
+from backend.api.state import app_state
 
 router = APIRouter(prefix="/system", tags=["system"])
 

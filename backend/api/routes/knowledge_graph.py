@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from api.state import app_state
+from backend.api.state import app_state
 
 router = APIRouter(prefix="/knowledge-graph", tags=["knowledge-graph"])
 

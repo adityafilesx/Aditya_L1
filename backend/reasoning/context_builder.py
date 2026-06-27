@@ -135,7 +135,7 @@ class ContextBuilder:
 
         # ── Decision State ──
         try:
-            from api.mock_data import generate_mock_forecast
+            from backend.api.mock_data import generate_mock_forecast
             pred_input = predictions if predictions else generate_mock_forecast()
             decision_state = self.app_state.decision_engine.evaluate(pred_input, telemetry)
         except Exception as e:

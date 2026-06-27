@@ -14,6 +14,9 @@ const PlatformPage = lazy(() =>
 const OperationsPage = lazy(() =>
   import('@features/mission/OperationsPage').then((m) => ({ default: m.OperationsPage })),
 );
+const ForecastingPage = lazy(() =>
+  import('@features/forecast/ForecastingPage').then((m) => ({ default: m.ForecastingPage })),
+);
 const AlertsPage = lazy(() =>
   import('@features/mission/AlertsPage').then((m) => ({ default: m.AlertsPage })),
 );
@@ -114,6 +117,14 @@ export function AppRouter() {
         element={
           <ShellRoute>
             <OperationsPage />
+          </ShellRoute>
+        }
+      />
+      <Route
+        path="/forecast"
+        element={
+          <ShellRoute>
+            <ForecastingPage />
           </ShellRoute>
         }
       />

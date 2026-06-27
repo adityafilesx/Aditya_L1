@@ -5,7 +5,7 @@ Report Agent — Assembles multi-section Markdown reports from other agents' dat
 import logging
 from datetime import datetime, timezone
 from typing import Any, List
-from reasoning.agents.base_agent import BaseAgent, AgentResult, Source
+from backend.reasoning.agents.base_agent import BaseAgent, AgentResult, Source
 
 logger = logging.getLogger("SRE.ReportAgent")
 

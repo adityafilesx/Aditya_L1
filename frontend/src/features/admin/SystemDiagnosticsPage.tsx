@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { PageLayout, Header, BaseCard, EnterpriseTable, Icon } from '@design-system/index';
+import { PageLayout, Header, BaseCard, EnterpriseTable } from '@design-system/index';
 import { useStreamStore } from '../../realtime/streamStore';
 
 export const SystemDiagnosticsPage: React.FC = () => {
@@ -25,16 +25,15 @@ export const SystemDiagnosticsPage: React.FC = () => {
     return () => clearInterval(interval);
   }, [connectionStatus]);
 
-  // Derive subsystem status
   const subsystems = [
-    { name: 'WebSocket Link', status: connectionStatus === 'connected' ? 'ONLINE' : 'OFFLINE' },
-    { name: 'API Server', status: connectionStatus === 'connected' ? 'ONLINE' : 'DEGRADED' },
-    { name: 'Telemetry Engine', status: missionState?.telemetry ? 'ONLINE' : 'WAITING' },
-    { name: 'Physics Engine', status: missionState?.physics ? 'ONLINE' : 'WAITING' },
-    { name: 'Digital Twin', status: missionState?.digital_twin ? 'ONLINE' : 'WAITING' },
-    { name: 'Forecast Engine', status: missionState?.forecast ? 'ONLINE' : 'WAITING' },
-    { name: 'Knowledge Graph', status: 'ONLINE' }, // Placeholder for graph DB connection
-    { name: 'AI Reasoning', status: missionState?.recommendations ? 'ONLINE' : 'WAITING' },
+    { id: '1', name: 'WebSocket Link', status: connectionStatus === 'connected' ? 'ONLINE' : 'OFFLINE' },
+    { id: '2', name: 'API Server', status: connectionStatus === 'connected' ? 'ONLINE' : 'DEGRADED' },
+    { id: '3', name: 'Telemetry Engine', status: missionState?.telemetry ? 'ONLINE' : 'WAITING' },
+    { id: '4', name: 'Physics Engine', status: missionState?.physics ? 'ONLINE' : 'WAITING' },
+    { id: '5', name: 'Digital Twin', status: missionState?.digital_twin ? 'ONLINE' : 'WAITING' },
+    { id: '6', name: 'Forecast Engine', status: missionState?.forecast ? 'ONLINE' : 'WAITING' },
+    { id: '7', name: 'Knowledge Graph', status: 'ONLINE' }, // Placeholder for graph DB connection
+    { id: '8', name: 'AI Reasoning', status: missionState?.recommendations ? 'ONLINE' : 'WAITING' },
   ];
 
   return (

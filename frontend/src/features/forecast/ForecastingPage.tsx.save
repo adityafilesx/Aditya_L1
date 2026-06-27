@@ -1,0 +1,60 @@
+
+import type { FC } from 'react';
+import { ForecastLayout } from './layouts/ForecastLayout';
+import { ForecastHeader } from './components/ForecastHeader';
+import { ForecastSummary } from './components/ForecastSummary';
+import { ForecastToolbar } from './components/ForecastToolbar';
+import { ForecastWorkspace } from './components/ForecastWorkspace';
+
+import type { FC } from 'react';
+import { ForecastLayout } from './layouts/ForecastLayout';
+import { ForecastHeader } from './components/ForecastHeader';
+import { ForecastSummary } from './components/ForecastSummary';
+import { ForecastToolbar } from './components/ForecastToolbar';
+import { ForecastWorkspace } from './components/ForecastWorkspace';
+
+import { useObservationStream } from './hooks/useObservationStream';
+import { useNowcastStream } from './hooks/useNowcastStream';
+
+export const ForecastingPageContent: FC = () => {
+  useObservationStream();
+  useNowcastStream();
+
+  return (
+    <>
+      <ForecastHeader />
+      <ForecastSummary />
+      <ForecastToolbar />
+      <ForecastWorkspace />
+    </>
+  );
+};
+
+export const ForecastingPage: FC = () => (
+  <ForecastLayout>
+    <ForecastingPageContent />
+  </ForecastLayout>
+);
+
+export default ForecastingPage;import { useNowcastStream } from './hooks/useNowcastStream';
+
+export const ForecastingPageContent: FC = () => {
+  useNowcastStream();
+
+  return (
+    <>
+      <ForecastHeader />
+      <ForecastSummary />
+      <ForecastToolbar />
+      <ForecastWorkspace />
+    </>
+  );
+};
+
+export const ForecastingPage: FC = () => (
+  <ForecastLayout>
+    <ForecastingPageContent />
+  </ForecastLayout>
+);
+
+export default ForecastingPage;

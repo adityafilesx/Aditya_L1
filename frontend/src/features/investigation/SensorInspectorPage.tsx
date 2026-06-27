@@ -33,7 +33,7 @@ export const SensorInspectorPage: React.FC = () => {
       accessorKey: 'status', 
       cell: (row: any) => (
         <BaseBadge 
-          label={row.status} 
+          title={row.status} 
           variant={row.status === 'ONLINE' ? 'success' : row.status === 'DEGRADED' ? 'warning' : 'critical'} 
         />
       )
@@ -69,7 +69,7 @@ export const SensorInspectorPage: React.FC = () => {
 
       <div className="grid grid-cols-12 gap-6">
         <div className="col-span-12">
-           <BaseCard title="Detailed Telemetry Diagnostics" variant="elevated">
+           <BaseCard title="Detailed Telemetry Diagnostics" variant="panel">
               <p className="text-on-surface-variant mb-4">Select a sensor above to view high-resolution raw data streams and health diagnostics.</p>
               <div className="h-[200px] bg-surface-highlight border border-outline rounded-md flex items-center justify-center">
                  <span className="text-on-surface-variant font-body-sm">Awaiting sensor selection...</span>

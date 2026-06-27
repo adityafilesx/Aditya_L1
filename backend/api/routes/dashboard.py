@@ -1,8 +1,8 @@
 import asyncio
 from fastapi import APIRouter
-from api.routes.operations import get_telemetry, get_physics, get_models_status, get_health
-from api.routes.decision import get_state
-from api.routes.forecast import get_current_forecast
+from backend.api.routes.operations import get_telemetry, get_physics, get_models_status, get_health
+from backend.api.routes.decision import get_state
+from backend.api.routes.forecast import get_current_forecast
 
 router = APIRouter(prefix="/dashboard", tags=["dashboard"])
 

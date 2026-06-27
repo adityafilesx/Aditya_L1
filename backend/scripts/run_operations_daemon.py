@@ -11,10 +11,10 @@ import pickle
 # Add project root to sys.path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from aditya_flare.config.config_loader import config, reload_config
-from aditya_flare.decision.state_machine import DecisionEngine
-from aditya_flare.utils.logger import decision_logger, telemetry_logger, inference_logger
-from aditya_flare.processing.features import extract_features
+from backend.aditya_flare.config.config_loader import config, reload_config
+from backend.aditya_flare.decision.state_machine import DecisionEngine
+from backend.aditya_flare.utils.logger import decision_logger, telemetry_logger, inference_logger
+from backend.aditya_flare.processing.features import extract_features
 
 logger = logging.getLogger("daemon")
 logger.setLevel(logging.INFO)

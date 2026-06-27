@@ -3,8 +3,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
-from api.state import app_state
-from events.generator import generator
+from backend.api.state import app_state
+from backend.events.generator import generator
 
 # Setup basic logging for the API layer
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
@@ -41,24 +41,33 @@ async def health_check():
     """Simple health check endpoint."""
     return {"status": "online", "version": "1.0.0", "service": "Aditya-L1 Backend"}
 
-from api.routes.dashboard import router as dashboard_router
-from api.routes.operations import router as operations_router
-from api.routes.forecast import router as forecast_router
-from api.routes.physics import router as physics_router
-from api.routes.decision import router as decision_router
-from api.routes.digital_twin import router as digital_twin_router
-from api.routes.knowledge_graph import router as knowledge_graph_router
-from api.routes.intelligence import router as intelligence_router
-from api.routes.system import router as system_router
-from api.routes.timeline import router as timeline_router
-from api.routes.research import router as research_router
-from api.routes.reasoning import router as reasoning_router
-from api.ws.live import router as ws_live_router
+from backend.api.routes.dashboard import router as dashboard_router
+from backend.api.routes.operations import router as operations_router
+from backend.api.routes.forecast import router as forecast_router
+from backend.api.routes.physics import router as physics_router
+from backend.api.routes.decision import router as decision_router
+from backend.api.routes.digital_twin import router as digital_twin_router
+from backend.api.routes.knowledge_graph import router as knowledge_graph_router
+from backend.api.routes.intelligence import router as intelligence_router
+from backend.api.routes.system import router as system_router
+from backend.api.routes.timeline import router as timeline_router
+from backend.api.routes.research import router as research_router
+from backend.api.routes.reasoning import router as reasoning_router
+from backend.api.ws.live import router as ws_live_router
+from backend.api.routes.observation import router as observation_router
+from backend.api.ws.observation import router as observation_ws_router
+from backend.api.routes.nowcasting import router as nowcasting_router
+from backend.api.ws.nowcasting import router as nowcasting_ws_router
+from backend.api.routes.features import router as features_router
+from backend.ml.serving.serving_apis import router as ml_router
+from backend.api.ws.ml import router as ml_ws_router
 
 app.include_router(dashboard_router, prefix="/api")
 app.include_router(operations_router, prefix="/api")
 app.include_router(forecast_router, prefix="/api")
 app.include_router(physics_router, prefix="/api")
+app.include_router(features_router, prefix="/api")
+app.include_router(ml_router, prefix="/api")
 app.include_router(decision_router, prefix="/api")
 app.include_router(digital_twin_router, prefix="/api")
 app.include_router(knowledge_graph_router, prefix="/api")
@@ -67,9 +76,14 @@ app.include_router(system_router, prefix="/api")
 app.include_router(timeline_router, prefix="/api")
 app.include_router(research_router, prefix="/api")
 app.include_router(reasoning_router, prefix="/api")
+app.include_router(observation_router, prefix="/api/observation")
+app.include_router(nowcasting_router, prefix="/api/nowcasting")
 
 # Mount WebSocket
 app.include_router(ws_live_router, prefix="/ws")
+app.include_router(observation_ws_router, prefix="/ws/observation")
+app.include_router(nowcasting_ws_router, prefix="/ws/nowcasting")
+app.include_router(ml_ws_router, prefix="/ws")
 
 if __name__ == "__main__":
     import uvicorn

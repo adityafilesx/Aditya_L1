@@ -1,22 +1,27 @@
 /**
- * Forecast Service (Phase FE-5 Draft)
- * Connects to Backend Machine Learning predictions (XGBoost/LightGBM).
+ * Forecast Service
+ * Connects to Backend Machine Learning predictions (XGBoost/LightGBM) via Orchestrator.
  */
+import type { ForecastOrchestrationResult } from '../../features/forecast/types/ForecastTypes';
 
-export interface ForecastResponse {
-  probability_M_class: number;
-  probability_X_class: number;
-  flare_expected_window: string;
-  confidence: number;
-}
+export const fetchCurrentForecast = async (): Promise<ForecastOrchestrationResult | null> => {
+  try {
+    // The backend runs on localhost:8000
+    const response = await fetch('http://localhost:8000/api/forecast/current');
+    
+    if (!response.ok) {
+      console.warn(`Forecast fetch failed with status: ${response.status}`);
+      return null;
+    }
 
-export const fetchNowcast = async (): Promise<ForecastResponse> => {
-  // TODO: Implement actual fetch using VITE_API_BASE_URL
-  console.warn("ForecastService.fetchNowcast: API not yet integrated. Returning mock data.");
-  return {
-    probability_M_class: 0.85,
-    probability_X_class: 0.12,
-    flare_expected_window: "2-4h",
-    confidence: 0.94
-  };
+    const data = await response.json();
+    if (data.status && data.status.includes('No forecasts available')) {
+       return null;
+    }
+    
+    return data as ForecastOrchestrationResult;
+  } catch (error) {
+    console.error('Error fetching forecast:', error);
+    return null;
+  }
 };

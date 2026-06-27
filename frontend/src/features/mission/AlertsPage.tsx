@@ -14,7 +14,7 @@ export const AlertsPage: React.FC = () => {
       accessorKey: 'severity', 
       cell: (row: any) => (
         <BaseBadge 
-          label={row.severity} 
+          title={row.severity} 
           variant={row.severity === 'CRITICAL' ? 'critical' : row.severity === 'WARNING' ? 'warning' : 'primary'} 
         />
       )
@@ -26,8 +26,8 @@ export const AlertsPage: React.FC = () => {
       accessorKey: 'actions', 
       cell: () => (
         <div className="flex gap-2">
-          <ActionButton icon="check" label="Ack" variant="ghost" onClick={() => {}} />
-          <ActionButton icon="info" label="Details" variant="ghost" onClick={() => {}} />
+          <ActionButton icon="check" title="Ack" variant="ghost" onClick={() => {}} />
+          <ActionButton icon="info" title="Details" variant="ghost" onClick={() => {}} />
         </div>
       )
     },
@@ -46,7 +46,7 @@ export const AlertsPage: React.FC = () => {
           <p className="text-on-surface-variant font-body-md mt-1">Real-time mission alert triage and history.</p>
         </div>
         <div className="flex gap-3">
-          <ActionButton icon="done_all" label="Acknowledge All" onClick={() => {}} />
+          <ActionButton icon="done_all" title="Acknowledge All" onClick={() => {}} />
         </div>
       </div>
 

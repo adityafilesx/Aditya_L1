@@ -5,7 +5,7 @@ Architecture is ready for real API integration in a future phase.
 
 import logging
 from typing import Any
-from reasoning.agents.base_agent import BaseAgent, AgentResult, Source
+from backend.reasoning.agents.base_agent import BaseAgent, AgentResult, Source
 
 logger = logging.getLogger("SRE.LiteratureAgent")
 

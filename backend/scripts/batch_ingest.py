@@ -12,9 +12,9 @@ import pandas as pd
 # Add project root to path so we can import modules
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from aditya_flare.data.readers.solexs_reader import read_solexs_lc, read_solexs_gti
-from aditya_flare.data.readers.helios_reader import read_helios_lc_all, read_helios_gti
-from aditya_flare.data.merger.data_merger import merge_instruments, save_merged
+from backend.aditya_flare.data.readers.solexs_reader import read_solexs_lc, read_solexs_gti
+from backend.aditya_flare.data.readers.helios_reader import read_helios_lc_all, read_helios_gti
+from backend.aditya_flare.data.merger.data_merger import merge_instruments, save_merged
 
 def parse_solexs_date(filename):
     # AL1_SLX_L1_20240201_v1.0.zip -> 20240201

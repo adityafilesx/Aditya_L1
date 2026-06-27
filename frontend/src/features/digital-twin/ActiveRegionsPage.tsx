@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageLayout, BaseCard, Icon, EnterpriseTable, BaseBadge, ActionButton } from '@design-system/index';
+import { PageLayout, BaseCard, Icon, EnterpriseTable, ActionButton } from '@design-system/index';
 
 const MOCK_REGIONS = [
   { id: 'AR3451', coords: 'N15W42', class: 'Beta-Gamma-Delta', prob: 0.85, history: 'Growing' },
@@ -28,9 +28,9 @@ export const ActiveRegionsPage: React.FC = () => {
       accessorKey: 'actions', 
       cell: () => (
         <div className="flex gap-2">
-          <ActionButton icon="view_in_ar" label="Twin" variant="ghost" onClick={() => {}} />
-          <ActionButton icon="hub" label="Graph" variant="ghost" onClick={() => {}} />
-          <ActionButton icon="science" label="AI" variant="ghost" onClick={() => {}} />
+          <ActionButton icon="view_in_ar" title="Twin" variant="ghost" onClick={() => {}} />
+          <ActionButton icon="hub" title="Graph" variant="ghost" onClick={() => {}} />
+          <ActionButton icon="science" title="AI" variant="ghost" onClick={() => {}} />
         </div>
       )
     },
@@ -55,7 +55,7 @@ export const ActiveRegionsPage: React.FC = () => {
            </BaseCard>
         </div>
         <div className="col-span-4 space-y-6">
-           <BaseCard title="AR3451 Detail" variant="elevated">
+           <BaseCard title="AR3451 Detail" variant="panel">
              <div className="space-y-4">
                <div className="flex justify-between items-center">
                  <span className="text-on-surface-variant font-label-md">Area (MH)</span>

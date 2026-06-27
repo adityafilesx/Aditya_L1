@@ -3,7 +3,7 @@ from pathlib import Path
 
 # Add project root to path
 sys.path.append(str(Path(__file__).parent.parent))
-from aditya_flare.ai_engine.models.physics_aware_tcn import PhysicsAwareTCN
+from backend.aditya_flare.ai_engine.models.physics_aware_tcn import PhysicsAwareTCN
 
 def main():
     print("Initializing Physics-Aware TCN...")

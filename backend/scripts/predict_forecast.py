@@ -9,7 +9,7 @@ import numpy as np
 
 # Add the project root to sys.path
 sys.path.append(str(Path(__file__).parent.parent))
-from aditya_flare.processing.features import extract_features
+from backend.aditya_flare.processing.features import extract_features
 
 def plot_forecast_timeline():
     processed_dir = Path("data/processed")

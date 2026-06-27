@@ -1,5 +1,5 @@
 import numpy as np
-from aditya_flare.evaluation.metrics import compute_skill_scores, compute_calibration_errors
+from backend.aditya_flare.evaluation.metrics import compute_skill_scores, compute_calibration_errors
 
 def test_compute_skill_scores():
     y_true = np.array([1, 1, 0, 0])

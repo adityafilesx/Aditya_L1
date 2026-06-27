@@ -13,7 +13,7 @@ export const SHELL_NAV_SECTIONS: NavSection[] = [
     title: 'Operations',
     items: [
       { id: 'nowcasting', label: 'Nowcasting', icon: 'settings_remote', path: '/operations/nowcasting', filled: true },
-      { id: 'forecasting', label: 'Forecasting', icon: 'analytics', path: '/operations' },
+      { id: 'forecasting', label: 'Forecasting', icon: 'analytics', path: '/forecast' },
       { id: 'alerts', label: 'Alerts', icon: 'notifications_active', path: '/operations/alerts' },
       { id: 'timeline', label: 'Timeline', icon: 'view_timeline', path: '/operations/timeline' },
     ],

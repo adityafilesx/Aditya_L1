@@ -19,7 +19,7 @@ export const LogsPage: React.FC = () => {
       accessorKey: 'level', 
       cell: (row: any) => (
         <BaseBadge 
-          label={row.level} 
+          title={row.level} 
           variant={row.level === 'ERROR' ? 'critical' : row.level === 'WARNING' ? 'warning' : 'primary'} 
         />
       )
@@ -41,8 +41,8 @@ export const LogsPage: React.FC = () => {
           <p className="text-on-surface-variant font-body-md mt-1">Live streaming logs from backend services and frontend clients.</p>
         </div>
         <div className="flex gap-3">
-          <ActionButton icon="download" label="Export Logs" onClick={() => {}} />
-          <ActionButton icon="delete" label="Clear Console" variant="outline" onClick={() => {}} />
+          <ActionButton icon="download" title="Export Logs" onClick={() => {}} />
+          <ActionButton icon="delete" title="Clear Console" variant="secondary" onClick={() => {}} />
         </div>
       </div>
 

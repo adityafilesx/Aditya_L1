@@ -41,6 +41,7 @@ export const api = {
   system: {
     getHealth: () => fetchClient<any>("/system/health"),
     getConfig: () => fetchClient<any>("/system/config"),
+    getDiagnostics: () => fetchClient<any>("/system/diagnostics"),
   },
   timeline: {
     getEvents: () => fetchClient<any>("/timeline/events"),
@@ -50,4 +51,15 @@ export const api = {
     getBenchmarks: () => fetchClient<any>("/research/benchmarks"),
     getExplainability: () => fetchClient<any>("/research/explainability"),
   },
+  ml: {
+    getRegistry: () => fetchClient<any>("/ml/registry"),
+    getModels: () => fetchClient<any>("/ml/models"),
+    getCalibration: () => fetchClient<any>("/ml/calibration"),
+    getTargets: () => fetchClient<any>("/ml/targets"),
+    getMetrics: () => fetchClient<any>("/ml/metrics"),
+    getMonitoring: () => fetchClient<any>("/ml/monitoring"),
+  },
+  features: {
+    getRegistry: () => fetchClient<any>("/features/registry"),
+  }
 };

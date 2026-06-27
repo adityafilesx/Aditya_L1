@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from physics_engine.morphology import classify_morphology, detect_timeline_stage
+from backend.physics_engine.morphology import classify_morphology, detect_timeline_stage
 
 def segment_events_and_timeline(df: pd.DataFrame, flux_col='solexs_sdd2_ctr', threshold=100.0) -> pd.DataFrame:
     """

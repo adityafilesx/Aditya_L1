@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from api.state import app_state
-from api.mock_data import generate_mock_telemetry, generate_mock_physics
+from backend.api.state import app_state
+from backend.api.mock_data import generate_mock_telemetry, generate_mock_physics
 
 router = APIRouter(prefix="/operations", tags=["operations"])
 

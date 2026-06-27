@@ -13,7 +13,7 @@ import mlflow
 
 # Ensure path resolution
 sys.path.append(str(Path(__file__).parent.parent.parent))
-from aditya_flare.processing.features import extract_features
+from backend.aditya_flare.processing.features import extract_features
 
 def compute_skill_scores(y_true, y_pred):
     tn, fp, fn, tp = confusion_matrix(y_true, y_pred, labels=[0, 1]).ravel()

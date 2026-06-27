@@ -15,23 +15,23 @@ import logging
 import time
 from typing import Any, AsyncGenerator, Dict, List, Optional
 
-from reasoning.context_builder import ContextBuilder, ReasoningContext
-from reasoning.planner import Planner, Plan
-from reasoning.router import Router
-from reasoning.memory import ResearchMemory
-from reasoning.agents.base_agent import AgentResult, Source
+from backend.reasoning.context_builder import ContextBuilder, ReasoningContext
+from backend.reasoning.planner import Planner, Plan
+from backend.reasoning.router import Router
+from backend.reasoning.memory import ResearchMemory
+from backend.reasoning.agents.base_agent import AgentResult, Source
 
 # Import all agents
-from reasoning.agents.physics_agent import PhysicsAgent
-from reasoning.agents.prediction_agent import PredictionAgent
-from reasoning.agents.digital_twin_agent import DigitalTwinAgent
-from reasoning.agents.knowledge_graph_agent import KnowledgeGraphAgent
-from reasoning.agents.mission_agent import MissionAgent
-from reasoning.agents.spectral_agent import SpectralAgent
-from reasoning.agents.literature_agent import LiteratureAgent
-from reasoning.agents.experiment_agent import ExperimentAgent
-from reasoning.agents.report_agent import ReportAgent
-from reasoning.agents.review_agent import ReviewAgent
+from backend.reasoning.agents.physics_agent import PhysicsAgent
+from backend.reasoning.agents.prediction_agent import PredictionAgent
+from backend.reasoning.agents.digital_twin_agent import DigitalTwinAgent
+from backend.reasoning.agents.knowledge_graph_agent import KnowledgeGraphAgent
+from backend.reasoning.agents.mission_agent import MissionAgent
+from backend.reasoning.agents.spectral_agent import SpectralAgent
+from backend.reasoning.agents.literature_agent import LiteratureAgent
+from backend.reasoning.agents.experiment_agent import ExperimentAgent
+from backend.reasoning.agents.report_agent import ReportAgent
+from backend.reasoning.agents.review_agent import ReviewAgent
 
 logger = logging.getLogger("SRE.Reasoner")
 

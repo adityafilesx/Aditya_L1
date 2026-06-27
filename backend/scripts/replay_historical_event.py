@@ -10,9 +10,9 @@ from datetime import datetime
 # Add the project root to sys.path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from aditya_flare.config.config_loader import config
-from aditya_flare.decision.state_machine import DecisionEngine
-from aditya_flare.utils.logger import setup_logger
+from backend.aditya_flare.config.config_loader import config
+from backend.aditya_flare.decision.state_machine import DecisionEngine
+from backend.aditya_flare.utils.logger import setup_logger
 
 logger = setup_logger("ReplayEngine", "replay.log")
 

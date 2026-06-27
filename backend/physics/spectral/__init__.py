@@ -1,0 +1,1 @@
+"""Spectral Engine — sub-package."""

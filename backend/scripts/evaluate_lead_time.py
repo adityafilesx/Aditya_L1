@@ -9,7 +9,7 @@ from pathlib import Path
 
 # Add project root to sys.path
 sys.path.append(str(Path(__file__).parent.parent))
-from aditya_flare.processing.features import extract_features
+from backend.aditya_flare.processing.features import extract_features
 
 def evaluate_lead_time():
     print("Evaluating Ensemble Model Lead Time & Verification Metrics...")

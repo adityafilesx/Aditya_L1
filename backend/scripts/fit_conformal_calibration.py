@@ -7,9 +7,9 @@ from pathlib import Path
 # Add the project root to sys.path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from aditya_flare.models.dataset import load_and_prepare_dataset, get_train_test_split
-from aditya_flare.config.config_loader import config
-from aditya_flare.utils.logger import training_logger
+from backend.aditya_flare.models.dataset import load_and_prepare_dataset, get_train_test_split
+from backend.aditya_flare.config.config_loader import config
+from backend.aditya_flare.utils.logger import training_logger
 import xgboost as xgb
 
 def fit_conformal():

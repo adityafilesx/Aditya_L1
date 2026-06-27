@@ -11,8 +11,8 @@ from plotly.subplots import make_subplots
 
 # Add project root to sys.path
 sys.path.append(str(Path(__file__).parent.parent.parent))
-from physics_engine.feature_pipeline import extract_physics_features as extract_features
-from aditya_flare.calibration.goes_calibrator import GoesCalibrator
+from backend.physics_engine.feature_pipeline import extract_physics_features as extract_features
+from backend.aditya_flare.calibration.goes_calibrator import GoesCalibrator
 
 st.set_page_config(
     page_title="AditSolarFlare Mission Control",
@@ -77,13 +77,13 @@ def load_assets():
     sim_df['forecast_prob'] = (0.7 * p_lgb) + (0.3 * p_knn)
     
     # Compute Space-Segment Onboard Shutter Trigger
-    from aditya_flare.models.space_trigger import SpaceOnboardTrigger
+    from backend.aditya_flare.models.space_trigger import SpaceOnboardTrigger
     space_trigger = SpaceOnboardTrigger()
     onboard_states = []
     onboard_derivs = []
     
     # Initialize Operational Decision Engine
-    from aditya_flare.decision.state_machine import DecisionEngine
+    from backend.aditya_flare.decision.state_machine import DecisionEngine
     decision_engine = DecisionEngine()
     
     op_states = []

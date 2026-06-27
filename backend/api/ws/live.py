@@ -2,8 +2,8 @@ import asyncio
 import json
 import logging
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
-from events.mission_bus import mission_bus
-from events.generator import generator
+from backend.events.mission_bus import mission_bus
+from backend.events.generator import generator
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
