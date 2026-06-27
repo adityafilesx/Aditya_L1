@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useMemo } from 'react';
+import { useMemo, Fragment } from 'react';
 import { BaseCard, PlotlyContainer, Icon } from '../../../design-system';
 import { useForecast } from '../hooks/useForecast';
 import { useForecastStore } from '../store/forecastStore';
@@ -263,13 +263,13 @@ export const MissionForecastCore: FC = () => {
 
   return (
     <div className="flex flex-col h-full min-h-0">
-      
-      <BaseCard className="flex flex-col flex-1 bg-surface-container-lowest/40 border border-border/20 backdrop-blur-md overflow-hidden min-h-0 p-3">
-        
+
+      <BaseCard size="sm" className="flex flex-col flex-1 bg-surface-container-lowest/40 border border-border/20 backdrop-blur-md overflow-hidden min-h-0">
+
         {/* Header */}
-        <div className="flex justify-between items-center flex-shrink-0 mb-4 border-b border-border/20 pb-2">
+        <div className="flex justify-between items-center flex-shrink-0 mb-3 border-b border-border/20 pb-2">
           <div className="flex items-center gap-1.5">
-            <Icon name="Analytics" className="text-primary" />
+            <Icon name="analytics" className="text-primary" />
             <h2 className="text-heading text-foreground">Forecast Core</h2>
           </div>
           <div className="flex items-center gap-1 bg-surface/50 border border-border/20 rounded p-1">
@@ -278,8 +278,8 @@ export const MissionForecastCore: FC = () => {
                 key={h}
                 onClick={() => setForecastWindow(h as ForecastWindows)}
                 className={`px-2 py-0.5 rounded text-label font-bold transition-all ${
-                  forecastWindow === h 
-                    ? 'bg-primary text-white shadow-focus' 
+                  forecastWindow === h
+                    ? 'bg-primary text-white shadow-focus'
                     : 'text-muted-foreground hover:bg-surface/80'
                 }`}
               >
@@ -289,13 +289,69 @@ export const MissionForecastCore: FC = () => {
           </div>
         </div>
 
-        {/* 1. Probability Heatmap (Dominant) */}
-        <div className="flex flex-col flex-shrink-0 mb-4">
-          <div className="flex justify-between items-end mb-2">
-            <span className="text-label text-muted-foreground uppercase">Probability Matrix Heatmap</span>
-            <span className="text-label text-muted-foreground">Confidence: {peakMetrics.confidence}</span>
+        {/* 1. Key Metrics HUD (Dominant) */}
+        <div className="flex-shrink-0 mb-3 bg-surface/30 border border-border/20 rounded p-3 relative overflow-hidden">
+          {/* Subtle grid background to simulate HUD */}
+          <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
+
+          <div className="flex justify-between items-center mb-2.5 relative z-10">
+            <span className="text-label text-muted-foreground uppercase tracking-widest">Expected Peak Trajectory</span>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-error animate-pulse" />
+              <span className="text-label text-error font-bold tracking-widest uppercase">Tracking {peakMetrics.goesClass}-Class</span>
+            </div>
           </div>
-          <div className="grid grid-cols-9 gap-1">
+
+          {/* Primary metrics — large, scannable */}
+          <div className="grid grid-cols-3 gap-3 items-end relative z-10">
+            <div className="flex flex-col">
+              <span className="text-label text-muted-foreground uppercase tracking-widest">Class</span>
+              <span className="text-hero text-foreground leading-none tabular-nums">{peakMetrics.goesClass}</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-label text-muted-foreground uppercase tracking-widest">Peak Time</span>
+              <span className="text-hero text-foreground leading-none tabular-nums tracking-normal">{peakMetrics.peakTimeStr}</span>
+            </div>
+            <div className="flex flex-col items-end text-right">
+              <span className="text-label text-muted-foreground uppercase tracking-widest">Peak Flux</span>
+              <span className="text-heading text-foreground leading-none tabular-nums tracking-normal">
+                {peakMetrics.peakFluxStr}
+                <span className="text-label text-muted-foreground ml-1">W/m²</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Supporting metrics — compact micro-row */}
+          <div className="grid grid-cols-4 gap-2 mt-2.5 pt-2.5 border-t border-border/20 relative z-10">
+            <div className="flex flex-col">
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Duration</span>
+              <span className="text-label text-foreground font-bold tabular-nums">{peakMetrics.durationStr}</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Rise</span>
+              <span className="text-label text-foreground font-bold tabular-nums">{peakMetrics.riseTimeStr}</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Decay</span>
+              <span className="text-label text-foreground font-bold tabular-nums">{peakMetrics.decayTimeStr}</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Conf</span>
+              <span className="text-label text-foreground font-bold tabular-nums">{peakMetrics.confidence}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 2. Probability Matrix — fills available height */}
+        <div className="flex flex-col flex-1 min-h-0 mb-3">
+          <div className="flex justify-between items-end mb-2 flex-shrink-0">
+            <span className="text-label text-muted-foreground uppercase tracking-wider">Probability Matrix</span>
+            <span className="text-[10px] text-muted-foreground uppercase tracking-wider">% · Class × Horizon</span>
+          </div>
+          <div
+            className="grid grid-cols-9 gap-1 flex-1 min-h-0"
+            style={{ gridTemplateRows: 'auto repeat(5, minmax(0, 1fr))' }}
+          >
             {/* Corner Cell */}
             <div className="flex items-center justify-center border-b border-border/20 pb-1">
               <span className="text-[9px] text-muted-foreground uppercase font-mono tracking-widest">Class</span>
@@ -306,75 +362,35 @@ export const MissionForecastCore: FC = () => {
                 <span className={`text-[10px] font-mono font-bold ${forecastWindow === h ? 'text-primary' : 'text-muted-foreground'}`}>{h}</span>
               </div>
             ))}
-            
+
             {/* Heatmap Rows */}
             {CLASSES.map(c => (
-              <>
-                <div key={`label-${c}`} className="flex items-center justify-center h-8">
-                  <span className="text-primary-metric text-muted-foreground">{c}</span>
+              <Fragment key={`row-${c}`}>
+                <div className="flex items-center justify-center min-h-0">
+                  <span className="text-primary-metric text-muted-foreground font-bold">{c}</span>
                 </div>
                 {HORIZONS.map(h => {
                   const prob = getProbability(h, c);
                   const isActive = forecastWindow === h;
                   return (
-                    <div 
+                    <div
                       key={`cell-${c}-${h}`}
                       onClick={() => setForecastWindow(h as ForecastWindows)}
-                      className={`h-8 flex items-center justify-center rounded cursor-pointer transition-all duration-300 ${getHeatmapColor(prob, c)} ${isActive ? 'ring-1 ring-primary/50 scale-[1.02]' : 'hover:scale-[1.02]'}`}
+                      className={`min-h-0 flex items-center justify-center rounded cursor-pointer transition-all duration-300 ${getHeatmapColor(prob, c)} ${isActive ? 'ring-1 ring-primary/50' : 'hover:brightness-110'}`}
                     >
-                      <span className="text-primary-metric">{(prob * 100).toFixed(0)}</span>
+                      <span className="text-label font-bold tabular-nums">{(prob * 100).toFixed(0)}</span>
                     </div>
                   );
                 })}
-              </>
+              </Fragment>
             ))}
           </div>
         </div>
 
-        {/* 2. Peak Forecast HUD (Aerospace Style) */}
-        <div className="flex flex-col flex-shrink-0 mb-4 bg-surface/30 border border-border/20 rounded p-3 relative overflow-hidden">
-          {/* Subtle grid background to simulate HUD */}
-          <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
-          
-          <div className="flex justify-between items-center mb-3 relative z-10">
-            <span className="text-label text-muted-foreground uppercase">Expected Peak Trajectory HUD</span>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-error animate-pulse" />
-              <span className="text-label text-error font-bold tracking-widest uppercase">TRACKING {peakMetrics.goesClass}-CLASS</span>
-            </div>
-          </div>
-          
-          <div className="flex justify-between items-end relative z-10">
-            <div className="flex flex-col">
-              <span className="text-label text-muted-foreground uppercase tracking-widest">Expected Peak Time</span>
-              <span className="text-hero text-foreground tabular-nums tracking-normal">{peakMetrics.peakTimeStr}</span>
-            </div>
-            <div className="flex flex-col items-end">
-              <span className="text-label text-muted-foreground uppercase tracking-widest">Expected Peak Flux</span>
-              <span className="text-hero text-foreground tabular-nums tracking-normal">{peakMetrics.peakFluxStr} <span className="text-primary-metric text-muted-foreground">W/m²</span></span>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-3 gap-4 mt-3 pt-3 border-t border-border/20 relative z-10">
-            <div className="flex justify-between items-center">
-              <span className="text-label text-muted-foreground">Duration</span>
-              <span className="text-primary-metric text-foreground">{peakMetrics.durationStr}</span>
-            </div>
-            <div className="flex justify-between items-center border-l border-r border-border/20 px-4">
-              <span className="text-label text-muted-foreground">Rise Time</span>
-              <span className="text-primary-metric text-foreground">{peakMetrics.riseTimeStr}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-label text-muted-foreground">Decay Time</span>
-              <span className="text-primary-metric text-foreground">{peakMetrics.decayTimeStr}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* 3. Trajectory Scientific Chart */}
-        <div className="flex-1 min-h-[180px] flex flex-col min-h-0 relative">
-          <span className="text-label text-muted-foreground uppercase absolute top-0 left-0 z-10">Trajectory & Thresholds ({forecastWindow})</span>
-          <div className="flex-1 w-full bg-surface-container-lowest border border-border/20 rounded mt-5 relative min-h-0">
+        {/* 3. Trajectory Scientific Chart — bounded secondary */}
+        <div className="flex flex-col flex-shrink-0 h-[240px]">
+          <span className="text-label text-muted-foreground uppercase tracking-wider mb-2 flex-shrink-0">Trajectory &amp; Thresholds ({forecastWindow})</span>
+          <div className="flex-1 w-full bg-surface-container-lowest border border-border/20 rounded relative min-h-0">
             <PlotlyContainer
               data={plotData as any}
               layout={layout as any}

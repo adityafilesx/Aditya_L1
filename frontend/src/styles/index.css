@@ -28,15 +28,15 @@
   }
 
   .active-sidebar-item {
-    @apply bg-white text-[#111318] border-l-4 border-primary-container rounded-r;
+    @apply text-primary font-semibold border-l-2 border-primary pl-3;
   }
 
   .sidebar-item-hover {
-    @apply transition-all rounded-lg;
+    @apply transition-all cursor-pointer;
   }
 
   .sidebar-item-hover:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+    @apply bg-surface-container text-on-surface;
   }
 
   .custom-shadow {
@@ -77,6 +77,7 @@
 
   .telemetry-table {
     @apply w-full text-left text-data-mono;
+    font-variant-numeric: tabular-nums;
   }
 
   .telemetry-table th {
@@ -115,8 +116,14 @@
     display: none;
   }
 
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--color-outline-variant)) transparent;
+  }
+
   .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
+    height: 5px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
@@ -124,7 +131,11 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-surface-dim rounded-full;
+    @apply bg-outline-variant rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-outline;
   }
 }
 

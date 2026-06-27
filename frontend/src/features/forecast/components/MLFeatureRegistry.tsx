@@ -56,7 +56,7 @@ export const MLFeatureRegistry: FC = () => {
       
       <div className="p-2 border-b border-border/50 bg-surface/40 flex justify-between items-center flex-shrink-0">
         <div className="flex items-center gap-1.5">
-          <Icon name="Database" className="text-primary" />
+          <Icon name="database" className="text-primary" />
           <h2 className="font-display font-bold text-xs tracking-wider uppercase">Machine & Feature Intelligence</h2>
         </div>
       </div>

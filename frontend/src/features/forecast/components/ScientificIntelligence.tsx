@@ -102,7 +102,7 @@ export const ScientificIntelligence: FC = () => {
       {/* Component Contract Header */}
       <div className="flex justify-between items-center flex-shrink-0 mb-2 border-b border-border/20 pb-2">
         <div className="flex items-center gap-1.5">
-          <Icon name="Psychology" className="text-primary" />
+          <Icon name="psychology" className="text-primary" />
           <h2 className="text-heading text-foreground">Scientific Intelligence</h2>
         </div>
         {/* Component Contract Status */}
@@ -112,11 +112,11 @@ export const ScientificIntelligence: FC = () => {
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col gap-2 min-h-0 overflow-hidden">
-        
-        {/* Subsection 1: Physics Snapshot */}
-        <div className="flex flex-col flex-shrink-0">
-          <div className="flex items-center justify-between mb-1">
+      <div className="flex-1 flex flex-col gap-3 min-h-0 overflow-hidden">
+
+        {/* Group 1: Physics Snapshot */}
+        <section className="flex flex-col flex-shrink-0">
+          <div className="flex items-center justify-between mb-1.5">
             <span className="text-label text-muted-foreground uppercase tracking-widest font-bold">Physics Snapshot</span>
             <span className={`px-2 py-0.5 rounded text-label font-mono font-bold tracking-widest ${
               physicsSnapshot.state === 'HEATING' ? 'bg-warning/20 text-warning border border-warning/50' : 'bg-success/20 text-success border border-success/50'
@@ -124,40 +124,50 @@ export const ScientificIntelligence: FC = () => {
               {physicsSnapshot.state}
             </span>
           </div>
-          
-          <div className="flex flex-col gap-1 bg-surface/20 border border-border/20 rounded p-1.5">
-            <div className="flex flex-col">
-              <div className="flex justify-between items-center"><span className="text-label text-muted-foreground uppercase">Coronal Temp</span><span className="text-primary-metric text-foreground">{physicsSnapshot.temp.toFixed(2)} MK</span></div>
-              <div className="flex justify-between items-center"><span className="text-label text-muted-foreground uppercase">Emission Meas</span><span className="text-primary-metric text-foreground">{physicsSnapshot.EM.toExponential(1)}</span></div>
+
+          <div className="flex flex-col gap-2 bg-surface/20 border border-border/20 rounded p-2">
+            {/* Paired key metrics */}
+            <div className="grid grid-cols-2 gap-x-3 gap-y-2">
+              <div className="flex flex-col">
+                <span className="text-label text-muted-foreground uppercase">Coronal Temp</span>
+                <span className="text-primary-metric text-foreground font-bold tabular-nums">{physicsSnapshot.temp.toFixed(2)} <span className="text-label text-muted-foreground">MK</span></span>
+              </div>
+              <div className="flex flex-col items-end text-right">
+                <span className="text-label text-muted-foreground uppercase">Emission Meas</span>
+                <span className="text-primary-metric text-foreground font-bold tabular-nums">{physicsSnapshot.EM.toExponential(1)}</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-label text-muted-foreground uppercase">Neupert Score</span>
+                <span className="text-primary-metric text-foreground font-bold tabular-nums">{(physicsSnapshot.neupert * 100).toFixed(0)}%</span>
+              </div>
+              <div className="flex flex-col items-end text-right">
+                <span className="text-label text-muted-foreground uppercase">Spectral Idx</span>
+                <span className="text-primary-metric text-foreground font-bold tabular-nums">{physicsSnapshot.spectralIndex.toFixed(2)}</span>
+              </div>
             </div>
-            
-            {/* Heating / Cooling mini-gauge */}
-            <div className="border-t border-border/20 pt-1.5">
-              <div className="flex justify-between text-label text-muted-foreground uppercase mb-0.5 font-mono">
+
+            {/* Heating / Cooling gauge */}
+            <div className="border-t border-border/20 pt-2">
+              <div className="flex justify-between text-label text-muted-foreground uppercase mb-1 font-mono">
                 <span>Heat ({physicsSnapshot.heat.toFixed(2)})</span>
                 <span>Cool ({physicsSnapshot.cool.toFixed(2)})</span>
               </div>
               <div className="flex gap-1.5 items-center">
-                <div className="flex-1 h-1 bg-surface-container rounded-full overflow-hidden">
+                <div className="flex-1 h-1.5 bg-surface-container rounded-full overflow-hidden">
                   <div className="h-full bg-warning transition-all" style={{ width: `${Math.min(100, physicsSnapshot.heat * 100)}%` }} />
                 </div>
-                <div className="flex-1 h-1 bg-surface-container rounded-full overflow-hidden">
+                <div className="flex-1 h-1.5 bg-surface-container rounded-full overflow-hidden">
                   <div className="h-full bg-info transition-all" style={{ width: `${Math.min(100, physicsSnapshot.cool * 100)}%` }} />
                 </div>
               </div>
             </div>
-
-            <div className="border-t border-border/20 pt-1.5 flex flex-col">
-              <div className="flex justify-between items-center"><span className="text-label text-muted-foreground uppercase">Neupert Score</span><span className="text-primary-metric text-foreground">{(physicsSnapshot.neupert * 100).toFixed(0)}%</span></div>
-              <div className="flex justify-between items-center"><span className="text-label text-muted-foreground uppercase">Spectral Idx</span><span className="text-primary-metric text-foreground">{physicsSnapshot.spectralIndex.toFixed(2)}</span></div>
-            </div>
           </div>
-        </div>
+        </section>
 
-        {/* Subsection 2: Confidence & Trust */}
-        <div className="flex flex-col flex-shrink-0 border-t border-border/20 pt-1.5">
-          <span className="text-label text-muted-foreground uppercase tracking-widest font-bold mb-1">Confidence & Trust HUD</span>
-          <div className="transform scale-[0.85] origin-top">
+        {/* Group 2: Confidence & Trust — fills available height */}
+        <section className="flex flex-col flex-1 min-h-0 border-t border-border/20 pt-2">
+          <span className="text-label text-muted-foreground uppercase tracking-widest font-bold mb-1.5 flex-shrink-0">Confidence &amp; Trust</span>
+          <div className="flex-1 min-h-0">
             <ConcentricConfidence
               overall={confidenceMetrics.overall}
               observation={confidenceMetrics.obs}
@@ -166,21 +176,19 @@ export const ScientificIntelligence: FC = () => {
               calibration={confidenceMetrics.cal}
             />
           </div>
-        </div>
+        </section>
 
-        {/* Subsection 3: Scientific Evidence Chips */}
-        <div className="flex flex-col flex-shrink-0 border-t border-border/20 pt-1.5 mt-auto">
-          <span className="text-label text-muted-foreground uppercase tracking-widest font-bold mb-1">Top Drivers</span>
-          <div className="flex flex-col gap-1">
-            <div className="flex flex-wrap gap-1">
-              {explanations.supporting.map((s, idx) => (
-                <div key={idx} className="bg-success/10 border border-success/30 text-success text-label px-1.5 py-0.5 rounded truncate max-w-full">
-                  + {s}
-                </div>
-              ))}
-            </div>
+        {/* Group 3: Top Drivers */}
+        <section className="flex flex-col flex-shrink-0 border-t border-border/20 pt-2">
+          <span className="text-label text-muted-foreground uppercase tracking-widest font-bold mb-1.5">Top Drivers</span>
+          <div className="flex flex-wrap gap-1">
+            {explanations.supporting.map((s, idx) => (
+              <div key={idx} className="bg-success/10 border border-success/30 text-success text-label px-2 py-1 rounded truncate max-w-full">
+                + {s}
+              </div>
+            ))}
           </div>
-        </div>
+        </section>
 
       </div>
     </BaseCard>

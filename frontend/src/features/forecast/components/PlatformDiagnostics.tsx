@@ -28,7 +28,7 @@ export const PlatformDiagnostics: FC = () => {
       
       {/* 1. Compliance standards */}
       <div className="hidden lg:flex items-center gap-1.5 border-r border-border/20 pr-4">
-        <Icon name="CheckCircle" size={10} className="text-success" />
+        <Icon name="check_circle" size="sm" className="text-success" />
         <span className="uppercase">ISO-9001 / ISRO-STD-02</span>
         <span className="text-border/40">|</span>
         <span className="font-bold text-success uppercase">VERIFIED</span>
