@@ -5,8 +5,7 @@ interface MissionControlLayoutV5Props {
   missionForecastCore: ReactNode;
   scientificIntelligence: ReactNode;
   decisionIntelligence: ReactNode;
-  machineIntelligence: ReactNode;
-  trustAndRepository: ReactNode;
+  operationsIntelligence: ReactNode;
   pipelineFlow: ReactNode;
   platformDiagnostics: ReactNode;
 }
@@ -16,8 +15,7 @@ export const MissionControlLayoutV5: FC<MissionControlLayoutV5Props> = ({
   missionForecastCore,
   scientificIntelligence,
   decisionIntelligence,
-  machineIntelligence,
-  trustAndRepository,
+  operationsIntelligence,
   pipelineFlow,
   platformDiagnostics
 }) => {
@@ -31,34 +29,29 @@ export const MissionControlLayoutV5: FC<MissionControlLayoutV5Props> = ({
 
       {/* 2. Workspace Grid (Zones 2-6) - Scrollable on small screens */}
       <div className="flex-1 overflow-y-auto min-h-0 custom-scrollbar pb-4">
-        <div className="grid grid-cols-12 gap-3 p-3 min-h-full h-fit">
-          
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-3 p-3 min-h-full h-fit">
+
           {/* Zone 3: Scientific Intelligence (Width 25%) */}
-          <div className="col-span-3 flex flex-col h-full">
+          <div className="col-span-1 xl:col-span-3 flex flex-col h-full max-xl:min-h-[480px]">
             {scientificIntelligence}
           </div>
 
           {/* Zone 2: Forecast Core (Width 50%) */}
-          <div className="col-span-6 flex flex-col h-full">
+          <div className="col-span-1 xl:col-span-6 flex flex-col h-full max-xl:min-h-[620px]">
             {missionForecastCore}
           </div>
 
-          {/* Right Column: Decision, Machine, Trust & Repository (Width 25%) */}
-          <div className="col-span-3 flex flex-col gap-3 h-full">
+          {/* Right Column: Decision + Operations Intelligence (Width 25%) */}
+          <div className="col-span-1 xl:col-span-3 flex flex-col gap-3 h-full">
             
             {/* Zone 4: Decision Intelligence */}
             <div className="flex-1 flex flex-col min-h-[300px]">
               {decisionIntelligence}
             </div>
-            
-            {/* Zone 5: Machine Intelligence */}
-            <div className="flex-shrink-0 flex flex-col min-h-[320px]">
-              {machineIntelligence}
-            </div>
 
-            {/* Zone 6: Trust & Repository */}
-            <div className="flex-shrink-0 flex flex-col min-h-[140px]">
-              {trustAndRepository}
+            {/* Zone 5: Operations Intelligence (merged Feature/Dataset/Model registries, Verification, Trust & Repository) */}
+            <div className="flex-shrink-0 flex flex-col min-h-[460px]">
+              {operationsIntelligence}
             </div>
 
           </div>

@@ -165,7 +165,7 @@ export const OverviewPageContent: FC = () => {
         }
       />
 
-      <div className="bg-white border border-outline-variant rounded-lg p-3 mb-gutter flex flex-wrap items-center gap-6 justify-between overflow-x-auto whitespace-nowrap">
+      <div className="bg-white border border-outline-variant rounded-lg p-3 mb-gutter flex flex-wrap items-center gap-x-8 gap-y-3">
         {mappedServices.map((serv) => (
           <div key={serv.name} className="flex items-center gap-2">
             <span className={`w-2 h-2 rounded-full ${serv.ok === true ? 'bg-success' : serv.ok === false ? 'bg-warning' : 'bg-critical'}`}></span>
@@ -175,7 +175,7 @@ export const OverviewPageContent: FC = () => {
       </div>
 
       {/* Grid of Metric Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-gutter mb-gutter">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-gutter mb-gutter">
         {mappedMetricData.map((data) => (
           <MetricCard
             key={data.title}
@@ -187,9 +187,10 @@ export const OverviewPageContent: FC = () => {
       </div>
 
       {/* Solar flux & Side panels */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-gutter">
-        <div className="lg:col-span-2">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-gutter items-stretch">
+        <div className="lg:col-span-2 h-full">
           <ChartContainer
+            className="h-full"
             title="Solar X-Ray Flux"
             subtitle="Real-time spectral density monitoring"
             timeRange="L-24H"
@@ -265,18 +266,20 @@ export const OverviewPageContent: FC = () => {
           title="AI Model Consensus"
           data={mappedModelData}
           columns={modelCols}
+          className="h-full"
           actions={<div className="px-3 py-1 bg-primary-container/10 border border-primary text-primary rounded-full font-label-caps text-label-caps">LIVE</div>}
         />
         <EnterpriseTable
           title="Sensor Health Matrix"
           data={mappedSensorData}
           columns={sensorCols}
+          className="h-full"
         />
       </div>
 
       {/* Digital Twin & Operational Timeline */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter mb-gutter">
-        <BaseCard variant="plain" size="md" className="flex flex-col md:flex-row gap-6">
+        <BaseCard variant="plain" size="md" className="h-full flex flex-col md:flex-row gap-6">
           <div className="md:w-1/3 aspect-square bg-inverse-surface rounded-lg relative overflow-hidden flex items-center justify-center">
             <img className="absolute inset-0 w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7bio_x30nXMd-EMAfLkPJK9CDrJ_kb72719jzU6VeGU3-TpU4GLcwFW8IHVAInENRY79suLvvMJyENirVk4d235eNxZPTUX4JjL2mgV6OA6nfU2OeWRPvmwijWdYbZ3yFgN2BDJicHqiRK8kZDmv09ICEfsQ-CyVwONVzT6gVKTjdFeLPoBOffRRFmLs4i5ZYLTWOnXglZ--eHMOr9vM7oh0398IfNJTotvUjKdAdaE70e_fADvQgVFfXtoyzzPQeDX2ihHoMUGfD" alt="Solar surface"/>
             <div className="absolute inset-0 border-[20px] border-transparent border-t-primary/20 border-l-primary/20"></div>
@@ -314,7 +317,7 @@ export const OverviewPageContent: FC = () => {
           </div>
         </BaseCard>
 
-        <BaseCard variant="plain" size="md">
+        <BaseCard variant="plain" size="md" className="h-full">
           <h3 className="font-label-caps text-label-caps text-on-surface-variant mb-4">Operational Timeline</h3>
           <Timeline
             items={(alerts || []).slice(0, 4).map((a: any) => ({
@@ -336,11 +339,11 @@ export const OverviewPageContent: FC = () => {
       />
 
       {/* System Resources Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-gutter">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-gutter">
         {Object.keys(state.system_metrics || {}).map((key) => {
           const value = state.system_metrics[key];
           return (
-            <div key={key} className="bg-white p-4 rounded-xl border border-outline-variant">
+            <div key={key} className="bg-white p-4 rounded-xl border border-outline-variant h-full">
               <div className="flex justify-between items-start mb-2">
                 <span className="text-[10px] text-outline uppercase font-bold">{key}</span>
                 <span className={`w-2 h-2 rounded-full ${value < 90 ? 'bg-success' : 'bg-warning'}`}></span>

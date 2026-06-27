@@ -6,8 +6,7 @@ import { MissionForecastSummary } from './components/MissionForecastSummary';
 import { ScientificIntelligence } from './components/ScientificIntelligence';
 import { MissionForecastCore } from './components/MissionForecastCore';
 import { OperatorCommand } from './components/OperatorCommand';
-import { MachineIntelligence } from './components/MachineIntelligence';
-import { TrustAndRepository } from './components/TrustAndRepository';
+import { OperationsIntelligence } from './components/OperationsIntelligence';
 import { PlatformDiagnostics } from './components/PlatformDiagnostics';
 
 import { useObservationStream } from './hooks/useObservationStream';
@@ -26,8 +25,7 @@ export const ForecastingPageContent: FC = () => {
       missionForecastCore={<MissionForecastCore />}
       scientificIntelligence={<ScientificIntelligence />}
       decisionIntelligence={<OperatorCommand />}
-      machineIntelligence={<MachineIntelligence />}
-      trustAndRepository={<TrustAndRepository />}
+      operationsIntelligence={<OperationsIntelligence />}
       pipelineFlow={<PipelineFlow />}
       platformDiagnostics={<PlatformDiagnostics />}
     />

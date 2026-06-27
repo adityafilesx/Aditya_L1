@@ -120,12 +120,12 @@ export const OperatorCommand: FC = () => {
       {/* Component Contract Header */}
       <div className="flex justify-between items-center flex-shrink-0 mb-3 border-b border-border/20 pb-2">
         <div className="flex items-center gap-1.5">
-          <Icon name="Shield" className="text-primary" />
+          <Icon name="shield" className="text-primary" />
           <h2 className="text-heading text-foreground">Decision Intelligence</h2>
         </div>
         
         <div className="flex items-center gap-1 text-label font-mono text-muted-foreground bg-surface/60 px-2 py-0.5 rounded border border-border/30">
-          <Icon name="Schedule" size={12} className="animate-spin text-primary" style={{ animationDuration: '4s' }} />
+          <Icon name="schedule" size="sm" className="animate-spin text-primary [animation-duration:4s]" />
           <span>PASS: {countdown}s</span>
         </div>
       </div>
@@ -165,42 +165,44 @@ export const OperatorCommand: FC = () => {
           </div>
         </div>
 
-        {/* Row 2: Decision Intelligence Details */}
-        <div className="bg-surface/20 border border-border/20 rounded p-3 flex flex-col gap-2 flex-shrink-0">
-          <div className="flex flex-col mb-1">
-            <span className="text-label font-bold text-muted-foreground uppercase tracking-widest">Recommended action</span>
-            <span className="text-primary-metric text-foreground leading-tight mt-1">{decision.action}</span>
-          </div>
-          
-          <div className="text-label leading-relaxed text-muted-foreground italic bg-surface/40 p-2 border border-border/20 rounded">
-            {decision.justification}
-          </div>
-
-          <div className="text-label leading-relaxed text-foreground mt-1">
-            <span className="font-bold text-muted-foreground uppercase tracking-widest block mb-1">Expected Consequence:</span>
-            {decision.consequence}
-          </div>
-
-          <div className="border-t border-border/20 pt-2 mt-1 text-label text-warning font-mono">
-            <span className="font-bold text-warning/70 uppercase tracking-widest block mb-1">Emergency Procedure:</span>
-            {decision.emergencyProcedure}
-          </div>
-
-          <div className="grid grid-cols-2 gap-2 border-t border-border/20 pt-2 mt-1">
-            <div className="flex flex-col">
+        {/* Row 2: Recommended Action + Priority */}
+        <div className="bg-surface/20 border border-border/20 rounded p-3 flex flex-col gap-2.5 flex-shrink-0">
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex flex-col min-w-0">
+              <span className="text-label font-bold text-muted-foreground uppercase tracking-widest">Recommended Action</span>
+              <span className="text-heading text-foreground leading-tight mt-1">{decision.action}</span>
+            </div>
+            <div className="flex flex-col items-end flex-shrink-0">
               <span className="text-label font-bold text-muted-foreground uppercase tracking-widest">Priority</span>
-              <span className={`px-2 py-0.5 rounded border text-label font-bold text-center w-fit mt-1 ${decision.priority.color}`}>
+              <span className={`px-2.5 py-1 rounded border text-label font-bold mt-1 ${decision.priority.color}`}>
                 {decision.priority.label}
               </span>
             </div>
-            <div className="flex flex-col">
-              <span className="text-label font-bold text-muted-foreground uppercase tracking-widest">Required Resp.</span>
-              <span className="text-primary-metric text-foreground mt-1">{decision.responseTime}</span>
-            </div>
+          </div>
+
+          <p className="text-label text-muted-foreground leading-relaxed line-clamp-2">{decision.justification}</p>
+
+          <div className="flex items-center justify-between gap-3 border-t border-border/20 pt-2">
+            <span className="text-label font-bold text-muted-foreground uppercase tracking-widest">Required Response</span>
+            <span className="text-primary-metric text-foreground font-bold tabular-nums">{decision.responseTime}</span>
+          </div>
+
+          <p className="text-label text-muted-foreground/80 leading-snug line-clamp-2">
+            <span className="font-bold text-muted-foreground uppercase tracking-wider">Outcome: </span>
+            {decision.consequence}
+          </p>
+        </div>
+
+        {/* Row 3: Emergency Procedure */}
+        <div className="flex items-start gap-2 bg-warning/10 border border-warning/30 rounded p-3 flex-shrink-0">
+          <Icon name="warning" size="sm" className="text-warning flex-shrink-0 mt-0.5" />
+          <div className="flex flex-col min-w-0">
+            <span className="text-label font-bold text-warning/80 uppercase tracking-widest">Emergency Procedure</span>
+            <span className="text-label text-warning font-mono leading-snug mt-0.5">{decision.emergencyProcedure}</span>
           </div>
         </div>
 
-        {/* Row 3: Replay Deck */}
+        {/* Row 4: Historical Replay */}
         <div className="flex flex-col gap-2 border-t border-border/20 pt-3 flex-shrink-0 mt-auto">
           <div className="flex justify-between items-center">
             <span className="font-bold text-muted-foreground uppercase tracking-widest text-label">Historical Replay</span>
