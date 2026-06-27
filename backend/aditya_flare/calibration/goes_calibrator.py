@@ -1,7 +1,7 @@
 import yaml
 import numpy as np
 from pathlib import Path
-from aditya_flare.calibration.calibration_utils import flux_to_goes_class_string
+from backend.aditya_flare.calibration.calibration_utils import flux_to_goes_class_string
 
 class GoesCalibrator:
     def __init__(self, config_path: str = None):

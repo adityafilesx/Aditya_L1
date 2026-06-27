@@ -1,4 +1,4 @@
-from aditya_flare.evaluation.metrics import compute_all_metrics
+from backend.aditya_flare.evaluation.metrics import compute_all_metrics
 
 class BenchmarkSuite:
     def __init__(self):

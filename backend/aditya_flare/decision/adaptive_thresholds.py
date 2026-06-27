@@ -1,7 +1,7 @@
 import logging
 from typing import List, Dict, Any
-from aditya_flare.config.config_loader import config
-from aditya_flare.decision.common import parse_goes_class
+from backend.aditya_flare.config.config_loader import config
+from backend.aditya_flare.decision.common import parse_goes_class
 
 logger = logging.getLogger(__name__)
 

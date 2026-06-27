@@ -5,15 +5,15 @@ import logging
 from typing import Dict, Any, Optional
 from datetime import datetime, timezone
 
-from aditya_flare.config.config_loader import config, reload_config
-from aditya_flare.decision.adaptive_thresholds import AdaptiveThresholdEngine
-from aditya_flare.decision.confidence import ConformalPredictor
-from aditya_flare.decision.recommendation import RecommendationEngine
-from aditya_flare.decision.common import OperationalState, parse_goes_class
-from aditya_flare.decision.telemetry_health import TelemetryMonitor, TelemetryHealthStatus
-from aditya_flare.decision.alert_manager import AlertManager
-from aditya_flare.decision.drift_monitor import DriftMonitor
-from aditya_flare.models.space_trigger import SpaceOnboardTrigger
+from backend.aditya_flare.config.config_loader import config, reload_config
+from backend.aditya_flare.decision.adaptive_thresholds import AdaptiveThresholdEngine
+from backend.aditya_flare.decision.confidence import ConformalPredictor
+from backend.aditya_flare.decision.recommendation import RecommendationEngine
+from backend.aditya_flare.decision.common import OperationalState, parse_goes_class
+from backend.aditya_flare.decision.telemetry_health import TelemetryMonitor, TelemetryHealthStatus
+from backend.aditya_flare.decision.alert_manager import AlertManager
+from backend.aditya_flare.decision.drift_monitor import DriftMonitor
+from backend.aditya_flare.models.space_trigger import SpaceOnboardTrigger
 
 logger = logging.getLogger(__name__)
 

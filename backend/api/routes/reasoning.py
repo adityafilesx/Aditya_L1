@@ -16,8 +16,8 @@ from fastapi import APIRouter, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
-from reasoning.reasoner import ScientificReasoner
-from api.state import app_state
+from backend.reasoning.reasoner import ScientificReasoner
+from backend.api.state import app_state
 
 logger = logging.getLogger("SRE.API")
 

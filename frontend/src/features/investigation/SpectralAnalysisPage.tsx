@@ -35,7 +35,7 @@ export const SpectralAnalysisPage: React.FC = () => {
 
       <div className="grid grid-cols-12 gap-6">
         <div className="col-span-8 space-y-6">
-          <BaseCard title="Spectral Fit" variant="elevated" className="h-[400px]">
+          <BaseCard title="Spectral Fit" variant="panel" className="h-[400px]">
             <PlotlyContainer 
               data={[
                 {
@@ -56,8 +56,8 @@ export const SpectralAnalysisPage: React.FC = () => {
                 }
               ]}
               layout={{
-                xaxis: { title: 'Energy (keV)', type: 'log' },
-                yaxis: { title: 'Flux (counts/s/keV)', type: 'log' },
+                xaxis: { title: { text: 'Energy (keV)' }, type: 'log' },
+                yaxis: { title: { text: 'Flux (counts/s/keV)' }, type: 'log' },
                 margin: { t: 20, b: 40, l: 60, r: 20 },
                 showlegend: true
               }}
@@ -76,8 +76,8 @@ export const SpectralAnalysisPage: React.FC = () => {
                 }
               ]}
               layout={{
-                xaxis: { title: 'Energy (keV)' },
-                yaxis: { title: 'sigma' },
+                xaxis: { title: { text: 'Energy (keV)' } },
+                yaxis: { title: { text: 'sigma' } },
                 margin: { t: 20, b: 40, l: 60, r: 20 },
                 showlegend: false
               }}
@@ -86,7 +86,7 @@ export const SpectralAnalysisPage: React.FC = () => {
         </div>
 
         <div className="col-span-4 space-y-6">
-          <BaseCard title="Fit Parameters" variant="elevated">
+          <BaseCard title="Fit Parameters" variant="panel">
              <div className="space-y-4">
                <div>
                  <label className="text-sm font-label-md text-on-surface-variant">Model Type</label>

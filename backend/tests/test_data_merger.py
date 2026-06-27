@@ -2,7 +2,7 @@ import pytest
 import os
 import numpy as np
 import pandas as pd
-from aditya_flare.data.merger.data_merger import merge_instruments, save_merged, load_merged
+from backend.aditya_flare.data.merger.data_merger import merge_instruments, save_merged, load_merged
 
 @pytest.fixture
 def make_fake_solexs_df():

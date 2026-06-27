@@ -1,0 +1,1 @@
+"""Characterization Engine — sub-package."""

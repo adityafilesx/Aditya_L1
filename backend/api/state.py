@@ -1,9 +1,9 @@
 import logging
-from aditya_flare.decision.state_machine import DecisionEngine
-from aditya_flare.multi_modal.digital_twin.state_tracker import SolarDigitalTwin
-from aditya_flare.multi_modal.knowledge_graph.event_graph import EventKnowledgeGraph
-from aditya_flare.multi_modal.mission.intelligence import MissionIntelligenceEngine
-from aditya_flare.models.space_trigger import SpaceOnboardTrigger
+from backend.aditya_flare.decision.state_machine import DecisionEngine
+from backend.aditya_flare.multi_modal.digital_twin.state_tracker import SolarDigitalTwin
+from backend.aditya_flare.multi_modal.knowledge_graph.event_graph import EventKnowledgeGraph
+from backend.aditya_flare.multi_modal.mission.intelligence import MissionIntelligenceEngine
+from backend.aditya_flare.models.space_trigger import SpaceOnboardTrigger
 
 logger = logging.getLogger(__name__)
 

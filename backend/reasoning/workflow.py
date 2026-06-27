@@ -5,7 +5,7 @@ Each workflow is a sequence of agent calls with data piping.
 
 import logging
 from typing import Any, List
-from reasoning.planner import SubTask
+from backend.reasoning.planner import SubTask
 
 logger = logging.getLogger("SRE.Workflow")
 

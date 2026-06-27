@@ -7,8 +7,8 @@ import logging
 import asyncio
 from typing import Any, Dict, List
 
-from reasoning.planner import SubTask
-from reasoning.agents.base_agent import BaseAgent, AgentResult
+from backend.reasoning.planner import SubTask
+from backend.reasoning.agents.base_agent import BaseAgent, AgentResult
 
 logger = logging.getLogger("SRE.Router")
 

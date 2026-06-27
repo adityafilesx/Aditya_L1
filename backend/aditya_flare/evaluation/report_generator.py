@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from aditya_flare.utils.logger import training_logger
+from backend.aditya_flare.utils.logger import training_logger
 
 def generate_scientific_report(metrics: dict, output_dir: str):
     output_dir = Path(output_dir)

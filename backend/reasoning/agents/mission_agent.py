@@ -5,7 +5,7 @@ HF blackout, radiation, CME, SEP, and recommendations.
 
 import logging
 from typing import Any
-from reasoning.agents.base_agent import BaseAgent, AgentResult, Source
+from backend.reasoning.agents.base_agent import BaseAgent, AgentResult, Source
 
 logger = logging.getLogger("SRE.MissionAgent")
 

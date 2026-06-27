@@ -2,12 +2,12 @@ import asyncio
 import random
 import datetime
 from datetime import timezone
-from events.models import (
+from backend.events.models import (
     MissionState, TelemetryState, PhysicsState, ForecastState, 
     ModelState, AlertEvent, DigitalTwinState
 )
-from events.mission_bus import mission_bus
-from api.state import app_state
+from backend.events.mission_bus import mission_bus
+from backend.api.state import app_state
 
 class MissionStateGenerator:
     def __init__(self):

@@ -3,7 +3,7 @@ from pathlib import Path
 
 # Add project root to path
 sys.path.append(str(Path(__file__).parent.parent))
-from aditya_flare.ai_engine.models.tcn import TemporalConvNet
+from backend.aditya_flare.ai_engine.models.tcn import TemporalConvNet
 
 def main():
     print("Initializing Temporal Convolutional Network (TCN) Baseline...")

@@ -28,13 +28,13 @@ export const ConfigurationPage: React.FC = () => {
           <p className="text-on-surface-variant font-body-md mt-1">Manage global platform settings and thresholds.</p>
         </div>
         <div className="flex gap-3">
-          <ActionButton icon="save" label="Save Changes" onClick={() => {}} />
+          <ActionButton icon="save" title="Save Changes" onClick={() => {}} />
         </div>
       </div>
 
       <div className="grid grid-cols-12 gap-6">
         <div className="col-span-6 space-y-6">
-          <BaseCard title="Environment Settings" variant="elevated">
+          <BaseCard title="Environment Settings" variant="panel">
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-label-md text-on-surface-variant mb-1">Environment</label>
@@ -64,7 +64,7 @@ export const ConfigurationPage: React.FC = () => {
         </div>
 
         <div className="col-span-6 space-y-6">
-          <BaseCard title="AI & Models" variant="elevated">
+          <BaseCard title="AI & Models" variant="panel">
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-label-md text-on-surface-variant mb-1">Confidence Threshold</label>

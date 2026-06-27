@@ -12,10 +12,10 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from pathlib import Path
 
-from aditya_flare.data.readers.solexs_reader import read_solexs_lc, read_solexs_gti
-from aditya_flare.data.readers.helios_reader import read_helios_lc_all, read_helios_gti
-from aditya_flare.data.readers.time_utils import unix_to_utc, mjd_to_utc
-from aditya_flare.data.merger.data_merger import merge_instruments, save_merged
+from backend.aditya_flare.data.readers.solexs_reader import read_solexs_lc, read_solexs_gti
+from backend.aditya_flare.data.readers.helios_reader import read_helios_lc_all, read_helios_gti
+from backend.aditya_flare.data.readers.time_utils import unix_to_utc, mjd_to_utc
+from backend.aditya_flare.data.merger.data_merger import merge_instruments, save_merged
 
 # Set your data directories here
 SOLEXS_DATA_DIR = Path("../data/raw/2024-07-17/solexs/")

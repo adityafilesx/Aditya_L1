@@ -6,8 +6,8 @@ Wraps existing AppState methods into a discoverable interface.
 import logging
 import json
 from typing import Any, Callable, Dict, Optional
-from api.state import app_state
-from api.mock_data import generate_mock_forecast, generate_mock_physics
+from backend.api.state import app_state
+from backend.api.mock_data import generate_mock_forecast, generate_mock_physics
 
 logger = logging.getLogger("SRE.ToolRegistry")
 

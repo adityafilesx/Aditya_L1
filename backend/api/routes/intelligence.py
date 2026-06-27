@@ -1,6 +1,6 @@
 import torch
 from fastapi import APIRouter
-from api.state import app_state
+from backend.api.state import app_state
 
 router = APIRouter(prefix="/intelligence", tags=["intelligence"])
 

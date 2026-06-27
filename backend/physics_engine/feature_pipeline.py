@@ -4,16 +4,16 @@ import logging
 from pathlib import Path
 
 # Original feature extractor
-from aditya_flare.processing.features import extract_features as original_extract_features
+from backend.aditya_flare.processing.features import extract_features as original_extract_features
 
 # New physics engine modules
-from physics_engine.statistics import extract_statistical_features
-from physics_engine.entropy import extract_entropy_features
-from physics_engine.wavelets import extract_wavelet_features
-from physics_engine.spectral import extract_spectral_features
-from physics_engine.thermodynamics import extract_thermodynamic_features
-from physics_engine.neupert import extract_neupert_features
-from physics_engine.event_segmentation import segment_events_and_timeline
+from backend.physics_engine.statistics import extract_statistical_features
+from backend.physics_engine.entropy import extract_entropy_features
+from backend.physics_engine.wavelets import extract_wavelet_features
+from backend.physics_engine.spectral import extract_spectral_features
+from backend.physics_engine.thermodynamics import extract_thermodynamic_features
+from backend.physics_engine.neupert import extract_neupert_features
+from backend.physics_engine.event_segmentation import segment_events_and_timeline
 import concurrent.futures
 
 logger = logging.getLogger(__name__)

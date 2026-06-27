@@ -3,7 +3,7 @@ import logging
 import logging.handlers
 from pathlib import Path
 from datetime import datetime, timezone
-from aditya_flare.config.config_loader import config
+from backend.aditya_flare.config.config_loader import config
 
 class JSONFormatter(logging.Formatter):
     def format(self, record):

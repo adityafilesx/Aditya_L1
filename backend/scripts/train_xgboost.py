@@ -10,12 +10,12 @@ from sklearn.metrics import classification_report
 # Add the project root to sys.path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from aditya_flare.models.dataset import load_and_prepare_dataset, get_train_test_split
-from aditya_flare.utils.logger import training_logger
-from aditya_flare.config.config_loader import config
-from aditya_flare.evaluation.benchmark import BenchmarkSuite
-from aditya_flare.evaluation.report_generator import generate_scientific_report, generate_benchmark_report
-from aditya_flare.evaluation.plots import plot_reliability_diagram, plot_roc_pr_curves
+from backend.aditya_flare.models.dataset import load_and_prepare_dataset, get_train_test_split
+from backend.aditya_flare.utils.logger import training_logger
+from backend.aditya_flare.config.config_loader import config
+from backend.aditya_flare.evaluation.benchmark import BenchmarkSuite
+from backend.aditya_flare.evaluation.report_generator import generate_scientific_report, generate_benchmark_report
+from backend.aditya_flare.evaluation.plots import plot_reliability_diagram, plot_roc_pr_curves
 
 def train_and_evaluate():
     processed_dir = Path(config.processed_dir)

@@ -5,7 +5,7 @@ from pathlib import Path
 
 # Add project root to path
 sys.path.append(str(Path(__file__).parent.parent))
-from aditya_flare.ai_engine.dataset import TemporalFlareDataset, DataSplitter, generate_dataset_report
+from backend.aditya_flare.ai_engine.dataset import TemporalFlareDataset, DataSplitter, generate_dataset_report
 
 def main():
     print("Loading data...")

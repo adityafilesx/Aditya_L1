@@ -1,0 +1,41 @@
+### layout.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/types/layout.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/features/knowledge-graph/utils/layout.ts
+
+### index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/types/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/contexts/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/app/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/constants/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/features/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/utils/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/components/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/hooks/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/assets/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/design-system/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/services/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/store/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/design-system/theme/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/design-system/hooks/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/design-system/tokens/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/design-system/animations/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/assets/images/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/assets/fonts/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/components/layout/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/components/common/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/components/common/Icon/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/components/common/StatusBadge/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/components/common/cards/KpiCard/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/components/layout/Sidebar/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/components/layout/Footer/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/components/layout/Layout/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/components/layout/Toolbar/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/components/layout/Header/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/features/research/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/features/knowledge-graph/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/features/admin/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/features/mission/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/features/ai/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/features/physics/index.ts
+- /Users/aditya1981/Documents/Unified Data Ingestion Engine/frontend/src/features/digital-twin/index.ts
+

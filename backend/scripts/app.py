@@ -9,7 +9,7 @@ from plotly.subplots import make_subplots
 
 # Add project root to sys.path
 sys.path.append(str(Path(__file__).parent.parent))
-from aditya_flare.models.dataset import load_and_prepare_dataset, get_train_test_split
+from backend.aditya_flare.models.dataset import load_and_prepare_dataset, get_train_test_split
 
 st.set_page_config(
     page_title="Aditya-L1 Nowcasting",

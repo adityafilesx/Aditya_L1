@@ -1,6 +1,6 @@
 import numpy as np
-from aditya_flare.calibration.calibration_utils import flux_to_goes_class_string, parse_goes_class_string
-from aditya_flare.calibration.goes_calibrator import GoesCalibrator
+from backend.aditya_flare.calibration.calibration_utils import flux_to_goes_class_string, parse_goes_class_string
+from backend.aditya_flare.calibration.goes_calibrator import GoesCalibrator
 
 def test_flux_to_goes_class_string():
     assert flux_to_goes_class_string(1.5e-4) == "X1.5"
